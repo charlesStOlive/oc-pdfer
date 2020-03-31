@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Waka Pdf
+
+# Model Form Field configuration
+form: $/waka/pdfer/models/wakapdf/fields.yaml
+
+# Model Class name
+modelClass: Waka\Pdfer\Models\WakaPdf
+
+# Default redirect location
+defaultRedirect: waka/pdfer/wakapdfs
+
+# Create page
+create:
+    title: Create Waka Pdf
+    redirect: waka/pdfer/wakapdfs/update/:id
+    redirectClose: waka/pdfer/wakapdfs
+
+# Update page
+update:
+    title: Edit Waka Pdf
+    redirect: waka/pdfer/wakapdfs
+    redirectClose: waka/pdfer/wakapdfs
+
+# Preview page
+preview:
+    title: Preview Waka Pdf

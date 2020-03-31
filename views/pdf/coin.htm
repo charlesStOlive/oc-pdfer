@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Remplacer la ligne du dessus par celle-ci pour désativer le zoom -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Permet d'afficher un icône dans la barre d'adresse -->
+    <!-- <link rel="shortcut icon" href="image/favicon.png"> -->
+    <title>Bootstrap v3.3.4</title>
+
+    <!-- css Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+        integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
+    </script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+    <!-- HTML5 Shim et Respond.js permet à IE8 de supporter les éléments du HTML5 -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <?php $name = "ddd"; ?>
+            <h1>--{{ data.model }}-</h1>
+            <p class="lead">Cette page contient le code à mettre pour intégrer Bootstrap à votre projet web.</p>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>sub part </th>
+                                            <th>sub qty</th>
+                                            <th>sub email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>John</td>
+                                            <td>Doe</td>
+                                            <td>john@example.com</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mary</td>
+                                            <td>Moe</td>
+                                            <td>mary@example.com</td>
+                                        </tr>
+                                        <tr>
+                                            <td>July</td>
+                                            <td>Dooley</td>
+                                            <td>july@example.com</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mary</td>
+                            <td>Moe</td>
+                            <td>mary@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-4">
+                <img src="https://www.w3schools.com/bootstrap/newyork.jpg" class="img-rounded" alt="Cinque Terre">
+                <ul class="list-group">
+                    <li class="list-group-item">New <span class="badge">12</span></li>
+                    <li class="list-group-item">Deleted <span class="badge">5</span></li>
+                    <li class="list-group-item">Warnings <span class="badge">3</span></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">Panel with panel-default class</div>
+                <div class="panel-body">
+                    <h1>Lighter, Secondary Text</h1>
+                    <p>The small element is used to create a lighter, secondary text in any heading:</p>
+                    <h1>h1 heading <small>secondary text</small></h1>
+                    <h2>h2 heading <small>secondary text</small></h2>
+                    <h3>h3 heading <small>secondary text</small></h3>
+                    <h4>h4 heading <small>secondary text</small></h4>
+                    <h5>h5 heading <small>secondary text</small></h5>
+                    <h6>h6 heading <small>secondary text</small></h6>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">Panel with panel-primary class</div>
+                <div class="panel-body">Panel Content</div>
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Panel with panel-success class</div>
+                <div class="panel-body">Panel Content</div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">Panel with panel-info class</div>
+                <div class="panel-body">Panel Content</div>
+            </div>
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">Panel with panel-warning class</div>
+                <div class="panel-body">Panel Content</div>
+            </div>
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">Panel with panel-danger class</div>
+                <div class="panel-body">Panel Content</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
