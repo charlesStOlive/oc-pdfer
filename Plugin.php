@@ -16,10 +16,10 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'Pdfer',
+            'name' => 'Pdfer',
             'description' => 'No description provided yet...',
-            'author'      => 'Waka',
-            'icon'        => 'icon-leaf'
+            'author' => 'Waka',
+            'icon' => 'icon-leaf',
         ];
     }
 
@@ -40,6 +40,33 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        \Event::listen('backend.down.update', function ($controller) {
+            if (get_class($controller) == 'Waka\Pdfer\Controllers\WakaPdf') {
+                return;
+            }
+
+            if (in_array('Waka.Pdfer.Behaviors.PdfBehavior', $controller->implement)) {
+                $data = [
+                    'model' => $modelClass = str_replace('\\', '\\\\', get_class($controller->formGetModel())),
+                    'modelId' => $controller->formGetModel()->id,
+                ];
+                return \View::make('waka.pdfer::publishPdf')->withData($data);;
+            }
+        });
+        \Event::listen('popup.actions.line1', function ($controller, $model, $id) {
+            if (get_class($controller) == 'Waka\Pdfer\Controllers\WakaPdf') {
+                return;
+            }
+
+            if (in_array('Waka.Pdfer.Behaviors.PdfBehavior', $controller->implement)) {
+                //trace_log("Laligne 1 est ici");
+                $data = [
+                    'model' => str_replace('\\', '\\\\', $model),
+                    'modelId' => $id,
+                ];
+                return \View::make('waka.pdfer::publishPdfContent')->withData($data);;
+            }
+        });
 
     }
 
@@ -64,12 +91,18 @@ class Plugin extends PluginBase
      */
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
-
         return [
-            'waka.pdfer.some_permission' => [
-                'tab' => 'Pdfer',
-                'label' => 'Some permission'
+            'waka.pdfer.admin.super' => [
+                'tab' => 'Waka',
+                'label' => 'Administrateur de Pdfer',
+            ],
+            'waka.pdfer.admin' => [
+                'tab' => 'Waka',
+                'label' => 'Administrateur de Pdfer',
+            ],
+            'waka.pdfer.user' => [
+                'tab' => 'Waka',
+                'label' => 'Utilisateur de Pdfer',
             ],
         ];
     }
@@ -79,17 +112,17 @@ class Plugin extends PluginBase
      *
      * @return array
      */
-    public function registerNavigation()
+    public function registerSettings()
     {
-        return []; // Remove this line to activate
-
         return [
-            'pdfer' => [
-                'label'       => 'Pdfer',
-                'url'         => Backend::url('waka/pdfer/mycontroller'),
-                'icon'        => 'icon-leaf',
-                'permissions' => ['waka.pdfer.*'],
-                'order'       => 500,
+            'wakapdfs' => [
+                'label' => \Lang::get('waka.pdfer::lang.menu.wakapdfs'),
+                'description' => \Lang::get('waka.pdfer::lang.menu.wakapdfs_description'),
+                'category' => \Lang::get('waka.pdfer::lang.menu.settings_category'),
+                'icon' => 'icon-file-pdf-o',
+                'url' => \Backend::url('waka/pdfer/wakapdfs'),
+                'permissions' => ['waka.pdfer.admin'],
+                'order' => 1,
             ],
         ];
     }

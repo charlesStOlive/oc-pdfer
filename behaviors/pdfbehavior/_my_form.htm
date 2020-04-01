@@ -1,0 +1,25 @@
+<?= Form::open() ?>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Tester le wakapdf</h4>
+        </div>
+        <div class="modal-body">
+            <?=  $pdfBehaviorWidget->render() ?>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" data-request="onTestPdfValidation"
+                data-request-data="redirect:0, modelId:'<?=$modelId?>'" data-hotkey="ctrl+s, cmd+s"
+                data-popup-load-indicator class="btn btn-primary">
+                Valider
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="popup">
+                Annuler
+            </button>
+        </div>
+    </div>
+</div>
+
+<?= Form::close() ?>

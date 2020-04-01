@@ -2,6 +2,7 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use System\Classes\SettingsManager;
 
 /**
  * Waka Pdfs Back-end Controller
@@ -11,6 +12,8 @@ class WakaPdfs extends Controller
     public $implement = [
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
+        'Waka.Informer.Behaviors.PopupInfo',
+        'Waka.Pdfer.Behaviors.PdfBehavior',
     ];
 
     public $formConfig = 'config_form.yaml';
@@ -20,7 +23,8 @@ class WakaPdfs extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Waka.Pdfer', 'pdfer', 'wakapdfs');
+        \BackendMenu::setContext('October.System', 'system', 'settings');
+        SettingsManager::setContext('Waka.Pdfer', 'wakapdfs');
     }
 
     public function show()

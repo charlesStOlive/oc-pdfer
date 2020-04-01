@@ -1,0 +1,31 @@
+<?= Form::open() ?>
+
+<div class="report-widget">
+
+    <h5>
+        Créer wakapdf Pdf
+    </h5>
+
+
+    <div class="form-group">
+        <select class="form-control custom-select" name="wakaPdfId">
+            <option value="" disabled selected>--Choose a wakapdf--</option>
+            <?php foreach($options as $key => $value)  { ?>
+            <option value="<?=$key?>"><?=$value?></option>
+            <?php } ?>
+        </select>
+        <div class="checkbox custom-checkbox m-t-md">
+            <input name="type" type="checkbox" id="type" checked />
+            <label for="type">Télecharger</label>
+        </div>
+    </div>
+
+    <button type="submit" data-request="onPdfBehaviorPopupValidation"
+        data-request-data="redirect:0, modelId:'<?=$modelId?>'" data-hotkey="ctrl+s, cmd+s" class="btn btn-primary">
+        Valider
+    </button>
+
+
+</div>
+
+<?= Form::close() ?>

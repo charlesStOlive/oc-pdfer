@@ -3,6 +3,72 @@
 # ===================================
 
 fields:
-    id:
-        label: ID
+
+    name:
+        label: waka.mailer::lang.wakapdf.name
+        span: auto
+    # slug:
+    #      label: waka.mailer::lang.wakapdf.slug   
+    #      preset: name
+    #      span: auto
+    # subject:
+    #     label: waka.mailer::lang.wakapdf.subject
+    #     span: auto  
+    data_source@create:
+        label: waka.mailer::lang.wakapdf.data_source
+        placeholder: waka.mailer::lang.wakapdf.data_source_placeholder
+        type: relation
+        select: name
+        span: auto 
+    data_source@update:
+        label: waka.mailer::lang.wakapdf.data_source
+        placeholder: waka.mailer::lang.wakapdf.data_source_placeholder
+        type: relation
+        select: name
+        span: auto
         disabled: true
+    template:
+        label: waka.mailer::lang.wakamail.mjml
+        type: codeeditor
+        language: html
+    model_functions@update:
+            label: Créer des collections à partir des fonctions du modèle
+            type: functionslist
+    scopes@update:
+        label: waka.compilator::lang.document.scopes.title
+        type: nestedform
+        form:
+            fields:
+                mode: 
+                    type: radio
+                    default: [all]
+                    cssClass: 'inline-options'
+                    options:
+                        all: Toutes les conditions doivent être vrai
+                        one: Une seul condition doit être vrai
+                conditions:
+                    label: waka.compilator::lang.document.scopes.conditions
+                    type: repeater
+                    prompt: waka.compilator::lang.document.scopes.prompt
+                    span: full
+                    form:
+                        fields:
+                            self: 
+                                label: waka.compilator::lang.document.scopes.self
+                                type: checkbox
+                                span: full
+                                default: true
+                            target:
+                                label: waka.compilator::lang.document.scopes.target
+                                commentAbove: waka.compilator::lang.document.scopes.target_com
+                                span: auto
+                                trigger:
+                                    action: disable
+                                    field: self
+                                    condition: checked
+                            ids:
+                                label: waka.compilator::lang.document.scopes.id
+                                type: taglist
+                                mode: array
+                                commentAbove: waka.compilator::lang.document.scopes.id_com
+                                span: auto

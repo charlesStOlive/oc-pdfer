@@ -1,56 +1,53 @@
 <?php Block::put('breadcrumb') ?>
-    <ul>
-        <li><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>">Waka Pdfs</a></li>
-        <li><?= e($this->pageTitle) ?></li>
-    </ul>
+<ul>
+    <li><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>">Waka Pdfs</a></li>
+    <li><?= e($this->pageTitle) ?></li>
+</ul>
 <?php Block::endPut() ?>
 
 <?php if (!$this->fatalError): ?>
 
-    <?= Form::open(['class' => 'layout']) ?>
+<?= Form::open(['class' => 'layout']) ?>
 
-        <div class="layout-row">
-            <?= $this->formRender() ?>
+<div class="layout-row">
+    <?= $this->formRender() ?>
+</div>
+
+<div class="form-buttons">
+    <div class="loading-indicator-container">
+        <button type="submit" data-request="onSave" data-request-data="redirect:0" data-hotkey="ctrl+s, cmd+s"
+            data-load-indicator="Saving WakaPdf..." class="btn btn-primary">
+            <u>S</u>ave
+        </button>
+        <div class="btn-group">
+            <button href="javascript:;" class="btn btn-default oc-icon-eye"
+                data-request-data="redirect:0, wakPdfId:<?=$this->params[0]?>, type:'inline'"
+                data-request="onLoadPdfTest">
+                <?= e(trans('waka.pdfer::lang.button.exemple_inline')) ?> </button>
+            <button type="button" class="btn btn-default oc-icon-cloud-download"
+                data-request-data="redirect:0, wakPdfId:<?=$this->params[0]?>,  type:'download'"
+                data-request="onLoadPdfTest">
+                <?= e(trans('waka.pdfer::lang.button.exemple_download')) ?> </button>
         </div>
+        <button type="button" data-request="onSave" data-request-data="close:1" data-hotkey="ctrl+enter, cmd+enter"
+            data-load-indicator="Saving WakaPdf..." class="btn btn-default">
+            Save and Close
+        </button>
+        <button type="button" class="oc-icon-trash-o btn-icon danger pull-right" data-request="onDelete"
+            data-load-indicator="Deleting WakaPdf..." data-request-confirm="Delete this wakapdf?">
+        </button>
+        <span class="btn-text">
+            or <a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>">Cancel</a>
+        </span>
 
-        <div class="form-buttons">
-            <div class="loading-indicator-container">
-                <button
-                    type="submit"
-                    data-request="onSave"
-                    data-request-data="redirect:0"
-                    data-hotkey="ctrl+s, cmd+s"
-                    data-load-indicator="Saving WakaPdf..."
-                    class="btn btn-primary">
-                    <u>S</u>ave
-                </button>
-                <button
-                    type="button"
-                    data-request="onSave"
-                    data-request-data="close:1"
-                    data-hotkey="ctrl+enter, cmd+enter"
-                    data-load-indicator="Saving WakaPdf..."
-                    class="btn btn-default">
-                    Save and Close
-                </button>
-                <button
-                    type="button"
-                    class="oc-icon-trash-o btn-icon danger pull-right"
-                    data-request="onDelete"
-                    data-load-indicator="Deleting WakaPdf..."
-                    data-request-confirm="Delete this wakapdf?">
-                </button>
-                <span class="btn-text">
-                    or <a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>">Cancel</a>
-                </span>
-            </div>
-        </div>
+    </div>
+</div>
 
-    <?= Form::close() ?>
+<?= Form::close() ?>
 
 <?php else: ?>
 
-    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>" class="btn btn-default">Return to waka pdfs list</a></p>
+<p class="flash-message static error"><?= e($this->fatalError) ?></p>
+<p><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>" class="btn btn-default">Return to waka pdfs list</a></p>
 
 <?php endif ?>

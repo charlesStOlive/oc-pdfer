@@ -37,7 +37,7 @@ class WakaPdf extends Model
     /**
      * @var array Attributes to be cast to JSON
      */
-    protected $jsonable = [];
+    protected $jsonable = ['scopes', 'model_functions'];
 
     /**
      * @var array Attributes to be appended to the API representation of the model (ex. toArray())
@@ -54,7 +54,7 @@ class WakaPdf extends Model
      */
     protected $dates = [
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     /**
@@ -62,11 +62,15 @@ class WakaPdf extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'data_source' => ['Waka\Utils\Models\DataSource'],
+    ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
-    public $morphMany = [];
+    public $morphMany = [
+        'informs' => ['Waka\Informer\Models\Inform', 'name' => 'informeable'],
+    ];
     public $attachOne = [];
     public $attachMany = [];
 }

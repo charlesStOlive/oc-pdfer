@@ -3,6 +3,25 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
+    sort_order:
+        label: waka.utils::lang.global.sort_order
+        invisible: true
+    inform:
+        type: waka-icon-info
+        width: 25px
+        label : ' '
+        launch_request: true
+        show_null: true
+        clickable: false
+        searchable: false
+        sortable: false
+    name:
+        label: waka.mailer::lang.wakapdf.name
         searchable: true
+    data_src:
+        label: waka.mailer::lang.wakapdf.data_source
+        relation: data_source
+        select: name
+    updated_at:
+        label: waka.utils::lang.global.updated_at
+        type: timetense
