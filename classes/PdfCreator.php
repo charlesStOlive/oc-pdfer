@@ -12,7 +12,7 @@ class PdfCreator
 
     public function __construct($pdf_id)
     {
-        trace_log($pdf_id);
+        //trace_log($pdf_id);
         $wakapdf = WakaPdf::find($pdf_id);
         $this->wakapdf = $wakapdf;
 
@@ -53,7 +53,7 @@ class PdfCreator
         $data['collections'] = $this->wakapdf->data_source->getFunctionsCollections($dataSourceId, $this->wakapdf);
         $data['settings'] = null;
 
-        trace_log(compact('data'));
+        //trace_log(compact('data'));
 
         $html = \Twig::parse($this->wakapdf->template, compact('data'));
         $pdf = \PDF::loadHtml($html);
@@ -82,7 +82,7 @@ class PdfCreator
                 $rel = $this->wakapdf->data_source->getDotedRelationValues($this->dataSourceId, $this->additionalParams);
                 //trace_log($rel);
                 $array = array_merge($array, $rel);
-                trace_log($array);
+                //trace_log($array);
             }
         }
 

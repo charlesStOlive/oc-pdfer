@@ -47,7 +47,7 @@ class PdfBehavior extends ControllerBehavior
         $conditions = $scopes['conditions'] ?? null;
         $mode = $scopes['mode'] ?? 'all';
 
-        trace_log("'mode : " . $mode);
+        //trace_log("'mode : " . $mode);
 
         if (!$conditions) {
             //si on ne retrouve pas les conditions on retourne true pour valider le model
@@ -63,7 +63,7 @@ class PdfBehavior extends ControllerBehavior
                 $model = $this->getStringModelRelation($myModel, $condition['target']);
                 $test = in_array($model->id, $condition['ids']);
             } else {
-                trace_log($condition['ids']);
+                //trace_log($condition['ids']);
                 $test = in_array($myModel->id, $condition['ids']);
 
             }
@@ -77,8 +77,8 @@ class PdfBehavior extends ControllerBehavior
                 array_push($conditionsOk, $test);
             }
         }
-        trace_log("nbConditions : " . $nbConditions);
-        trace_log("count(conditionsOk) : " . count($conditionsOk));
+        //trace_log("nbConditions : " . $nbConditions);
+        //trace_log("count(conditionsOk) : " . count($conditionsOk));
         if ($nbConditions == count($conditionsOk)) {
             return true;
         } else {
