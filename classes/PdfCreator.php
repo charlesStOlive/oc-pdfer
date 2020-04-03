@@ -49,13 +49,17 @@ class PdfCreator
         //$data['collections'] = $this->wakapdf->data_source->getFunctionsCollections($dataSourceId, $this->wakapdf);
         $data = [];
         $data['model'] = $this->wakapdf->data_source->getValues($dataSourceId);
-        $data['images'] = $this->wakapdf->data_source->getAllPicturesUrl($dataSourceId);
-        $data['collections'] = $this->wakapdf->data_source->getFunctionsCollections($dataSourceId, $this->wakapdf);
+        $data['images'] = $this->wakapdf->data_source->getPicturesUrl($dataSourceId, $this->wakapdf->images);
+        $data['collections'] = $this->wakapdf->data_source->getFunctionsCollections($dataSourceId, $this->wakapdf->model_functions);
         $data['settings'] = null;
 
-        //trace_log(compact('data'));
+        trace_log(compact('data'));
 
         $html = \Twig::parse($this->wakapdf->template, compact('data'));
+
+        // if ($type == "html") {
+        //     return $html;
+        // }
         $pdf = \PDF::loadHtml($html);
         $pdf->setOption('margin-top', 10);
         $pdf->setOption('margin-right', 10);

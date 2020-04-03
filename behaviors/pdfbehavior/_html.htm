@@ -1,0 +1,19 @@
+<?= Form::open() ?>
+
+<div class="report-widget bg-p">
+
+    <div class="modal-header" style="width: 1024px">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Voir l'email</h4>
+    </div>
+
+    <div class="modal-body" style="background-color: white">
+        <?php if(isset($html)) {  ?>
+        <div>
+            <?=$html?>
+        </div>
+        <?php } ?>
+    </div>
+</div>
+
+<?= Form::close() ?>

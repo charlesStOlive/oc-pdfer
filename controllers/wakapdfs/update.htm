@@ -9,6 +9,12 @@
 
 <?= Form::open(['class' => 'layout']) ?>
 
+<div class="form-buttons">
+    <?= $this->fireViewEvent('backend.update.duplicate') ?>
+    <?= $this->fireViewEvent('backend.top.update') ?>
+    <?= $this->fireViewEvent('backend.crsm.updateView') ?>
+</div>
+
 <div class="layout-row">
     <?= $this->formRender() ?>
 </div>
@@ -20,14 +26,18 @@
             <u>S</u>ave
         </button>
         <div class="btn-group">
-            <button href="javascript:;" class="btn btn-default oc-icon-eye"
-                data-request-data="redirect:0, wakPdfId:<?=$this->params[0]?>, type:'inline'"
+            <!--<button href="javascript:;" class="btn btn-default oc-icon-chrome"
+                data-request-data="redirect:0, wakaPdfId:<?=$this->params[0]?>, type:'inline'"
                 data-request="onLoadPdfTest">
-                <?= e(trans('waka.pdfer::lang.button.exemple_inline')) ?> </button>
+                <?= e(trans('waka.pdfer::lang.button.exemple_inline')) ?> </button>-->
+            <a class="btn btn-default oc-icon-chrome" <?php $param = $this->params[0] ?>
+                href="<?= Backend::url("waka/pdfer/wakapdfs/makepdf/?wakaPdfId=$param&type=html" )?>" target="_blank">
+                <?=e(trans('waka.pdfer::lang.button.exemple_inline')) ?> </a>
             <button type="button" class="btn btn-default oc-icon-cloud-download"
-                data-request-data="redirect:0, wakPdfId:<?=$this->params[0]?>,  type:'download'"
+                data-request-data="redirect:0, wakaPdfId:<?=$this->params[0]?>,  type:'download'"
                 data-request="onLoadPdfTest">
                 <?= e(trans('waka.pdfer::lang.button.exemple_download')) ?> </button>
+
         </div>
         <button type="button" data-request="onSave" data-request-data="close:1" data-hotkey="ctrl+enter, cmd+enter"
             data-load-indicator="Saving WakaPdf..." class="btn btn-default">

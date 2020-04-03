@@ -37,7 +37,7 @@ class WakaPdf extends Model
     /**
      * @var array Attributes to be cast to JSON
      */
-    protected $jsonable = ['scopes', 'model_functions'];
+    protected $jsonable = ['scopes', 'model_functions', 'images'];
 
     /**
      * @var array Attributes to be appended to the API representation of the model (ex. toArray())

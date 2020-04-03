@@ -17,6 +17,7 @@ class CreateWakaPdfsTable extends Migration
             $table->integer('data_source_id')->unsigned()->nullable();
             $table->text('scopes')->nullable();
             $table->text('model_functions')->nullable();
+            $table->text('images')->nullable();
 
             $table->integer('sort_order')->default(0);
 

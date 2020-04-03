@@ -9,6 +9,7 @@ return [
     ],
     'wakapdf' => [
         'name' => 'Nom',
+        'template' => "Template HTML compatible bootstrap 3.4.1",
         'path' => 'Fichier source',
         'analyze' => "Log d'analyse des codes du fichier source",
         'has_sectors_perso' => 'Personaliser le contenu en fonction du secteur',
@@ -34,8 +35,9 @@ return [
         'show' => "Voir",
     ],
     "button" => [
-        'exemple_download' => "Télecharger un exemple",
-        'exemple_inline' => "Voir un éxemple",
+        'exemple_download' => "Télecharger un ex.",
+        'exemple_inline' => "ex. en ligne",
+        'exemple_html' => "Voir HTML",
 
     ],
 ];

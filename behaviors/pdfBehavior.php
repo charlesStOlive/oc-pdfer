@@ -180,13 +180,24 @@ class PdfBehavior extends ControllerBehavior
     public function onLoadPdfTest()
     {
         $type = post('type');
-        $wakPdfId = post('wakPdfId');
-        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $wakPdfId . '&type=' . $type);
+        $wakaPdfId = post('wakaPdfId');
+        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $wakaPdfId . '&type=' . $type);
     }
+    // public function onLoadPdfTestShow()
+    // {
+    //     $wakaPdfId = post('wakaPdfId');
+    //     $modelId = post('modelId');
+    //     trace_log($modelId);
+    //     $type = 'html';
+    //     $pc = new PdfCreator($wakaPdfId);
+    //     $this->vars['html'] = $pc->renderPdf($modelId, $type);
+    //     return $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_html.htm');
+    // }
     public function makepdf()
     {
         $wakaPdfId = post('wakaPdfId');
         $modelId = post('modelId');
+        trace_log($modelId);
         $type = post('type');
 
         $wc = new PdfCreator($wakaPdfId);
