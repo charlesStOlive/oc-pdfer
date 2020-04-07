@@ -210,7 +210,7 @@ class PdfBehavior extends ControllerBehavior
         $config = $this->makeConfig('$/waka/pdfer/models/wakapdf/fields_for_test.yaml');
         $config->alias = 'pdfBehaviorformWidget';
         $config->arrayName = 'pdfBehavior_array';
-        $config->model = new wakaPdf();
+        $config->model = new WakaPdf();
         $widget = $this->makeWidget('Backend\Widgets\Form', $config);
         $widget->bindToController();
         return $widget;
