@@ -3,7 +3,7 @@
 use Backend\Classes\ControllerBehavior;
 use Redirect;
 use Waka\Pdfer\Classes\PdfCreator;
-use Waka\Pdfer\Models\wakaPdf;
+use Waka\Pdfer\Models\WakaPdf;
 
 class PdfBehavior extends ControllerBehavior
 {
