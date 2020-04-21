@@ -8,6 +8,10 @@ return [
         'settings_category' => 'Wakaari Modèle',
     ],
     'wakapdf' => [
+        'tab_info' => "Info",
+        'tab_edit' => "Edit",
+        'tab_scopes' => "Limites",
+        'tab_fnc' => "Images et fonctions",
         'name' => 'Nom',
         'template' => "Template HTML compatible bootstrap 3.4.1",
         'path' => 'Fichier source',

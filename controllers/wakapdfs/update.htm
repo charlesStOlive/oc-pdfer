@@ -1,10 +1,4 @@
-<?php Block::put('breadcrumb') ?>
-<ul>
-    <li><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>">Waka Pdfs</a></li>
-    <li><?= e($this->pageTitle) ?></li>
-</ul>
-<?php Block::endPut() ?>
-
+<?php Block::put('form-contents') ?>
 <?php if (!$this->fatalError): ?>
 
 <?= Form::open(['class' => 'layout']) ?>
@@ -61,3 +55,16 @@
 <p><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>" class="btn btn-default">Return to waka pdfs list</a></p>
 
 <?php endif ?>
+<?php Block::endPut() ?>
+
+<!-- Complimentary sidebar -->
+<?php Block::put('form-sidebar');?>
+<div id="sidebar_attributes"><?= $this->makePartial('attributes') ?></div>
+<?php Block::endPut() ?>
+
+<!-- Layout execution -->
+<?php Block::put('body') ?>
+<?= Form::open(['class'=>'layout stretch']) ?>
+<?= $this->makeLayout('form-with-sidebar') ?>
+<?= Form::close() ?>
+<?php Block::endPut() ?>

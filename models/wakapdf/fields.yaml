@@ -1,79 +1,89 @@
 # ===================================
 #  Form Field Definitions
 # ===================================
+tabs:
+    defaultTab: waka.pdfer::lang.wakapdf.tab_edit
+    icons: 
+        waka.pdfer::lang.wakapdf.tab_info: icon-info-circle
+        waka.pdfer::lang.wakapdf.tab_edit: icon-pencil
+        waka.pdfer::lang.wakapdf.tab_scopes: icon-filter  
+        waka.pdfer::lang.wakapdf.tab_fnc: icon-address-card-o
+    fields:
 
-fields:
-
-    name:
-        label: waka.pdfer::lang.wakapdf.name
-        span: auto
-    # slug:
-    #      label: waka.pdfer::lang.wakapdf.slug   
-    #      preset: name
-    #      span: auto
-    # subject:
-    #     label: waka.pdfer::lang.wakapdf.subject
-    #     span: auto  
-    data_source@create:
-        label: waka.pdfer::lang.wakapdf.data_source
-        placeholder: waka.pdfer::lang.wakapdf.data_source_placeholder
-        type: relation
-        select: name
-        span: auto 
-    data_source@update:
-        label: waka.pdfer::lang.wakapdf.data_source
-        placeholder: waka.pdfer::lang.wakapdf.data_source_placeholder
-        type: relation
-        select: name
-        span: auto
-        disabled: true
-    template:
-        label: waka.pdfer::lang.wakapdf.template
-        type: codeeditor
-        language: html
-    model_functions@update:
-            label: Créer des collections à partir des fonctions du modèle
-            type: functionslist
+        name:
+            label: waka.pdfer::lang.wakapdf.name
             span: auto
-    images@update:
-            label: Injecter des images à partir du modèle
-            type: imageslist
+        # slug:
+        #      label: waka.pdfer::lang.wakapdf.slug   
+        #      preset: name
+        #      span: auto
+        # subject:
+        #     label: waka.pdfer::lang.wakapdf.subject
+        #     span: auto  
+        data_source@create:
+            label: waka.pdfer::lang.wakapdf.data_source
+            placeholder: waka.pdfer::lang.wakapdf.data_source_placeholder
+            type: relation
+            select: name
+            span: auto 
+        data_source@update:
+            label: waka.pdfer::lang.wakapdf.data_source
+            placeholder: waka.pdfer::lang.wakapdf.data_source_placeholder
+            type: relation
+            select: name
             span: auto
-    scopes@update:
-        label: waka.worder::lang.document.scopes.title
-        type: nestedform
-        form:
-            fields:
-                mode: 
-                    type: radio
-                    default: [all]
-                    cssClass: 'inline-options'
-                    options:
-                        all: Toutes les conditions doivent être vrai
-                        one: Une seul condition doit être vrai
-                conditions:
-                    label: waka.worder::lang.document.scopes.conditions
-                    type: repeater
-                    prompt: waka.worder::lang.document.scopes.prompt
-                    span: full
-                    form:
-                        fields:
-                            self: 
-                                label: waka.worder::lang.document.scopes.self
-                                type: checkbox
-                                span: full
-                                default: true
-                            target:
-                                label: waka.worder::lang.document.scopes.target
-                                commentAbove: waka.worder::lang.document.scopes.target_com
-                                span: auto
-                                trigger:
-                                    action: disable
-                                    field: self
-                                    condition: checked
-                            ids:
-                                label: waka.worder::lang.document.scopes.id
-                                type: taglist
-                                mode: array
-                                commentAbove: waka.worder::lang.document.scopes.id_com
-                                span: auto
+            disabled: true
+        template:
+            label: waka.pdfer::lang.wakapdf.template
+            type: codeeditor
+            language: html
+            size: giant
+        model_functions@update:
+                label: Créer des collections à partir des fonctions du modèle
+                type: functionslist
+                span: auto
+                tab: waka.pdfer::lang.wakapdf.tab_fnc
+        images@update:
+                label: Injecter des images à partir du modèle
+                type: imageslist
+                span: auto
+                tab: waka.pdfer::lang.wakapdf.tab_fnc
+        scopes@update:
+            label: waka.worder::lang.document.scopes.title
+            type: nestedform
+            tab: waka.pdfer::lang.wakapdf.tab_scopes
+            form:
+                fields:
+                    mode: 
+                        type: radio
+                        default: [all]
+                        cssClass: 'inline-options'
+                        options:
+                            all: Toutes les conditions doivent être vrai
+                            one: Une seul condition doit être vrai
+                    conditions:
+                        label: waka.worder::lang.document.scopes.conditions
+                        type: repeater
+                        prompt: waka.worder::lang.document.scopes.prompt
+                        span: full
+                        form:
+                            fields:
+                                self: 
+                                    label: waka.worder::lang.document.scopes.self
+                                    type: checkbox
+                                    span: full
+                                    default: true
+                                target:
+                                    label: waka.worder::lang.document.scopes.target
+                                    commentAbove: waka.worder::lang.document.scopes.target_com
+                                    span: auto
+                                    trigger:
+                                        action: disable
+                                        field: self
+                                        condition: checked
+                                ids:
+                                    label: waka.worder::lang.document.scopes.id
+                                    type: taglist
+                                    mode: array
+                                    commentAbove: waka.worder::lang.document.scopes.id_com
+                                    span: auto
