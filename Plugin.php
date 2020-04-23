@@ -93,15 +93,15 @@ class Plugin extends PluginBase
     {
         return [
             'waka.pdfer.admin.super' => [
-                'tab' => 'Waka',
-                'label' => 'Administrateur de Pdfer',
+                'tab' => 'Waka - Pdfer',
+                'label' => 'Super administrateur de Pdfer',
             ],
-            'waka.pdfer.admin' => [
-                'tab' => 'Waka',
+            'waka.pdfer.admin.base' => [
+                'tab' => 'Waka - Pdfer',
                 'label' => 'Administrateur de Pdfer',
             ],
             'waka.pdfer.user' => [
-                'tab' => 'Waka',
+                'tab' => 'Waka - Pdfer',
                 'label' => 'Utilisateur de Pdfer',
             ],
         ];
@@ -121,7 +121,7 @@ class Plugin extends PluginBase
                 'category' => \Lang::get('waka.pdfer::lang.menu.settings_category'),
                 'icon' => 'icon-file-pdf-o',
                 'url' => \Backend::url('waka/pdfer/wakapdfs'),
-                'permissions' => ['waka.pdfer.admin'],
+                'permissions' => ['waka.pdfer.admin.*'],
                 'order' => 1,
             ],
         ];
