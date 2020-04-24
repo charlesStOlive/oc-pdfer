@@ -1,3 +1,9 @@
-1.0.1: 
-- 'First version of Pdfer'
-- create_waka_pdfs_table.php
+1.0.1:
+    - 'First version of Pdfer'
+    - create_waka_pdfs_table.php
+1.0.2:
+    - 'Ajout des CSS'
+    - create_pdf_layouts_table.php
+1.0.3:
+    - 'ajout pdf_layout dans wakapdf'
+    - create_waka_pdfs_table_u103.php

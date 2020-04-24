@@ -1,0 +1,14 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: Nom
+        searchable: true
+    usedBy:
+        label: Nombre de PDF consomateur
+        relation: waka_pdfs
+        useRelationCount: true
+
+

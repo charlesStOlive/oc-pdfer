@@ -124,6 +124,15 @@ class Plugin extends PluginBase
                 'permissions' => ['waka.pdfer.admin.*'],
                 'order' => 1,
             ],
+            'pdflayouts' => [
+                'label' => \Lang::get('waka.pdfer::lang.menu.pdflayouts'),
+                'description' => \Lang::get('waka.pdfer::lang.menu.pdflayouts_description'),
+                'category' => \Lang::get('waka.pdfer::lang.menu.settings_category'),
+                'icon' => 'icon-css3',
+                'url' => \Backend::url('waka/pdfer/pdflayouts'),
+                'permissions' => ['waka.pdfer.admin.*'],
+                'order' => 1,
+            ],
         ];
     }
 }

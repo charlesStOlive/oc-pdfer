@@ -50,14 +50,20 @@ class PdfCreator
         $doted = $this->wakapdf->data_source->getValues($dataSourceId);
         $img = $this->wakapdf->data_source->getPicturesUrl($dataSourceId, $this->wakapdf->images);
         $fnc = $this->wakapdf->data_source->getFunctionsCollections($dataSourceId, $this->wakapdf->model_functions);
+        $css = $this->wakapdf->pdf_layout->css;
 
         $model = [
             $varName => $doted,
             'IMG' => $img,
             'FNC' => $fnc,
+            'css' => $css,
         ];
 
         $html = \Twig::parse($this->wakapdf->template, $model);
+
+        //return $html;
+
+        //trace_log($html);
 
         $pdf = \PDF::loadHtml($html);
         $pdf->setOption('margin-top', 10);
@@ -65,9 +71,10 @@ class PdfCreator
         $pdf->setOption('margin-bottom', 10);
         $pdf->setOption('margin-left', 10);
         $pdf->setOption('viewport-size', '1280x1024');
+        //$pdf->setOption('zoom', '1.5');
         // $pdf->setOption('enable-javascript', true);
         // $pdf->setOption('javascript-delay', 5000);
-        $pdf->setOption('enable-smart-shrinking', true);
+        //$pdf->setOption('enable-smart-shrinking', true);
         // $pdf->setOption('no-stop-slow-scripts', true);
 
         if (!$type || $type == "download") {

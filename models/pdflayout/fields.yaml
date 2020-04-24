@@ -1,0 +1,13 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: Nom
+    css:
+        label: CSS
+        type: codeeditor
+        size: huge
+        language: css
+

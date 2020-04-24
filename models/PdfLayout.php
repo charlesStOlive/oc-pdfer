@@ -3,16 +3,16 @@
 use Model;
 
 /**
- * WakaPdf Model
+ * pdfLayout Model
  */
-class WakaPdf extends Model
+class PdfLayout extends Model
 {
     use \October\Rain\Database\Traits\Validation;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'waka_pdfer_waka_pdfs';
+    public $table = 'waka_pdfer_pdf_layouts';
 
     /**
      * @var array Guarded fields
@@ -37,7 +37,7 @@ class WakaPdf extends Model
     /**
      * @var array Attributes to be cast to JSON
      */
-    protected $jsonable = ['scopes', 'model_functions', 'images'];
+    protected $jsonable = [];
 
     /**
      * @var array Attributes to be appended to the API representation of the model (ex. toArray())
@@ -61,25 +61,14 @@ class WakaPdf extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
-    public $belongsTo = [
-        'data_source' => ['Waka\Utils\Models\DataSource'],
-        'pdf_layout' => ['Waka\Pdfer\Models\PdfLayout'],
+    public $hasMany = [
+        'waka_pdfs' => ['Waka\Pdfer\Models\WakaPdf'],
     ];
+    public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
-    public $morphMany = [
-        'informs' => ['Waka\Informer\Models\Inform', 'name' => 'informeable'],
-    ];
+    public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
-
-    public function getRapidLinksAttribute()
-    {
-        $links = [
-            "CSS du PDF" => \Backend::url('waka/pdfer/pdflayouts/update/' . $this->pdf_layout->id),
-        ];
-        return $links;
-    }
 }

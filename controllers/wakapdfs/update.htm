@@ -37,6 +37,7 @@
             data-load-indicator="Saving WakaPdf..." class="btn btn-default">
             Save and Close
         </button>
+        <?= $this->fireViewEvent('backend.down.rapidLinks') ?>
         <button type="button" class="oc-icon-trash-o btn-icon danger pull-right" data-request="onDelete"
             data-load-indicator="Deleting WakaPdf..." data-request-confirm="Delete this wakapdf?">
         </button>
