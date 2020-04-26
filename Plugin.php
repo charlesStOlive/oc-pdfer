@@ -2,6 +2,7 @@
 
 use Backend;
 use System\Classes\PluginBase;
+use System\Classes\CombineAssets;
 
 /**
  * Pdfer Plugin Information File
@@ -30,6 +31,13 @@ class Plugin extends PluginBase
      */
     public function register()
     {
+        /*
+         * Register asset bundles
+         */
+        CombineAssets::registerCallback(function ($combiner) {
+            //$combiner->registerBundle('$/waka/pdfer/assets/less/milligram.sass');
+            $combiner->registerBundle('$/waka/pdfer/assets/milligram/milligram.less');
+        });
 
     }
 
