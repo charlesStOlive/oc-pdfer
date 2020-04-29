@@ -50,7 +50,10 @@ class PdfCreator
         $doted = $this->wakapdf->data_source->getValues($dataSourceId);
         $img = $this->wakapdf->data_source->getPicturesUrl($dataSourceId, $this->wakapdf->images);
         $fnc = $this->wakapdf->data_source->getFunctionsCollections($dataSourceId, $this->wakapdf->model_functions);
-        $css = $this->wakapdf->pdf_layout->css;
+        $css = null;
+        if ($this->wakapdf->pdf_layout) {
+            $css = $this->wakapdf->pdf_layout->css;
+        }
 
         $model = [
             $varName => $doted,

@@ -77,8 +77,12 @@ class WakaPdf extends Model
 
     public function getRapidLinksAttribute()
     {
+        $layout_id = null;
+        if ($this->pdf_layout) {
+            $layout_id = $this->pdf_layout->id;
+        }
         $links = [
-            "CSS du PDF" => \Backend::url('waka/pdfer/pdflayouts/update/' . $this->pdf_layout->id),
+            "CSS du PDF" => \Backend::url('waka/pdfer/pdflayouts/update/' . $layout_id),
         ];
         return $links;
     }
