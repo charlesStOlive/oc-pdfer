@@ -4,10 +4,23 @@
 
 fields:
     name:
-        label: Nom
+        label: waka.pdfer::lang.pdflayout.name
+    crsm_layout:
+        label: waka.pdfer::lang.pdflayout.crsm_layout
+        type: dropdown
+        options: listCrsmLayout
+        default: 0
+    add_css:
+        label: waka.pdfer::lang.pdflayout.add_css
+        type: checkbox
+        default: false
     css:
-        label: CSS
+        label: waka.pdfer::lang.pdflayout.css
         type: codeeditor
         size: huge
         language: css
+        trigger:
+            action: show
+            field: add_css
+            condition: checked
 

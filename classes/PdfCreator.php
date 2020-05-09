@@ -52,9 +52,8 @@ class PdfCreator
         $fnc = $this->wakapdf->data_source->getFunctionsCollections($dataSourceId, $this->wakapdf->model_functions);
         $css = null;
         if ($this->wakapdf->pdf_layout) {
-            $css = $this->wakapdf->pdf_layout->css;
+            $css = \File::get(plugins_path() . $this->wakapdf->pdf_layout->crsm_layout);
         }
-
         $model = [
             $varName => $doted,
             'IMG' => $img,

@@ -12,6 +12,9 @@ class CreateWakaPdfsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
+
+            $table->boolean('pdf_layout_id')->unsigned()->nullable();
+
             $table->text('template')->nullable();
 
             $table->integer('data_source_id')->unsigned()->nullable();

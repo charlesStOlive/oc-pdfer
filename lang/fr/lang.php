@@ -9,6 +9,12 @@ return [
         'pdflayouts' => 'Css des PDF',
         'pdflayouts_description' => 'Gestion des feuilles de styles pour les PDF',
     ],
+    'pdflayout' => [
+        'name' => "Nom du template",
+        'crsm_layout' => "Nom de la bibliothèque CSS",
+        'add_css' => "Ajouter vos propres CSS",
+        'css' => "CSS",
+    ],
     'wakapdf' => [
         'tab_info' => "Info",
         'tab_edit' => "Edit",

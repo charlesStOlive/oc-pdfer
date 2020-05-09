@@ -71,4 +71,9 @@ class PdfLayout extends Model
     public $morphMany = [];
     public $attachOne = [];
     public $attachMany = [];
+
+    public function listCrsmLayout()
+    {
+        return \Config::get('waka.crsm::assets.css');
+    }
 }

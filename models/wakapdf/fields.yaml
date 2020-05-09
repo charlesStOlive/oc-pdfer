@@ -13,11 +13,7 @@ tabs:
         name:
             label: waka.pdfer::lang.wakapdf.name
             span: auto
-        pdf_layout:
-            label: waka.pdfer::lang.wakapdf.pdf_layout
-            span: auto
-            type: relation
-            select: name
+       
         # slug:
         #      label: waka.pdfer::lang.wakapdf.slug   
         #      preset: name
@@ -38,6 +34,11 @@ tabs:
             select: name
             span: auto
             disabled: true
+        pdf_layout:
+            label: waka.pdfer::lang.wakapdf.pdf_layout
+            span: auto
+            type: relation
+            select: name
         template:
             label: waka.pdfer::lang.wakapdf.template
             type: codeeditor
