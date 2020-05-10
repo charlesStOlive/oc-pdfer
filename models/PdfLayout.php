@@ -74,6 +74,7 @@ class PdfLayout extends Model
 
     public function listCrsmLayout()
     {
+        trace_log(\Config::get('waka.crsm::assets.css'));
         return \Config::get('waka.crsm::assets.css');
     }
 }

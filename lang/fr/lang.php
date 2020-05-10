@@ -22,6 +22,7 @@ return [
         'tab_fnc' => "Images et fonctions",
         'pdf_layout' => 'Lyout et CSS',
         'name' => 'Nom',
+        'pdf_layout' => "Modèle",
         'template' => "Template HTML compatible bootstrap 3.4.1",
         'path' => 'Fichier source',
         'analyze' => "Log d'analyse des codes du fichier source",
