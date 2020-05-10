@@ -63,6 +63,12 @@ class PdfCreator
 
         $html = \Twig::parse($this->wakapdf->template, $model);
 
+        $slugName = $doted['name'] ?? null;
+        $slugName = str_slug($slugName);
+        $pdfSlug = str_slug($this->wakapdf->name);
+
+        $fileName = $pdfSlug.'_'.$slugName.'.pdf';
+
         //return $html;
 
         //trace_log($html);
@@ -80,9 +86,9 @@ class PdfCreator
         // $pdf->setOption('no-stop-slow-scripts', true);
 
         if (!$type || $type == "download") {
-            return $pdf->download('test2.pdf');
+            return $pdf->download($fileName);
         } else {
-            return $pdf->inline('test2.pdf');
+            return $pdf->inline($fileName);
         }
     }
 
