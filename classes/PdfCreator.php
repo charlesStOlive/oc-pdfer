@@ -63,11 +63,13 @@ class PdfCreator
 
         $html = \Twig::parse($this->wakapdf->template, $model);
 
+        return $html;
+
         $slugName = $doted['name'] ?? null;
         $slugName = str_slug($slugName);
         $pdfSlug = str_slug($this->wakapdf->name);
 
-        $fileName = $pdfSlug.'_'.$slugName.'.pdf';
+        $fileName = $pdfSlug . '_' . $slugName . '.pdf';
 
         //return $html;
 
