@@ -40,7 +40,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        \Event::listen('backend.down.update', function ($controller) {
+        \Event::listen('backend.update.prod', function ($controller) {
             if (get_class($controller) == 'Waka\Pdfer\Controllers\WakaPdf') {
                 return;
             }
@@ -53,7 +53,7 @@ class Plugin extends PluginBase
                 return \View::make('waka.pdfer::publishPdf')->withData($data);;
             }
         });
-        \Event::listen('popup.actions.line1', function ($controller, $model, $id) {
+        \Event::listen('popup.actions.prod', function ($controller, $model, $id) {
             if (get_class($controller) == 'Waka\Pdfer\Controllers\WakaPdf') {
                 return;
             }
