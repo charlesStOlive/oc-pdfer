@@ -47,12 +47,10 @@ tabs:
         model_functions@update:
                 label: Créer des collections à partir des fonctions du modèle
                 type: functionslist
-                span: auto
                 tab: waka.pdfer::lang.wakapdf.tab_fnc
         images@update:
                 label: Injecter des images à partir du modèle
                 type: imageslist
-                span: auto
                 tab: waka.pdfer::lang.wakapdf.tab_fnc
         scopes@update:
             label: waka.worder::lang.document.scopes.title
