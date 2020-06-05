@@ -187,7 +187,7 @@ class PdfBehavior extends ControllerBehavior
     // {
     //     $wakaPdfId = post('wakaPdfId');
     //     $modelId = post('modelId');
-    //     trace_log($modelId);
+    //     //trace_log($modelId);
     //     $type = 'html';
     //     $pc = new PdfCreator($wakaPdfId);
     //     $this->vars['html'] = $pc->renderPdf($modelId, $type);
@@ -197,7 +197,7 @@ class PdfBehavior extends ControllerBehavior
     {
         $wakaPdfId = post('wakaPdfId');
         $modelId = post('modelId');
-        trace_log($modelId);
+        //trace_log($modelId);
         $type = post('type');
 
         $wc = new PdfCreator($wakaPdfId);
