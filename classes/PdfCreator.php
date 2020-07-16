@@ -1,49 +1,52 @@
 <?php namespace Waka\Pdfer\Classes;
 
+use App;
 use Waka\Pdfer\Models\WakaPdf;
 
 class PdfCreator
 {
 
-    private $dataSourceModel;
+    private $modelSource;
     private $dataSourceId;
     private $additionalParams;
     private $dataSourceAdditionalParams;
 
     public function __construct($pdf_id)
     {
-        //trace_log($pdf_id);
         $wakapdf = WakaPdf::find($pdf_id);
         $this->wakapdf = $wakapdf;
 
     }
 
-    public function prepareCreatorVars($dataSourceId)
-    {
-        $this->dataSourceModel = $this->linkModelSource($dataSourceId);
-        $this->dataSourceAdditionalParams = $this->dataSourceModel->hasRelationArray;
-    }
-    public function setAdditionalParams($additionalParams)
-    {
-        if ($additionalParams) {
-            $this->additionalParams = $additionalParams;
-        }
-    }
-    private function linkModelSource($dataSourceId)
-    {
-        $this->dataSourceId = $dataSourceId;
-        // si vide on puise dans le test
-        if (!$this->dataSourceId) {
-            $this->dataSourceId = $this->wakapdf->data_source->test_id;
-        }
-        //on enregistre le modèle
-        //trace_log($this->wakapdf->data_source->modelClass);
-        return $this->wakapdf->data_source->modelClass::find($this->dataSourceId);
-    }
-
     public function renderPdf($dataSourceId, $type = 'inline')
     {
-        $this->prepareCreatorVars($dataSourceId);
+        $data = $this->prepareCreatorVars($dataSourceId);
+        $pdf = $this->createPdf($data['html']);
+        return $pdf->download($data['fileName']);
+    }
+
+    public function renderCloud($dataSourceId)
+    {
+        $data = $this->prepareCreatorVars($dataSourceId);
+        $pdf = $this->createPdf($data['html']);
+        $pdfContent = $pdf->output();
+
+        $folderOrg = new \Waka\Lot\Classes\FolderOrganisation();
+        $folders = $folderOrg->getFolder($this->modelSource);
+
+        $cloudSystem = App::make('cloudSystem');
+        $lastFolderDir = $cloudSystem->createDirFromArray($folders);
+
+        //\Storage::cloud()->put('test.txt', 'Hello World');
+
+        \Storage::cloud()->put($lastFolderDir['path'] . '/' . $data['fileName'], $pdfContent);
+
+    }
+
+    public function prepareCreatorVars($dataSourceId)
+    {
+        $this->modelSource = $this->linkModelSource($dataSourceId);
+        $this->dataSourceAdditionalParams = $this->modelSource->hasRelationArray;
 
         $varName = strtolower($this->wakapdf->data_source->model);
 
@@ -62,19 +65,37 @@ class PdfCreator
         ];
 
         $html = \Twig::parse($this->wakapdf->template, $model);
-
         //return $html;
 
         $slugName = $doted['name'] ?? null;
         $slugName = str_slug($slugName);
         $pdfSlug = str_slug($this->wakapdf->name);
 
-        $fileName = $pdfSlug . '_' . $slugName . '.pdf';
+        return [
+            "fileName" => $fileName = $pdfSlug . '_' . $slugName . '.pdf',
+            "html" => $html,
+        ];
+    }
+    // public function setAdditionalParams($additionalParams)
+    // {
+    //     if ($additionalParams) {
+    //         $this->additionalParams = $additionalParams;
+    //     }
+    // }
+    private function linkModelSource($dataSourceId)
+    {
+        $this->dataSourceId = $dataSourceId;
+        // si vide on puise dans le test
+        if (!$this->dataSourceId) {
+            $this->dataSourceId = $this->wakapdf->data_source->test_id;
+        }
+        //on enregistre le modèle
+        //trace_log($this->wakapdf->data_source->modelClass);
+        return $this->wakapdf->data_source->modelClass::find($this->dataSourceId);
+    }
 
-        //return $html;
-
-        //trace_log($html);
-
+    public function createPdf($html)
+    {
         $pdf = \PDF::loadHtml($html);
         $pdf->setOption('margin-top', 10);
         $pdf->setOption('margin-right', 10);
@@ -86,12 +107,7 @@ class PdfCreator
         // $pdf->setOption('javascript-delay', 5000);
         //$pdf->setOption('enable-smart-shrinking', true);
         // $pdf->setOption('no-stop-slow-scripts', true);
-
-        if (!$type || $type == "download") {
-            return $pdf->download($fileName);
-        } else {
-            return $pdf->inline($fileName);
-        }
+        return $pdf;
     }
 
     public function getDotedValues()
