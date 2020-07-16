@@ -31,7 +31,7 @@ class PdfCreator
         $pdf = $this->createPdf($data['html']);
         $pdfContent = $pdf->output();
 
-        $folderOrg = new \Waka\Lot\Classes\FolderOrganisation();
+        $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
         $folders = $folderOrg->getFolder($this->modelSource);
 
         $cloudSystem = App::make('cloudSystem');
