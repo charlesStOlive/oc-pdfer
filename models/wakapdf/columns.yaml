@@ -16,14 +16,14 @@ columns:
         searchable: false
         sortable: false
     name:
-        label: waka.mailer::lang.wakapdf.name
+        label: waka.pdfer::lang.wakapdf.name
         searchable: true
     pdf_layout_name:
-        label: waka.mailer::lang.wakapdf.pdf_layout
+        label: waka.pdfer::lang.wakapdf.pdf_layout
         relation: pdf_layout
         select: name
     data_src:
-        label: waka.mailer::lang.wakapdf.data_source
+        label: waka.pdfer::lang.wakapdf.data_source
         relation: data_source
         select: name
     updated_at:
