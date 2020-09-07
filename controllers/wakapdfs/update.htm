@@ -25,11 +25,10 @@
                 data-request="onLoadPdfTest">
                 <?= e(trans('waka.pdfer::lang.button.exemple_inline')) ?> </button>-->
             <a class="btn btn-default oc-icon-chrome" <?php $param = $this->params[0] ?>
-                href="<?= Backend::url("waka/pdfer/wakapdfs/makepdf/?wakaPdfId=$param&type=html" )?>" target="_blank">
+                href="<?= Backend::url("waka/pdfer/wakapdfs/makepdf/?wakaPdfId=$param&inline=1" )?>" target="_blank">
                 <?=e(trans('waka.pdfer::lang.button.exemple_inline')) ?> </a>
             <button type="button" class="btn btn-default oc-icon-cloud-download"
-                data-request-data="redirect:0, wakaPdfId:<?=$this->params[0]?>,  type:'download'"
-                data-request="onLoadPdfTest">
+                data-request-data="redirect:0, wakaPdfId:<?=$this->params[0]?>" data-request=" onLoadPdfTest">
                 <?= e(trans('waka.pdfer::lang.button.exemple_download')) ?> </button>
 
         </div>

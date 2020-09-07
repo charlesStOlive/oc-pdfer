@@ -1,6 +1,7 @@
 <?php namespace Waka\Pdfer\Behaviors;
 
 use Backend\Classes\ControllerBehavior;
+use Lang;
 use Redirect;
 use Waka\Pdfer\Classes\PdfCreator;
 use Waka\Pdfer\Models\WakaPdf;
@@ -76,7 +77,9 @@ class PdfBehavior extends ControllerBehavior
         $wakaPdfId = post('wakaPdfId');
         $modelId = post('modelId');
 
-        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $wakaPdfId . '&modelId=' . $modelId);
+        $inline = post('inline');
+
+        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $wakaPdfId . '&modelId=' . $modelId . '&inline=' . $inline);
 
     }
 
@@ -104,6 +107,11 @@ class PdfBehavior extends ControllerBehavior
             'wakaPdfId' => 'required',
         ];
 
+        $messages = [
+            'modelId.required' => Lang::get("waka.modelid::lang.errors.modelId"),
+            'wakaPdfId.wakaPdfId' => Lang::get("waka.crsm::lang.errors.wakaPdfId"),
+        ];
+
         $validator = \Validator::make($inputs, $rules);
 
         if ($validator->fails()) {
@@ -117,29 +125,20 @@ class PdfBehavior extends ControllerBehavior
      */
     public function onLoadPdfTest()
     {
-        $type = post('type');
+        $inline = post('inline');
         $wakaPdfId = post('wakaPdfId');
-        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $wakaPdfId . '&type=' . $type);
+        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $wakaPdfId . '&inline=' . $inline);
     }
-    // public function onLoadPdfTestShow()
-    // {
-    //     $wakaPdfId = post('wakaPdfId');
-    //     $modelId = post('modelId');
-    //     //trace_log($modelId);
-    //     $type = 'html';
-    //     $pc = new PdfCreator($wakaPdfId);
-    //     $this->vars['html'] = $pc->renderPdf($modelId, $type);
-    //     return $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_html.htm');
-    // }
+
     public function makepdf()
     {
         $wakaPdfId = post('wakaPdfId');
         $modelId = post('modelId');
         //trace_log($modelId);
-        $type = post('type');
+        $inline = post('inline');
 
         $wc = new PdfCreator($wakaPdfId);
-        return $wc->renderPdf($modelId, $type);
+        return $wc->renderPdf($modelId, $inline);
     }
 
     public function createPdfBehaviorWidget()

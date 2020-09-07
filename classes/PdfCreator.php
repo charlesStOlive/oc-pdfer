@@ -18,11 +18,17 @@ class PdfCreator
 
     }
 
-    public function renderPdf($dataSourceId, $type = 'inline')
+    public function renderPdf($dataSourceId, $inline = false)
     {
         $data = $this->prepareCreatorVars($dataSourceId);
         $pdf = $this->createPdf($data['html']);
-        return $pdf->download($data['fileName']);
+        if ($inline) {
+            return $pdf->inline($data['fileName']);
+        } else {
+            return $pdf->download($data['fileName']);
+
+        }
+
     }
 
     public function renderCloud($dataSourceId)

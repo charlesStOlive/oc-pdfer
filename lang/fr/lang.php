@@ -54,4 +54,8 @@ return [
         'exemple_html' => "Voir HTML",
 
     ],
+    "errors" => [
+        "modelId" => "Le modèle source de la fuison n'est pas determiné",
+        "wakaPdfId" => "Il manque le modèle PDF",
+    ],
 ];
