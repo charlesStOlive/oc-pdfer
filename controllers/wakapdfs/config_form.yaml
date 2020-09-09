@@ -22,7 +22,7 @@ create:
 
 # Update page
 update:
-    title: Edit Waka Pdf
+    title: Editer un PDF
     redirect: waka/pdfer/wakapdfs
     redirectClose: waka/pdfer/wakapdfs
 

@@ -1,3 +1,10 @@
+<?php Block::put('breadcrumb') ?>
+<ul>
+    <li><a href="<?= Backend::url('system/settings/') ?>">Réglages</a></li>
+    <li><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>">Modèles PDF</a></li>
+    <li><?= e($this->pageTitle) ?></li>
+</ul>
+<?php Block::endPut() ?>
 <?php Block::put('form-contents') ?>
 <?php if (!$this->fatalError): ?>
 
