@@ -9,7 +9,7 @@ list: $/waka/pdfer/models/wakapdf/columns.yaml
 modelClass: Waka\Pdfer\Models\WakaPdf
 
 # List Title
-title: Manage Waka Pdfs
+title: Gerer les PDFs
 
 # Link URL for each record
 recordUrl: waka/pdfer/wakapdfs/update/:id
