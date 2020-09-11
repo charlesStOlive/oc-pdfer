@@ -1,0 +1,17 @@
+# ===================================
+#  Reorder Behavior Config
+# ===================================
+
+# Reorder Title
+title: Reorder Pdfs
+
+# Attribute name
+nameFrom: name
+
+# Model Class name
+modelClass: Waka\Pdfer\Models\WakaPdf
+
+# Toolbar widget configuration
+#toolbar:
+    # Partial for toolbar buttons
+    # buttons: reorder_toolbar

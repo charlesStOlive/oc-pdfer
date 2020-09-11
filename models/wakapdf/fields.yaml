@@ -52,42 +52,58 @@ tabs:
                 label: Injecter des images à partir du modèle
                 type: imageslist
                 tab: waka.pdfer::lang.wakapdf.tab_fnc
-        scopes@update:
-            label: waka.worder::lang.document.scopes.title
-            type: nestedform
-            tab: waka.pdfer::lang.wakapdf.tab_scopes
-            form:
-                fields:
-                    mode: 
-                        type: radio
-                        default: [all]
-                        cssClass: 'inline-options'
-                        options:
-                            all: Toutes les conditions doivent être vrai
-                            one: Une seul condition doit être vrai
-                    conditions:
-                        label: waka.worder::lang.document.scopes.conditions
-                        type: repeater
-                        prompt: waka.worder::lang.document.scopes.prompt
-                        span: full
-                        form:
-                            fields:
-                                self: 
-                                    label: waka.worder::lang.document.scopes.self
-                                    type: checkbox
-                                    span: full
-                                    default: true
-                                target:
-                                    label: waka.worder::lang.document.scopes.target
-                                    commentAbove: waka.worder::lang.document.scopes.target_com
-                                    span: auto
-                                    trigger:
-                                        action: disable
-                                        field: self
-                                        condition: checked
-                                ids:
-                                    label: waka.worder::lang.document.scopes.id
-                                    type: taglist
-                                    mode: array
-                                    commentAbove: waka.worder::lang.document.scopes.id_com
-                                    span: auto
+        
+        scope_type: 
+            label: waka.utils::lang.scopes.type
+            tab: waka.mailer::lang.wakamail.tab_scopes
+            type: dropdown
+            options:
+                none: Auncun
+                all: Toutes les conditions devront être vrais
+                one: Une seul condition doit être vrai
+        scopes:
+            type: scopeslist
+            tab: waka.mailer::lang.wakamail.tab_scopes
+            trigger:
+                action: hide
+                field: scope_type
+                condition: value[none]
+        # scopes@update:
+        #     label: waka.worder::lang.document.scopes.title
+        #     type: nestedform
+        #     tab: waka.pdfer::lang.wakapdf.tab_scopes
+        #     form:
+        #         fields:
+        #             mode: 
+        #                 type: radio
+        #                 default: [all]
+        #                 cssClass: 'inline-options'
+        #                 options:
+        #                     all: Toutes les conditions doivent être vrai
+        #                     one: Une seul condition doit être vrai
+        #             conditions:
+        #                 label: waka.worder::lang.document.scopes.conditions
+        #                 type: repeater
+        #                 prompt: waka.worder::lang.document.scopes.prompt
+        #                 span: full
+        #                 form:
+        #                     fields:
+        #                         self: 
+        #                             label: waka.worder::lang.document.scopes.self
+        #                             type: checkbox
+        #                             span: full
+        #                             default: true
+        #                         target:
+        #                             label: waka.worder::lang.document.scopes.target
+        #                             commentAbove: waka.worder::lang.document.scopes.target_com
+        #                             span: auto
+        #                             trigger:
+        #                                 action: disable
+        #                                 field: self
+        #                                 condition: checked
+        #                         ids:
+        #                             label: waka.worder::lang.document.scopes.id
+        #                             type: taglist
+        #                             mode: array
+        #                             commentAbove: waka.worder::lang.document.scopes.id_com
+        #                             span: auto

@@ -12,6 +12,7 @@ class WakaPdfs extends Controller
     public $implement = [
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
+        'Backend.Behaviors.ReorderController',
         'Waka.Informer.Behaviors.PopupInfo',
         'Waka.Pdfer.Behaviors.PdfBehavior',
         'Waka.Utils.Behaviors.DuplicateModel',
@@ -20,6 +21,7 @@ class WakaPdfs extends Controller
 
     public $formConfig = 'config_form.yaml';
     public $listConfig = 'config_list.yaml';
+    public $reorderConfig = 'config_reorder.yaml';
     public $duplicateConfig = 'config_duplicate.yaml';
     public $sidebarInfoConfig = '$/waka/crsm/config/config_wakapdfs_attributes.yaml';
 

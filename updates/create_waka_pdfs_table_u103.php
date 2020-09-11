@@ -9,14 +9,14 @@ class CreateWakaPdfsTableU103 extends Migration
     public function up()
     {
         Schema::table('waka_pdfer_waka_pdfs', function (Blueprint $table) {
-            $table->boolean('pdf_layout_id')->unsigned()->nullable();
+            $table->string('scope_type')->nullable();
         });
     }
 
     public function down()
     {
         Schema::table('waka_pdfer_waka_pdfs', function (Blueprint $table) {
-            $table->dropColumn('pdf_layout_id');
+            $table->dropColumn('scope_type');
         });
     }
 }
