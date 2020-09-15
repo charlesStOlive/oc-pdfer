@@ -26,6 +26,9 @@ columns:
         label: waka.pdfer::lang.wakapdf.data_source
         relation: data_source
         select: name
+    is_scope:
+        label: waka.utils::lang.scopes.is_scope
+        type: switch
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense
