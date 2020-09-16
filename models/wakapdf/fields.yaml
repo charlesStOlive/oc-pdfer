@@ -55,7 +55,7 @@ tabs:
         
         is_scope: 
             label: waka.utils::lang.scopes.is_scope
-            type: checkbox
+            type: switch
         scopes:
             type: scopeslist
             trigger:
