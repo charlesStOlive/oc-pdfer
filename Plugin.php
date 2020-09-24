@@ -118,20 +118,20 @@ class Plugin extends PluginBase
             'wakapdfs' => [
                 'label' => \Lang::get('waka.pdfer::lang.menu.wakapdfs'),
                 'description' => \Lang::get('waka.pdfer::lang.menu.wakapdfs_description'),
-                'category' => \Lang::get('waka.pdfer::lang.menu.settings_category'),
+                'category' => \Lang::get('waka.utils::lang.menu.settings_category_model'),
                 'icon' => 'icon-file-pdf-o',
                 'url' => \Backend::url('waka/pdfer/wakapdfs'),
                 'permissions' => ['waka.pdfer.admin.*'],
-                'order' => 1,
+                'order' => 20,
             ],
             'pdflayouts' => [
                 'label' => \Lang::get('waka.pdfer::lang.menu.pdflayouts'),
                 'description' => \Lang::get('waka.pdfer::lang.menu.pdflayouts_description'),
-                'category' => \Lang::get('waka.pdfer::lang.menu.settings_category'),
+                'category' => \Lang::get('waka.utils::lang.menu.settings_category_model'),
                 'icon' => 'icon-css3',
                 'url' => \Backend::url('waka/pdfer/pdflayouts'),
                 'permissions' => ['waka.pdfer.admin.*'],
-                'order' => 1,
+                'order' => 21,
             ],
         ];
     }
