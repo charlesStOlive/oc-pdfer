@@ -29,12 +29,12 @@ class PdfBehavior extends ControllerBehavior
         return \Waka\Utils\Models\DataSource::where('model', '=', $modelClassName)->first();
     }
 
-    public function getModel($model, $modelId)
-    {
-        $myModel = new $model;
-        $myModel = $myModel::find($modelId);
-        return $myModel;
-    }
+    // public function getModel($model, $modelId)
+    // {
+    //     $myModel = new $model;
+    //     $myModel = $myModel::find($modelId);
+    //     return $myModel;
+    // }
 
     /**
      * LOAD DES POPUPS
