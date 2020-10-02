@@ -2,6 +2,7 @@
 
 use App;
 use Waka\Pdfer\Models\WakaPdf;
+use Waka\Utils\Classes\DataSource;
 
 class PdfCreator
 {
@@ -10,11 +11,13 @@ class PdfCreator
     private $dataSourceId;
     private $additionalParams;
     private $dataSourceAdditionalParams;
+    private $dataSource;
 
     public function __construct($pdf_id)
     {
         $wakapdf = WakaPdf::find($pdf_id);
         $this->wakapdf = $wakapdf;
+        $this->dataSource = new DataSource($this->wakapdf->data_source_id, 'id');
 
     }
 
@@ -49,16 +52,16 @@ class PdfCreator
 
     }
 
-    public function prepareCreatorVars($dataSourceId)
+    public function prepareCreatorVars($modelId)
     {
-        $this->modelSource = $this->linkModelSource($dataSourceId);
-        $this->dataSourceAdditionalParams = $this->modelSource->hasRelationArray;
+        //$this->modelSource = $this->linkModelSource($modelId);
+        //$this->dataSourceAdditionalParams = $this->modelSource->hasRelationArray;
 
-        $varName = strtolower($this->wakapdf->data_source->model);
+        $varName = strtolower($this->dataSource->name);
 
-        $doted = $this->wakapdf->data_source->getValues($dataSourceId);
-        $img = $this->wakapdf->data_source->getPicturesUrl($dataSourceId, $this->wakapdf->images);
-        $fnc = $this->wakapdf->data_source->getFunctionsCollections($dataSourceId, $this->wakapdf->model_functions);
+        $doted = $this->dataSource->getValues($modelId);
+        $img = $this->dataSource->getPicturesUrl($modelId, $this->wakapdf->images);
+        $fnc = $this->dataSource->getFunctionsCollections($modelId, $this->wakapdf->model_functions);
         $css = null;
         if ($this->wakapdf->pdf_layout) {
             $css = \File::get(plugins_path() . $this->wakapdf->pdf_layout->crsm_layout);
@@ -88,17 +91,17 @@ class PdfCreator
     //         $this->additionalParams = $additionalParams;
     //     }
     // }
-    private function linkModelSource($dataSourceId)
-    {
-        $this->dataSourceId = $dataSourceId;
-        // si vide on puise dans le test
-        if (!$this->dataSourceId) {
-            $this->dataSourceId = $this->wakapdf->data_source->test_id;
-        }
-        //on enregistre le modèle
-        //trace_log($this->wakapdf->data_source->modelClass);
-        return $this->wakapdf->data_source->modelClass::find($this->dataSourceId);
-    }
+    // private function linkModelSource($dataSourceId)
+    // {
+    //     $this->dataSourceId = $dataSourceId;
+    //     // si vide on puise dans le test
+    //     if (!$this->dataSourceId) {
+    //         $this->dataSourceId = $this->wakapdf->data_source->test_id;
+    //     }
+    //     //on enregistre le modèle
+    //     //trace_log($this->wakapdf->data_source->modelClass);
+    //     return $this->wakapdf->data_source->modelClass::find($this->dataSourceId);
+    // }
 
     public function createPdf($html)
     {
@@ -116,23 +119,23 @@ class PdfCreator
         return $pdf;
     }
 
-    public function getDotedValues()
-    {
-        $array = [];
-        if ($this->additionalParams) {
-            if (count($this->additionalParams)) {
-                $rel = $this->wakapdf->data_source->getDotedRelationValues($this->dataSourceId, $this->additionalParams);
-                //trace_log($rel);
-                $array = array_merge($array, $rel);
-                //trace_log($array);
-            }
-        }
+    // public function getDotedValues()
+    // {
+    //     $array = [];
+    //     if ($this->additionalParams) {
+    //         if (count($this->additionalParams)) {
+    //             $rel = $this->wakapdf->data_source->getDotedRelationValues($this->dataSourceId, $this->additionalParams);
+    //             //trace_log($rel);
+    //             $array = array_merge($array, $rel);
+    //             //trace_log($array);
+    //         }
+    //     }
 
-        $rel = $this->wakapdf->data_source->getDotedValues($this->dataSourceId);
-        //trace_log($rel);
-        $array = array_merge($array, $rel);
-        return $array;
+    //     $rel = $this->wakapdf->data_source->getDotedValues($this->dataSourceId);
+    //     //trace_log($rel);
+    //     $array = array_merge($array, $rel);
+    //     return $array;
 
-    }
+    // }
 
 }
