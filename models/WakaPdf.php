@@ -64,7 +64,7 @@ class WakaPdf extends Model
     public $hasOne = [];
     public $hasMany = [];
     public $belongsTo = [
-        'data_source' => ['Waka\Utils\Models\DataSource'],
+        //'data_source' => ['Waka\Utils\Models\DataSource'],
         'pdf_layout' => ['Waka\Pdfer\Models\PdfLayout'],
     ];
     public $belongsToMany = [];
@@ -86,5 +86,13 @@ class WakaPdf extends Model
             "CSS du PDF" => \Backend::url('waka/pdfer/pdflayouts/update/' . $layout_id),
         ];
         return $links;
+    }
+
+    /**
+     * LIST
+     */
+    public function listDataSource()
+    {
+        return \Waka\Utils\Classes\DataSourceList::lists();
     }
 }

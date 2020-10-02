@@ -3,9 +3,10 @@
 # ===================================
 
 fields:
-    contact:
-        type: dropdown
-        options: listContacts
-        placeholder: waka.utils::lang.global.placeholder_contact
+    # A supprimer à mon avis
+    # contact:
+    #     type: dropdown
+    #     options: listContacts
+    #     placeholder: waka.utils::lang.global.placeholder_contact
     
     

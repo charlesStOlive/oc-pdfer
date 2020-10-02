@@ -5,6 +5,7 @@ use Lang;
 use Redirect;
 use Waka\Pdfer\Classes\PdfCreator;
 use Waka\Pdfer\Models\WakaPdf;
+use Waka\Utils\Classes\DataSource;
 
 class PdfBehavior extends ControllerBehavior
 {
@@ -22,12 +23,12 @@ class PdfBehavior extends ControllerBehavior
      * METHODES
      */
 
-    public function getDataSourceFromModel(String $model)
-    {
-        $modelClassDecouped = explode('\\', $model);
-        $modelClassName = array_pop($modelClassDecouped);
-        return \Waka\Utils\Models\DataSource::where('model', '=', $modelClassName)->first();
-    }
+    // public function getDataSourceFromModel(String $model)
+    // {
+    //     $modelClassDecouped = explode('\\', $model);
+    //     $modelClassName = array_pop($modelClassDecouped);
+    //     return \Waka\Utils\Models\DataSource::where('model', '=', $modelClassName)->first();
+    // }
 
     // public function getModel($model, $modelId)
     // {
@@ -44,8 +45,8 @@ class PdfBehavior extends ControllerBehavior
         $model = post('model');
         $modelId = post('modelId');
 
-        $dataSource = $this->getDataSourceFromModel($model);
-        $options = $dataSource->getPartialOptions($modelId, 'Waka\Pdfer\Models\WakaPdf');
+        $ds = new DataSource($model, 'class');
+        $options = $ds->getPartialOptions($modelId, 'Waka\Pdfer\Models\WakaPdf');
 
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
@@ -57,8 +58,8 @@ class PdfBehavior extends ControllerBehavior
         $model = post('model');
         $modelId = post('modelId');
 
-        $dataSource = $this->getDataSourceFromModel($model);
-        $options = $dataSource->getPartialOptions($modelId, 'Waka\Pdfer\Models\WakaPdf');
+        $ds = new DataSource($model, 'class');
+        $options = $ds->getPartialOptions($modelId, 'Waka\Pdfer\Models\WakaPdf');
 
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
