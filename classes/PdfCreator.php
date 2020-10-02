@@ -54,8 +54,6 @@ class PdfCreator
 
     public function prepareCreatorVars($modelId)
     {
-        //$this->modelSource = $this->linkModelSource($modelId);
-        //$this->dataSourceAdditionalParams = $this->modelSource->hasRelationArray;
 
         $varName = strtolower($this->dataSource->name);
 
@@ -85,23 +83,6 @@ class PdfCreator
             "html" => $html,
         ];
     }
-    // public function setAdditionalParams($additionalParams)
-    // {
-    //     if ($additionalParams) {
-    //         $this->additionalParams = $additionalParams;
-    //     }
-    // }
-    // private function linkModelSource($dataSourceId)
-    // {
-    //     $this->dataSourceId = $dataSourceId;
-    //     // si vide on puise dans le test
-    //     if (!$this->dataSourceId) {
-    //         $this->dataSourceId = $this->wakapdf->data_source->test_id;
-    //     }
-    //     //on enregistre le modèle
-    //     //trace_log($this->wakapdf->data_source->modelClass);
-    //     return $this->wakapdf->data_source->modelClass::find($this->dataSourceId);
-    // }
 
     public function createPdf($html)
     {
@@ -118,24 +99,5 @@ class PdfCreator
         // $pdf->setOption('no-stop-slow-scripts', true);
         return $pdf;
     }
-
-    // public function getDotedValues()
-    // {
-    //     $array = [];
-    //     if ($this->additionalParams) {
-    //         if (count($this->additionalParams)) {
-    //             $rel = $this->wakapdf->data_source->getDotedRelationValues($this->dataSourceId, $this->additionalParams);
-    //             //trace_log($rel);
-    //             $array = array_merge($array, $rel);
-    //             //trace_log($array);
-    //         }
-    //     }
-
-    //     $rel = $this->wakapdf->data_source->getDotedValues($this->dataSourceId);
-    //     //trace_log($rel);
-    //     $array = array_merge($array, $rel);
-    //     return $array;
-
-    // }
 
 }

@@ -22,10 +22,9 @@ columns:
         label: waka.pdfer::lang.wakapdf.pdf_layout
         relation: pdf_layout
         select: name
-    data_src:
-        label: waka.pdfer::lang.wakapdf.data_source
-        relation: data_source
-        select: name
+    data_source_id:
+        label: waka.utils::lang.datasource.title
+        type: datasource
     is_scope:
         label: waka.utils::lang.scopes.is_scope
         type: switch
