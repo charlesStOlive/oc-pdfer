@@ -59,7 +59,7 @@ class PdfCreator
 
         $doted = $this->dataSource->getValues($modelId);
         $img = $this->dataSource->wimages->getPicturesUrl($this->wakapdf->images);
-        trace_log($img);
+        //trace_log($img);
         $fnc = $this->dataSource->getFunctionsCollections($modelId, $this->wakapdf->model_functions);
         $css = null;
         if ($this->wakapdf->pdf_layout) {
