@@ -63,7 +63,7 @@ class PdfCreator
         $fnc = $this->dataSource->getFunctionsCollections($modelId, $this->wakapdf->model_functions);
         $css = null;
         if ($this->wakapdf->pdf_layout) {
-            $css = \File::get(plugins_path() . $this->wakapdf->pdf_layout->crsm_layout);
+            $css = \File::get(plugins_path() . $this->wakapdf->pdf_layout->wconfig_layout);
         }
         $model = [
             $varName => $doted,

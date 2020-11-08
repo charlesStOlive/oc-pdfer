@@ -5,10 +5,10 @@
 fields:
     name:
         label: waka.pdfer::lang.pdflayout.name
-    crsm_layout:
-        label: waka.pdfer::lang.pdflayout.crsm_layout
+    wconfig_layout:
+        label: waka.pdfer::lang.pdflayout.wconfig_layout
         type: dropdown
-        options: listCrsmLayout
+        options: listWconfigLayout
         default: 0
     add_css:
         label: waka.pdfer::lang.pdflayout.add_css

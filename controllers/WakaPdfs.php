@@ -23,7 +23,7 @@ class WakaPdfs extends Controller
     public $listConfig = 'config_list.yaml';
     public $reorderConfig = 'config_reorder.yaml';
     public $duplicateConfig = 'config_duplicate.yaml';
-    public $sidebarInfoConfig = '$/waka/crsm/config/config_wakapdfs_attributes.yaml';
+    public $sidebarAttributesConfig = 'config_attributes.yaml';
 
     public $sidebarAttributes;
 

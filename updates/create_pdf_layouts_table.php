@@ -13,7 +13,7 @@ class CreatePdfLayoutsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('layout')->nullable();
-            $table->string('crsm_layout')->nullable();
+            $table->string('wconfig_layout')->nullable();
             $table->boolean('add_css')->default(false);
             $table->text('css')->nullable();
             $table->timestamps();

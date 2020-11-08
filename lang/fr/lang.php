@@ -11,7 +11,7 @@ return [
     ],
     'pdflayout' => [
         'name' => "Nom du template",
-        'crsm_layout' => "Nom de la bibliothèque CSS",
+        'wconfig_layout' => "Nom de la bibliothèque CSS",
         'add_css' => "Ajouter vos propres CSS",
         'css' => "CSS",
     ],
