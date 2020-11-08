@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Document
+
+# Model Class name
+modelClass: Waka\Pdfer\Models\WakaPdf
+type: pdf
+text_info: "Glissez une valeur dans la zone de saisie"
+separate_fields:
+    - client
+    - cp
+    - contact
+    - project
+    - sector
+    - info
+    - ao
+    - country
+hidden_fields:
+    - .id
+    - _id
+    - sector.content
+    - is_ex
+    - txt_
+    - tasks
+    - missions
+
+
+
