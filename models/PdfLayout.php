@@ -74,6 +74,6 @@ class PdfLayout extends Model
 
     public function listWconfigLayout()
     {
-        return \Config::get('waka.wconfig::assets.css');
+        return \Config::get('waka.wconfig::assets.css.pdf');
     }
 }
