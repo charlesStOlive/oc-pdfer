@@ -1,0 +1,17 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:    
+    name:
+        label: waka.pdfer::bloc.name
+        span: left
+        required: true
+    slug:
+        label: waka.pdfer::bloc.slug
+        span: right
+        required: true
+    description:
+        label: waka.pdfer::bloc.description
+        span: auto
+        type: textarea

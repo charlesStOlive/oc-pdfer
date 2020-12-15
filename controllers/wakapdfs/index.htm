@@ -1,2 +1,34 @@
-
-<?= $this->listRender() ?>
+<div class="control-tabs content-tabs tabs-flush"
+     data-control="tab">
+    <ul class="nav nav-tabs">
+        <li class="<?= $activeTab == 'wakamails' ? 'active' : '' ?>">
+            <a href="#wakamails"
+               data-tab-url="<?= Backend::url('waka/pdfer/wakapdfs/index/wakamails') ?>">
+                <?= e(trans('waka.pdfer::wakapdf.title')) ?>
+            </a>
+        </li>
+        <li class="<?= $activeTab == 'layouts' ? 'active' : '' ?>">
+            <a href="#layouts"
+               data-tab-url="<?= Backend::url('waka/pdfer/wakapdfs/index/layouts') ?>">
+                <?= e(trans('waka.pdfer::layout.title')) ?>
+            </a>
+        </li>
+        <li class="<?= $activeTab == 'blocs' ? 'active' : '' ?>">
+            <a href="#blocs"
+               data-tab-url="<?= Backend::url('waka/pdfer/wakapdfs/index/blocs') ?>">
+                <?= e(trans('waka.pdfer::bloc.title')) ?>
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane <?= $activeTab == 'wakamails' ? 'active' : '' ?>">
+            <?= $this->listRender('wakapdfs') ?>
+        </div>
+        <div class="tab-pane <?= $activeTab == 'layouts' ? 'active' : '' ?>">
+            <?= $this->listRender('layouts') ?>
+        </div>
+        <div class="tab-pane <?= $activeTab == 'blocs' ? 'active' : '' ?>">
+            <?= $this->listRender('blocs') ?>
+        </div>
+    </div>
+</div>

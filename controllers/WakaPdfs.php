@@ -5,36 +5,37 @@ use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
 
 /**
- * Waka Pdfs Back-end Controller
+ * Waka Pdf Back-end Controller
  */
 class WakaPdfs extends Controller
 {
     public $implement = [
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
-        'Backend.Behaviors.ReorderController',
-        'Waka.Informer.Behaviors.PopupInfo',
-        'Waka.Pdfer.Behaviors.PdfBehavior',
-        'Waka.Utils.Behaviors.DuplicateModel',
         'waka.Utils.Behaviors.SideBarAttributesBehavior',
+        'Waka.Pdfer.Behaviors.PdfBehavior',
+        'Backend.Behaviors.ReorderController',
+        'Waka.Utils.Behaviors.DuplicateModel',
+
     ];
 
     public $formConfig = 'config_form.yaml';
-    public $listConfig = 'config_list.yaml';
-    public $reorderConfig = 'config_reorder.yaml';
+    public $listConfig = [
+        'wakapdfs' => 'config_list.yaml',
+        'layouts' => 'config_list_layouts.yaml',
+        'blocs' => 'config_list_blocs.yaml',
+    ];
     public $duplicateConfig = 'config_duplicate.yaml';
+    public $reorderConfig = 'config_reorder.yaml';
     public $sidebarAttributesConfig = 'config_attributes.yaml';
-
-    public $sidebarAttributes;
 
     public function __construct()
     {
         parent::__construct();
-
-        \BackendMenu::setContext('October.System', 'system', 'settings');
-        SettingsManager::setContext('Waka.Pdfer', 'wakapdfs');
-
+        BackendMenu::setContext('October.System', 'system', 'settings');
+        SettingsManager::setContext('Waka.Pdfer', 'WakaPdfs');
     }
+
     public function update($id)
     {
         $this->bodyClass = 'compact-container';
@@ -48,5 +49,10 @@ class WakaPdfs extends Controller
             '#sidebar_attributes' => $this->attributesRender($this->params[0]),
         ];
     }
-
+    public function index($tab = null)
+    {
+        $this->asExtension('ListController')->index();
+        $this->bodyClass = 'compact-container';
+        $this->vars['activeTab'] = $tab ?: 'templates';
+    }
 }

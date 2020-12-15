@@ -1,7 +1,7 @@
 <?php Block::put('breadcrumb') ?>
 <ul>
     <li><a href="<?= Backend::url('system/settings/') ?>"><?= e(trans('waka.utils::lang.global.settings')) ?></a></li>
-    <li><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>"><?= e(trans('waka.pdfer::wakapdf.title')) ?></a></li>
+    <li><a href="<?= Backend::url('waka/pdfer/layouts') ?>"><?= e(trans('waka.pdfer::layout.title')) ?></a></li>
     <li><?= e($this->pageTitle) ?></li>
 </ul>
 <?php Block::endPut() ?>
@@ -15,6 +15,7 @@
 </div>
 <div class="form-buttons">
     <div class="loading-indicator-container">
+        <?php if ($this->user->hasAccess('waka.pdfer')): ?>
         <button type="submit"
                 data-request="onSave"
                 data-hotkey="ctrl+s, cmd+s"
@@ -30,8 +31,9 @@
                 class="btn btn-default">
             <?= e(trans('waka.utils::lang.global.create_close')) ?>
         </button>
+        <?php endif ?>
         <span class="btn-text">
-            or <a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>">
+            or <a href="<?= Backend::url('waka/pdfer/layouts') ?>">
                 <?= e(trans('waka.utils::lang.global.cancel')) ?></a>
         </span>
     </div>
@@ -42,7 +44,7 @@
 <?php else: ?>
 
 <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-<p><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>"
-       class="btn btn-default">Return to waka pdf list</a></p>
+<p><a href="<?= Backend::url('waka/pdfer/layouts') ?>"
+       class="btn btn-default">Return to layout list</a></p>
 
 <?php endif ?>

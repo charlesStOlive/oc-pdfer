@@ -1,13 +1,16 @@
 <div data-control="toolbar">
-    <a href="<?= Backend::url('waka/pdfer/wakapdfs/create') ?>"
+    <?php if ($this->user->hasAccess('waka.pdfer')): ?>
+    <a href="<?= Backend::url('waka/pdfer/blocs/create') ?>"
        class="btn btn-primary oc-icon-plus">
-        <?= e(trans('waka.pdfer::wakapdf.create')) ?>
+        <?= e(trans('waka.pdfer::bloc.create')) ?>
     </a>
+    <?php endif ?>
+    <?php if ($this->user->hasAccess('waka.pdfer')): ?>
     <button class="btn btn-danger oc-icon-trash-o"
             disabled="disabled"
             onclick="$(this).data('request-data', { checked: $('.control-list').listWidget('getChecked') })"
             data-request="onDelete"
-            data-request-confirm="Are you sure you want to delete the selected Waka Pdfs?"
+            data-request-confirm="Are you sure you want to delete the selected Blocs?"
             data-trigger-action="enable"
             data-trigger=".control-list input[type=checkbox]"
             data-trigger-condition="checked"
@@ -15,9 +18,6 @@
             data-stripe-load-indicator>
         <?= e(trans('waka.utils::lang.global.delete_selected')) ?>
     </button>
-    <a href="<?= Backend::url('waka/pdfer/wakapdfs/reorder') ?>"
-       class="btn btn-default oc-icon-bars">
-        <?= e(trans('waka.utils::lang.global.reorder')) ?>
-    </a>
+    <?php endif ?>
     <?= $this->fireViewEvent('backend.top.index') ?>
 </div>

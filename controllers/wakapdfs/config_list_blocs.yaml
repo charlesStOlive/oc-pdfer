@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/waka/pdfer/models/wakapdf/columns.yaml
+list: $/waka/pdfer/models/bloc/columns.yaml
 
 # Model Class name
-modelClass: Waka\Pdfer\Models\WakaPdf
+modelClass: Waka\Pdfer\Models\Bloc
 
 # List Title
-title: waka.pdfer::wakapdf.title
+title: waka.pdfer::bloc.title
 
 # Link URL for each record
-recordUrl: waka/pdfer/wakapdfs/update/:id
+recordUrl: waka/pdfer/blocs/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
@@ -35,15 +35,15 @@ showSorting: true
 #     column: created_at
 #     direction: desc
 defaultSort:
-    column: sort_order
-    direction: asc
-# Display checkboxes next to each record
+    column: updated_at
+    direction: desc
+    # Display checkboxes next to each record
 showCheckboxes: true
 
 # Toolbar widget configuration
 toolbar:
     # Partial for toolbar buttons
-    buttons: list_toolbar
+    buttons: list_blocs_toolbar
 
     # Search widget configuration
     search:

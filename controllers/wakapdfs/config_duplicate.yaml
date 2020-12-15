@@ -6,8 +6,8 @@
 # Model Class name
 modelClass: Waka\Pdfer\Models\WakaPdf
 
-name: Pdf
-title: Dupliquer un pdf
+name: wakapdfs
+title: waka.utils::lang.global.duplicate_theWakaPdf
 redirect: backend/waka/pdfer/wakapdfs/update/
 
 duplication:
@@ -24,7 +24,7 @@ duplication:
     #Les champs qui seront modifié dans le formulaire du popup 
     fields:
         name:
-          label: Nom du pdf
+          label: waka.pdfer::wakapdf.name 
 
         # _keep:
         #   label: Dupliquer dans ce projet

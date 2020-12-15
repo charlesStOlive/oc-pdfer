@@ -3,7 +3,7 @@
 # ===================================
 
 # Record name
-name: Waka Pdf
+name: waka.pdfer::wakapdf.form_name
 
 # Model Form Field configuration
 form: $/waka/pdfer/models/wakapdf/fields.yaml
@@ -12,20 +12,21 @@ form: $/waka/pdfer/models/wakapdf/fields.yaml
 modelClass: Waka\Pdfer\Models\WakaPdf
 
 # Default redirect location
-defaultRedirect: waka/pdfer/wakapdfs
+defaultRedirect: waka/pdfer/wakapdfs/index/wakamails
 
 # Create page
 create:
-    title: Create Waka Pdf
+    title: waka.pdfer::wakapdf.create
     redirect: waka/pdfer/wakapdfs/update/:id
     redirectClose: waka/pdfer/wakapdfs
+    form: $/waka/pdfer/models/wakapdf/fields_create.yaml
 
 # Update page
 update:
-    title: Editer un PDF
-    redirect: waka/pdfer/wakapdfs
-    redirectClose: waka/pdfer/wakapdfs
+    title: waka.pdfer::wakapdf.update
+    redirect: waka/pdfer/wakapdfs/index/wakamails
+    redirectClose: waka/pdfer/wakapdfs/index/wakamails
 
 # Preview page
 preview:
-    title: Preview Waka Pdf
+    title: waka.pdfer::wakapdf.preview_name

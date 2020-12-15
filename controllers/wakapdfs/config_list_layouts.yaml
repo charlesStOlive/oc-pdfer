@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/waka/pdfer/models/pdflayout/columns.yaml
+list: $/waka/pdfer/models/layout/columns.yaml
 
 # Model Class name
-modelClass: Waka\Pdfer\Models\PdfLayout
+modelClass: Waka\Pdfer\Models\Layout
 
 # List Title
-title: Manage Pdf Layouts
+title: waka.pdfer::layout.title
 
 # Link URL for each record
-recordUrl: waka/pdfer/pdflayouts/update/:id
+recordUrl: waka/pdfer/layouts/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
@@ -29,18 +29,21 @@ showSetup: true
 # Displays the sorting link on each column
 showSorting: true
 
+
 # Default sorting column
 # defaultSort:
 #     column: created_at
 #     direction: desc
-
-# Display checkboxes next to each record
+defaultSort:
+    column: updated_at
+    direction: desc
+    # Display checkboxes next to each record
 showCheckboxes: true
 
 # Toolbar widget configuration
 toolbar:
     # Partial for toolbar buttons
-    buttons: list_toolbar
+    buttons: list_layouts_toolbar
 
     # Search widget configuration
     search:

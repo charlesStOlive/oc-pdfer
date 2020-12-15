@@ -1,0 +1,27 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:    
+    name:
+        label: waka.pdfer::layout.name
+        span: left
+        required: true
+    contenu:
+        label: waka.pdfer::layout.contenu
+        span: full
+        type: codeeditor
+        required: true
+        size: giant
+    baseCss:
+        label: waka.pdfer::layout.baseCss
+        span: left
+        type: dropdown
+        placeholder: waka.utils::lang.global.placeholder
+        required: true
+        options: listWconfigLayout
+    AddCss:
+        label: waka.pdfer::layout.AddCss
+        span: full
+        type: codeeditor
+        size: giant

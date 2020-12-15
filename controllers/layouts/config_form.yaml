@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: waka.pdfer::layout.form_name
+
+# Model Form Field configuration
+form: $/waka/pdfer/models/layout/fields.yaml
+
+# Model Class name
+modelClass: Waka\Pdfer\Models\Layout
+
+# Default redirect location
+defaultRedirect: waka/pdfer/wakapdfs/index/layouts
+
+# Create page
+create:
+    title: waka.pdfer::layout.create
+    redirect: waka/pdfer/layouts/update/:id
+    redirectClose: waka/pdfer/wakapdfs/index/layouts
+
+# Update page
+update:
+    title: waka.pdfer::layout.update
+    redirect: waka/pdfer/wakapdfs/index/layouts
+    redirectClose: waka/pdfer/wakapdfs/index/layouts
+
+# Preview page
+preview:
+    title: waka.pdfer::layout.preview_name

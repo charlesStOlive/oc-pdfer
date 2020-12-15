@@ -1,12 +1,5 @@
 1.0.1:
     - 'First version of Pdfer'
     - create_waka_pdfs_table.php
-1.0.2:
-    - 'Ajout des CSS'
-    - create_pdf_layouts_table.php
-1.0.3:
-    - 'ajout su scope type'
-    - create_waka_pdfs_table_u103.php
-1.0.4:
-    - 'Nettoyage des anciens scopes'
-    - clean_scopes.php
+    - create_layouts_table.php
+    - create_blocs_table.php

@@ -3,31 +3,29 @@
 # ===================================
 
 columns:
-    sort_order:
-        label: waka.utils::lang.global.sort_order
-        invisible: true
-    inform:
-        type: waka-icon-info
-        width: 25px
-        label : ' '
-        launch_request: true
-        show_null: true
-        clickable: false
-        searchable: false
-        sortable: false
-    name:
-        label: waka.pdfer::lang.wakapdf.name
+    id:
+        label: ID
         searchable: true
-    pdf_layout_name:
-        label: waka.pdfer::lang.wakapdf.pdf_layout
-        relation: pdf_layout
-        select: name
+        invisible: true
+
+    name:
+        label: waka.pdfer::wakapdf.name
+        searchable: true
+    slug:
+        label: waka.pdfer::wakapdf.slug
+        searchable: true
+    pdf_name:
+        label: waka.pdfer::wakapdf.pdf_name
+        searchable: true
     data_source_id:
-        label: waka.utils::lang.datasource.title
-        type: datasource
-    is_scope:
-        label: waka.utils::lang.scopes.is_scope
-        type: switch
+        label: waka.pdfer::wakapdf.data_source_id
+        searchable: true
+    layout_r:
+        label: waka.pdfer::wakapdf.layout
+        searchable: true
+        relation: layout
+        select: name
+        searchable: true
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense

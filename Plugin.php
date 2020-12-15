@@ -120,18 +120,9 @@ class Plugin extends PluginBase
                 'description' => \Lang::get('waka.pdfer::lang.menu.wakapdfs_description'),
                 'category' => \Lang::get('waka.utils::lang.menu.settings_category_model'),
                 'icon' => 'icon-file-pdf-o',
-                'url' => \Backend::url('waka/pdfer/wakapdfs'),
+                'url' => \Backend::url('waka/pdfer/wakapdfs/index/wakamails'),
                 'permissions' => ['waka.pdfer.admin.*'],
                 'order' => 20,
-            ],
-            'pdflayouts' => [
-                'label' => \Lang::get('waka.pdfer::lang.menu.pdflayouts'),
-                'description' => \Lang::get('waka.pdfer::lang.menu.pdflayouts_description'),
-                'category' => \Lang::get('waka.utils::lang.menu.settings_category_model'),
-                'icon' => 'icon-css3',
-                'url' => \Backend::url('waka/pdfer/pdflayouts'),
-                'permissions' => ['waka.pdfer.admin.*'],
-                'order' => 21,
             ],
         ];
     }

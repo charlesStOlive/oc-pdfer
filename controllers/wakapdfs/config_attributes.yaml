@@ -3,11 +3,13 @@
 # ===================================
 
 # Record name
-name: Document
+name: WakaPdf
 
 # Model Class name
 modelClass: Waka\Pdfer\Models\WakaPdf
-type: pdf
+type: email
 text_info: "Glissez une valeur dans la zone de saisie"
+
+
 
 

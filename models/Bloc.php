@@ -3,20 +3,19 @@
 use Model;
 
 /**
- * wakaPdf Model
+ * bloc Model
  */
 
-class WakaPdf extends Model
+class Bloc extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    use \October\Rain\Database\Traits\SoftDelete;
     use \October\Rain\Database\Traits\Sortable;
     use \Waka\Utils\Classes\Traits\DataSourceHelpers;
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'waka_pdfer_waka_pdfs';
+    public $table = 'waka_pdfer_blocs';
 
 
     /**
@@ -34,9 +33,7 @@ class WakaPdf extends Model
      */
     public $rules = [
         'name' => 'required',
-        'slug' => 'required|unique:waka_mailer_waka_mails',
-        'pdf_name' => 'required',
-        'data_source_id' => 'required',
+        'slug' => 'required',
     ];
 
     /**
@@ -54,9 +51,6 @@ class WakaPdf extends Model
      * @var array Attributes to be cast to JSON
      */
     protected $jsonable = [
-        'model_functions',
-        'images',
-        'scopes',
     ];
 
     /**
@@ -76,7 +70,6 @@ class WakaPdf extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at',
     ];
 
     /**
@@ -88,9 +81,6 @@ class WakaPdf extends Model
     public $hasOneThrough = [];
     public $hasManyThrough = [];
     public $belongsTo = [
-        'layout' => [
-            'Waka\Pdfer\Models\Layout',
-        ],
     ];
     public $belongsToMany = [];
     public $morphTo = [];

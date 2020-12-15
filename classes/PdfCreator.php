@@ -13,6 +13,8 @@ class PdfCreator
     private $dataSourceAdditionalParams;
     private $dataSource;
 
+    private $isTwigStarted;
+
     public function __construct($pdf_id)
     {
         $wakapdf = WakaPdf::find($pdf_id);
@@ -73,8 +75,7 @@ class PdfCreator
             'css' => $css,
         ];
 
-        $html = \Twig::parse($this->wakapdf->template, $model);
-        //return $html;
+        $htmlLayout = $this->renderHtml($model, $varName);
 
         $slugName = $doted['name'] ?? null;
         $slugName = str_slug($slugName);
@@ -82,7 +83,7 @@ class PdfCreator
 
         return [
             "fileName" => $fileName = $pdfSlug . '_' . $slugName . '.pdf',
-            "html" => $html,
+            "html" => $htmlLayout,
         ];
     }
 
@@ -100,6 +101,58 @@ class PdfCreator
         //$pdf->setOption('enable-smart-shrinking', true);
         // $pdf->setOption('no-stop-slow-scripts', true);
         return $pdf;
+    }
+
+    public function renderHtml($model, $varName)
+    {
+        $this->startTwig();
+        $html = $this->wakapdf->template;
+        $htmlContent = \Twig::parse($html, $model);
+        $data = [
+            $varName => $model,
+            'content' => $htmlContent,
+            'baseCss' => \File::get(plugins_path() . $this->wakapdf->layout->baseCss),
+            'AddCss' => $this->wakapdf->layout->Addcss,
+        ];
+        $htmlLayout = \Twig::parse($this->wakapdf->layout->contenu, $data);
+        $this->stopTwig();
+        return $htmlLayout;
+
+    }
+
+    /**
+     * Temporarily registers mail based token parsers with Twig.
+     * @return void
+     */
+    protected function startTwig()
+    {
+        if ($this->isTwigStarted) {
+            return;
+        }
+
+        $this->isTwigStarted = true;
+
+        $markupManager = \System\Classes\MarkupManager::instance();
+        $markupManager->beginTransaction();
+        $markupManager->registerTokenParsers([
+            new \System\Twig\MailPartialTokenParser,
+        ]);
+    }
+
+    /**
+     * Indicates that we are finished with Twig.
+     * @return void
+     */
+    protected function stopTwig()
+    {
+        if (!$this->isTwigStarted) {
+            return;
+        }
+
+        $markupManager = \System\Classes\MarkupManager::instance();
+        $markupManager->endTransaction();
+
+        $this->isTwigStarted = false;
     }
 
 }

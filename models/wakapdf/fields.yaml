@@ -2,102 +2,85 @@
 #  Form Field Definitions
 # ===================================
 tabs:
-    defaultTab: waka.pdfer::lang.wakapdf.tab_edit
+    defaultTab: waka.mailer::wakamail.tab_edit
     icons: 
-        waka.pdfer::lang.wakapdf.tab_info: icon-info-circle
-        waka.pdfer::lang.wakapdf.tab_edit: icon-pencil
-        waka.pdfer::lang.wakapdf.tab_scopes: icon-filter  
-        waka.pdfer::lang.wakapdf.tab_fnc: icon-address-card-o
-    fields:
-
-        name:
-            label: waka.pdfer::lang.wakapdf.name
-            span: auto
-       
-        # slug:
-        #      label: waka.pdfer::lang.wakapdf.slug   
-        #      preset: name
-        #      span: auto
-        # subject:
-        #     label: waka.pdfer::lang.wakapdf.subject
-        #     span: auto  
-        data_source_id@create:
-            label: waka.utils::lang.datasource.title
-            placeholder: waka.utils::lang.datasource.placeholder
-            type: dropdown
-            options: listDataSource
-            span: auto 
-        data_source_id@update:
-            label: waka.utils::lang.datasource.title
-            placeholder: waka.utils::lang.datasource.placeholder
-            type: dropdown
-            options: listDataSource
-            span: auto
-            disabled: true
-        pdf_layout:
-            label: waka.pdfer::lang.wakapdf.pdf_layout
-            span: auto
-            type: relation
-            select: name
+        waka.mailer::wakamail.tab_info: icon-info-circle
+        waka.mailer::wakamail.tab_edit: icon-pencil
+        waka.mailer::wakamail.tab_scopes: icon-filter
+        waka.mailer::wakamail.tab_fnc: icon-address-card-o
+        waka.lp::lang.source_log.tab_lp: icon-file
+    fields:    
+        pdf_name:
+            label: waka.pdfer::wakapdf.pdf_name
+            span: left
+            required: true
+            commentAbove: waka.pdfer::wakapdf.pdf_name_com
+            tab: waka.pdfer::wakapdf.tab_edit
         template:
-            label: waka.pdfer::lang.wakapdf.template
+            label: waka.pdfer::wakapdf.template
+            span: full
             type: codeeditor
-            language: html
             size: giant
-        model_functions@update:
-                label: Créer des collections à partir des fonctions du modèle
-                type: functionslist
-                tab: waka.pdfer::lang.wakapdf.tab_fnc
-        images@update:
-                label: Injecter des images à partir du modèle
-                type: imageslist
-                tab: waka.pdfer::lang.wakapdf.tab_fnc
-        
-        is_scope: 
-            label: waka.utils::lang.scopes.is_scope
+            tab: waka.pdfer::wakapdf.tab_edit
+        name:
+            label: waka.pdfer::wakapdf.name
+            span: left
+            required: true
+            size: giant
+            commentAbove: waka.pdfer::wakapdf.name_com
+            tab: waka.pdfer::wakapdf.tab_info
+        slug:
+            label: waka.pdfer::wakapdf.slug
+            span: right
+            required: true
+            disabled: true
+            tab: waka.pdfer::wakapdf.tab_info
+        data_source_id:
+            label: waka.pdfer::wakapdf.data_source_id
+            span: right
+            type: dropdown
+            placeholder: waka.utils::lang.global.placeholder
+            required: true
+            disabled: true
+            options: listDataSource
+            tab: waka.pdfer::wakapdf.tab_info
+        layout:
+            label: waka.pdfer::wakapdf.layout
+            span: left
+            type: relation
+            placeholder: waka.utils::lang.global.placeholder
+            nameFrom: name
+            tab: waka.pdfer::wakapdf.tab_info
+        model_functions:
+            label: waka.pdfer::wakapdf.model_functions
+            span: full
+            type: functionslist
+            size: giant
+            tab: waka.pdfer::wakapdf.tab_fnc
+        images:
+            label: waka.pdfer::wakapdf.images
+            span: full
+            type: imageslist
+            tab: waka.pdfer::wakapdf.tab_fnc
+        is_scope:
+            label: waka.pdfer::wakapdf.is_scope
+            span: left
             type: switch
+            default: false
+            tab: waka.pdfer::wakapdf.tab_scopes
         scopes:
+            label: waka.pdfer::wakapdf.scopes
+            span: left
             type: scopeslist
             trigger:
-                action: hide
+                action: show
                 field: is_scope
-                condition: unchecked
-        # scopes@update:
-        #     label: waka.worder::lang.document.scopes.title
-        #     type: nestedform
-        #     tab: waka.pdfer::lang.wakapdf.tab_scopes
-        #     form:
-        #         fields:
-        #             mode: 
-        #                 type: radio
-        #                 default: [all]
-        #                 cssClass: 'inline-options'
-        #                 options:
-        #                     all: Toutes les conditions doivent être vrai
-        #                     one: Une seul condition doit être vrai
-        #             conditions:
-        #                 label: waka.worder::lang.document.scopes.conditions
-        #                 type: repeater
-        #                 prompt: waka.worder::lang.document.scopes.prompt
-        #                 span: full
-        #                 form:
-        #                     fields:
-        #                         self: 
-        #                             label: waka.worder::lang.document.scopes.self
-        #                             type: checkbox
-        #                             span: full
-        #                             default: true
-        #                         target:
-        #                             label: waka.worder::lang.document.scopes.target
-        #                             commentAbove: waka.worder::lang.document.scopes.target_com
-        #                             span: auto
-        #                             trigger:
-        #                                 action: disable
-        #                                 field: self
-        #                                 condition: checked
-        #                         ids:
-        #                             label: waka.worder::lang.document.scopes.id
-        #                             type: taglist
-        #                             mode: array
-        #                             commentAbove: waka.worder::lang.document.scopes.id_com
-        #                             span: auto
+                condition: checked
+            tab: waka.pdfer::wakapdf.tab_scopes
+        test_id:
+            label: waka.pdfer::wakapdf.test_id
+            span: auto
+            type: dropdown
+            placeholder: waka.utils::lang.global.placeholder
+            options: listDataSourceTarget
+            tab: waka.pdfer::wakapdf.tab_info

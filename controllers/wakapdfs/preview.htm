@@ -1,19 +1,20 @@
 <?php Block::put('breadcrumb') ?>
-    <ul>
-        <li><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>">Waka Pdfs</a></li>
-        <li><?= e($this->pageTitle) ?></li>
-    </ul>
+<ul>
+    <li><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>"><?= e(trans('waka.pdfer::wakapdf.preview_name')) ?></a></li>
+    <li><?= e($this->pageTitle) ?></li>
+</ul>
 <?php Block::endPut() ?>
 
 <?php if (!$this->fatalError): ?>
 
-    <div class="form-preview">
-        <?= $this->formRenderPreview() ?>
-    </div>
+<div class="form-preview">
+    <?= $this->formRenderPreview() ?>
+</div>
 
 <?php else: ?>
 
-    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
-    <p><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>" class="btn btn-default">Return to waka pdfs list</a></p>
+<p class="flash-message static error"><?= e($this->fatalError) ?></p>
+<p><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>"
+       class="btn btn-default">Return to waka pdf list</a></p>
 
 <?php endif ?>
