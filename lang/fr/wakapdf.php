@@ -6,7 +6,7 @@ return [
     'slug' => 'Code/Slug',
     'pdf_name' => 'Nom du document pdf',
     'pdf_name_com' => 'Nom du document en sortie',
-    'data_source_id' => 'Source des données',
+    'data_source' => 'Source des données',
     'layout' => 'Maquette',
     'template' => 'Éditeur',
     'model_functions' => 'Fonctions',

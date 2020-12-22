@@ -15,7 +15,7 @@ class WakaPdfsImport implements ToCollection, WithHeadingRow
             $wakaPdf->name = $row['name'] ?? null;
             $wakaPdf->slug = $row['slug'] ?? null;
             $wakaPdf->pdf_name = $row['pdf_name'] ?? null;
-            $wakaPdf->data_source_id = $row['data_source_id'] ?? null;
+            $wakaPdf->data_source = $row['data_source'] ?? null;
             $wakaPdf->layout_id = $row['layout_id'] ?? null;
             $wakaPdf->template = $row['template'] ?? null;
             $wakaPdf->model_functions = json_decode($row['model_functions'] ?? null);

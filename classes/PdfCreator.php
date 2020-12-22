@@ -19,7 +19,7 @@ class PdfCreator
     {
         $wakapdf = WakaPdf::find($pdf_id);
         $this->wakapdf = $wakapdf;
-        $this->dataSource = new DataSource($this->wakapdf->data_source_id, 'id');
+        $this->dataSource = new DataSource($this->wakapdf->data_source);
 
     }
 

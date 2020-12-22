@@ -17,8 +17,8 @@ columns:
     pdf_name:
         label: waka.pdfer::wakapdf.pdf_name
         searchable: true
-    data_source_id:
-        label: waka.pdfer::wakapdf.data_source_id
+    data_source:
+        label: waka.pdfer::wakapdf.data_source
         searchable: true
     layout_r:
         label: waka.pdfer::wakapdf.layout

@@ -18,8 +18,8 @@ fields:
         span: left
         required: true
         comment: waka.pdfer::wakapdf.pdf_name_com
-    data_source_id:
-        label: waka.pdfer::wakapdf.data_source_id
+    data_source:
+        label: waka.pdfer::wakapdf.data_source
         span: right
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder

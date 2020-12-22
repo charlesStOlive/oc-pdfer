@@ -14,7 +14,7 @@ class CreateWakaPdfsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('pdf_name');
-            $table->integer('data_source_id');
+            $table->string('data_source');
             $table->integer('layout_id')->unsigned()->nullable();
             $table->text('template')->nullable();
             $table->text('model_functions')->nullable();
