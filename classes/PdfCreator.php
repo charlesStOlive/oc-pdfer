@@ -43,7 +43,7 @@ class PdfCreator
         $pdfContent = $pdf->output();
 
         $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
-        $folders = $folderOrg->getFolder($this->modelSource);
+        $folders = $folderOrg->getFolder($this->dataSource->model);
 
         $cloudSystem = App::make('cloudSystem');
         $lastFolderDir = $cloudSystem->createDirFromArray($folders);
@@ -74,12 +74,12 @@ class PdfCreator
 
         $htmlLayout = $this->renderHtml($model, $varName);
 
-        $slugName = $doted['name'] ?? null;
-        $slugName = str_slug($slugName);
-        $pdfSlug = str_slug($this->wakapdf->name);
+        $slugName = $this->createTwigStrName($doted);
+
+        trace_log($slugName);
 
         return [
-            "fileName" => $fileName = $pdfSlug . '_' . $slugName . '.pdf',
+            "fileName" => $slugName . '.pdf',
             "html" => $htmlLayout,
             "options" => $this->wakapdf->layout->options,
         ];
@@ -94,16 +94,6 @@ class PdfCreator
                 $pdf->setOption($key, $value);
             }
         }
-
-        // // $pdf->setOption('margin-top', 10);
-        // // $pdf->setOption('margin-right', 10);
-        // // $pdf->setOption('margin-bottom', 10);
-        // // $pdf->setOption('margin-left', 10);
-        // // $pdf->setOption('viewport-size', '1280x1024');
-        // if ($data['orientation'] ?? false) {
-        //     $pdf->setOption('orientation', $data['orientation']);
-        // }
-
         //$pdf->setOption('zoom', '1.5');
         // $pdf->setOption('enable-javascript', true);
         // $pdf->setOption('javascript-delay', 5000);
@@ -128,6 +118,17 @@ class PdfCreator
         $this->stopTwig();
         return $htmlLayout;
 
+    }
+
+    public function createTwigStrName($data)
+    {
+        $modelName = strtolower($this->dataSource->name);
+        $vars = [
+            $modelName => $data,
+        ];
+        trace_log($this->wakapdf->pdf_name);
+        $nameConstruction = \Twig::parse($this->wakapdf->pdf_name, $vars);
+        return str_slug($nameConstruction);
     }
 
     /**
