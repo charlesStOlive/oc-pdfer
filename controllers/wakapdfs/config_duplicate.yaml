@@ -25,6 +25,8 @@ duplication:
     fields:
         name:
           label: waka.pdfer::wakapdf.name 
+        slug:
+          label: waka.pdfer::wakapdf.slug 
 
         # _keep:
         #   label: Dupliquer dans ce projet

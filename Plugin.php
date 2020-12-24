@@ -120,7 +120,7 @@ class Plugin extends PluginBase
                 'description' => \Lang::get('waka.pdfer::lang.menu.wakapdfs_description'),
                 'category' => \Lang::get('waka.utils::lang.menu.settings_category_model'),
                 'icon' => 'icon-file-pdf-o',
-                'url' => \Backend::url('waka/pdfer/wakapdfs/index/wakamails'),
+                'url' => \Backend::url('waka/pdfer/wakapdfs/index/wakapdfs'),
                 'permissions' => ['waka.pdfer.admin.*'],
                 'order' => 20,
             ],

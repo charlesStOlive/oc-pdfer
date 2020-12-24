@@ -1,9 +1,9 @@
 <div class="control-tabs content-tabs tabs-flush"
      data-control="tab">
     <ul class="nav nav-tabs">
-        <li class="<?= $activeTab == 'wakamails' ? 'active' : '' ?>">
-            <a href="#wakamails"
-               data-tab-url="<?= Backend::url('waka/pdfer/wakapdfs/index/wakamails') ?>">
+        <li class="<?= $activeTab == 'wakapdfs' ? 'active' : '' ?>">
+            <a href="#wakapdfs"
+               data-tab-url="<?= Backend::url('waka/pdfer/wakapdfs/index/wakapdfs') ?>">
                 <?= e(trans('waka.pdfer::wakapdf.title')) ?>
             </a>
         </li>
@@ -21,7 +21,7 @@
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane <?= $activeTab == 'wakamails' ? 'active' : '' ?>">
+        <div class="tab-pane <?= $activeTab == 'wakapdfs' ? 'active' : '' ?>">
             <?= $this->listRender('wakapdfs') ?>
         </div>
         <div class="tab-pane <?= $activeTab == 'layouts' ? 'active' : '' ?>">

@@ -17,6 +17,7 @@ class Layout extends Model
      */
     public $table = 'waka_pdfer_layouts';
 
+
     /**
      * @var array Guarded fields
      */
@@ -51,6 +52,7 @@ class Layout extends Model
      * @var array Attributes to be cast to JSON
      */
     protected $jsonable = [
+        'options',
     ];
 
     /**
@@ -115,7 +117,7 @@ class Layout extends Model
     /**
      * SETTERS
      */
-
+ 
     /**
      * FILTER FIELDS
      */
@@ -123,5 +125,5 @@ class Layout extends Model
     /**
      * OTHERS
      */
-
+    
 }

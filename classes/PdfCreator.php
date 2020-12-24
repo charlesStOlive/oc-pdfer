@@ -26,7 +26,7 @@ class PdfCreator
     public function renderPdf($dataSourceId, $inline = false)
     {
         $data = $this->prepareCreatorVars($dataSourceId);
-        $pdf = $this->createPdf($data['html']);
+        $pdf = $this->createPdf($data);
         if ($inline) {
             return $pdf->inline($data['fileName']);
         } else {
@@ -39,7 +39,7 @@ class PdfCreator
     public function renderCloud($dataSourceId)
     {
         $data = $this->prepareCreatorVars($dataSourceId);
-        $pdf = $this->createPdf($data['html']);
+        $pdf = $this->createPdf($data);
         $pdfContent = $pdf->output();
 
         $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
@@ -64,10 +64,7 @@ class PdfCreator
         //trace_log($img);
         $fnc = $this->dataSource->getFunctionsCollections($modelId, $this->wakapdf->model_functions);
         $css = null;
-        if ($this->wakapdf->pdf_layout) {
-            //trace_log($this->wakapdf->pdf_layout);
-            $css = \File::get(plugins_path() . $this->wakapdf->pdf_layout->wconfig_layout);
-        }
+
         $model = [
             $varName => $doted,
             'IMG' => $img,
@@ -84,17 +81,29 @@ class PdfCreator
         return [
             "fileName" => $fileName = $pdfSlug . '_' . $slugName . '.pdf',
             "html" => $htmlLayout,
+            "options" => $this->wakapdf->layout->options,
         ];
     }
 
-    public function createPdf($html)
+    public function createPdf($data)
     {
-        $pdf = \PDF::loadHtml($html);
-        $pdf->setOption('margin-top', 10);
-        $pdf->setOption('margin-right', 10);
-        $pdf->setOption('margin-bottom', 10);
-        $pdf->setOption('margin-left', 10);
-        $pdf->setOption('viewport-size', '1280x1024');
+        $pdf = \PDF::loadHtml($data['html']);
+        $options = $data['options'] ?? null;
+        if ($options) {
+            foreach ($options as $key => $value) {
+                $pdf->setOption($key, $value);
+            }
+        }
+
+        // // $pdf->setOption('margin-top', 10);
+        // // $pdf->setOption('margin-right', 10);
+        // // $pdf->setOption('margin-bottom', 10);
+        // // $pdf->setOption('margin-left', 10);
+        // // $pdf->setOption('viewport-size', '1280x1024');
+        // if ($data['orientation'] ?? false) {
+        //     $pdf->setOption('orientation', $data['orientation']);
+        // }
+
         //$pdf->setOption('zoom', '1.5');
         // $pdf->setOption('enable-javascript', true);
         // $pdf->setOption('javascript-delay', 5000);
@@ -115,6 +124,7 @@ class PdfCreator
             'AddCss' => $this->wakapdf->layout->Addcss,
         ];
         $htmlLayout = \Twig::parse($this->wakapdf->layout->contenu, $data);
+        //trace_log($htmlLayout);
         $this->stopTwig();
         return $htmlLayout;
 

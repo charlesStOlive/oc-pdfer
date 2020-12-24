@@ -22,6 +22,7 @@ tabs:
             type: codeeditor
             size: giant
             tab: waka.pdfer::wakapdf.tab_edit
+            language: html
         name:
             label: waka.pdfer::wakapdf.name
             span: left

@@ -13,6 +13,7 @@ fields:
         type: codeeditor
         required: true
         size: giant
+        language: html
     baseCss:
         label: waka.pdfer::layout.baseCss
         span: left
@@ -25,3 +26,35 @@ fields:
         span: full
         type: codeeditor
         size: giant
+        language: css
+    options:
+        label: waka.pdfer::layout.options
+        span: left
+        type: nestedform
+        form:
+            fields:
+                orientation:
+                    label: Orientation
+                    type: dropdown
+                    options:
+                        Portrait: Portrait
+                        Landscape: Paysage
+                margin-top:
+                    label: Marge haut
+                    default: 10
+                    type: number
+                margin-right:
+                    label: Marge haut
+                    default: 10
+                    type: number
+                margin-bottom:
+                    label: Marge haut
+                    default: 10
+                    type: number
+                margin-left:
+                    label: Marge haut
+                    default: 10
+                    type: number
+                viewport-size:
+                    label: viewPort
+                    default: 1280x1024
