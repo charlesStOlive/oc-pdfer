@@ -76,7 +76,7 @@ class PdfCreator
 
         $slugName = $this->createTwigStrName($doted);
 
-        trace_log($slugName);
+        //trace_log($slugName);
 
         return [
             "fileName" => $slugName . '.pdf',
@@ -126,7 +126,7 @@ class PdfCreator
         $vars = [
             $modelName => $data,
         ];
-        trace_log($this->wakapdf->pdf_name);
+        //trace_log($this->wakapdf->pdf_name);
         $nameConstruction = \Twig::parse($this->wakapdf->pdf_name, $vars);
         return str_slug($nameConstruction);
     }
