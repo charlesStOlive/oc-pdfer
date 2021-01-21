@@ -8,25 +8,39 @@
 
 
     <div class="form-group">
-        <select class="form-control custom-select" name="wakaPdfId">
-            <option value="" disabled selected>--Choisissez un PDF--</option>
+        <select class="form-control custom-select"
+                name="wakaPdfId">
+            <option value=""
+                    disabled
+                    selected>--Choisissez un PDF--</option>
             <?php foreach($options as $key => $value)  { ?>
-            <option value="<?=$key?>"><?=$value?></option>
+            <option value="<?=$key?>">
+                <?=$value?>
+            </option>
             <?php } ?>
         </select>
         <div class="checkbox custom-checkbox m-t-md">
-            <input name="inline" type="checkbox" id="inline" />
+            <input name="inline"
+                   type="checkbox"
+                   id="inline" />
             <label for="inline">Afficher sans le navigateur</label>
         </div>
     </div>
-    <?php if (Config('waka.wconfig::cloud.controller.pdf.show')) : ?>
-    <button type="submit" data-request="onCloudPdfValidation" data-request-data="redirect:0, modelId:'<?=$modelId?>'"
-        data-hotkey="ctrl+s, cmd+s" data-popup-load-indicator class="btn btn-primary">
+    <?php if (Config('waka.wconfig::cloud.controller.pdf.show') && $this->user->hasAccess('waka.cloud.create_file')) : ?>
+    <button type="submit"
+            data-request="onCloudPdfValidation"
+            data-request-data="redirect:0, modelId:'<?=$modelId?>'"
+            data-hotkey="ctrl+s, cmd+s"
+            data-popup-load-indicator
+            class="btn btn-primary">
         Enregistrer dans le cloud
     </button>
     <?php endif ?>
-    <button type="submit" data-request="onPdfBehaviorPopupValidation"
-        data-request-data="redirect:0, modelId:'<?=$modelId?>'" data-hotkey="ctrl+s, cmd+s" class="btn btn-primary">
+    <button type="submit"
+            data-request="onPdfBehaviorPopupValidation"
+            data-request-data="redirect:0, modelId:'<?=$modelId?>'"
+            data-hotkey="ctrl+s, cmd+s"
+            class="btn btn-primary">
         Valider
     </button>
 
