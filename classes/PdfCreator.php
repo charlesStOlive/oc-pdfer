@@ -36,17 +36,22 @@ class PdfCreator
 
     }
 
-    public function renderCloud($dataSourceId)
+    public function renderCloud($dataSourceId, $lot = false)
     {
         $data = $this->prepareCreatorVars($dataSourceId);
         $pdf = $this->createPdf($data);
         $pdfContent = $pdf->output();
 
-        $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
-        $folders = $folderOrg->getFolder($this->dataSource->model);
-
         $cloudSystem = App::make('cloudSystem');
-        $lastFolderDir = $cloudSystem->createDirFromArray($folders);
+
+        $lastFolderDir = null;
+        if ($lot) {
+            $lastFolderDir = $cloudSystem->createDirFromArray(['lots']);
+        } else {
+            $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
+            $folders = $folderOrg->getFolder($this->dataSource->model);
+            $lastFolderDir = $cloudSystem->createDirFromArray($folders);
+        }
 
         //\Storage::cloud()->put('test.txt', 'Hello World');
 
