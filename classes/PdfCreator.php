@@ -31,9 +31,17 @@ class PdfCreator
             return $pdf->inline($data['fileName']);
         } else {
             return $pdf->download($data['fileName']);
-
         }
 
+    }
+
+    public function renderTemp($dataSourceId, $inline = false)
+    {
+        $data = $this->prepareCreatorVars($dataSourceId);
+        $pdf = $this->createPdf($data);
+        $pdfContent = $pdf->output();
+        \Storage::put('temp/' . $data['fileName'], $pdfContent);
+        return 'temp/' . $data['fileName'];
     }
 
     public function renderCloud($dataSourceId, $lot = false)
