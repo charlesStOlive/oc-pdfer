@@ -29,22 +29,13 @@
             </div>
         </div>
         <div class="modal-footer m-t">
-            <?php if (Config('wcli.wconfig::cloud.controller.pdf.show') && $this->user->hasAccess('waka.cloud.create_file')) : ?>
-            <button type="submit"
-                    data-request="onCloudPdfValidation"
-                    data-request-data="redirect:0, modelId:'<?=$modelId?>'"
-                    data-hotkey="ctrl+s, cmd+s"
-                    data-popup-load-indicator
-                    class="btn btn-primary">
-                Enregistrer dans le cloud
-            </button>
-            <?php endif ?>
+            <?= $this->fireViewEvent('backend.creator.popup.validation', [$modelId]) ?>
             <button type="submit"
                     data-request="onPdfBehaviorPopupValidation"
                     data-request-data="redirect:0, modelId:'<?=$modelId?>'"
                     data-hotkey="ctrl+s, cmd+s"
                     class="btn btn-primary">
-                Valider
+                Créer PDF
             </button>
             <button type="button"
                     class="btn btn-default"

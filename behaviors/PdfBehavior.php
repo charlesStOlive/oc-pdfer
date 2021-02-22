@@ -20,24 +20,6 @@ class PdfBehavior extends ControllerBehavior
     }
 
     /**
-     * METHODES
-     */
-
-    // public function getDataSourceFromModel(String $model)
-    // {
-    //     $modelClassDecouped = explode('\\', $model);
-    //     $modelClassName = array_pop($modelClassDecouped);
-    //     return \Waka\Utils\Models\DataSource::where('model', '=', $modelClassName)->first();
-    // }
-
-    // public function getModel($model, $modelId)
-    // {
-    //     $myModel = new $model;
-    //     $myModel = $myModel::find($modelId);
-    //     return $myModel;
-    // }
-
-    /**
      * LOAD DES POPUPS
      */
     public function onLoadPdfBehaviorPopupForm()
@@ -84,20 +66,6 @@ class PdfBehavior extends ControllerBehavior
 
     }
 
-    public function onCloudPdfValidation()
-    {
-        $errors = $this->CheckValidation(\Input::all());
-        if ($errors) {
-            throw new \ValidationException(['error' => $errors]);
-        }
-        $wakaPdfId = post('wakaPdfId');
-        $modelId = post('modelId');
-
-        $wc = new PdfCreator($wakaPdfId);
-        $wc->renderCloud($modelId);
-
-    }
-
     /**
      * Validations
      */
@@ -135,11 +103,8 @@ class PdfBehavior extends ControllerBehavior
     {
         $wakaPdfId = post('wakaPdfId');
         $modelId = post('modelId');
-        //trace_log($modelId);
         $inline = post('inline');
-
-        $wc = new PdfCreator($wakaPdfId);
-        return $wc->renderPdf($modelId, $inline);
+        return PdfCreator::find($wakaPdfId)->renderPdf($modelId, $inline);
     }
 
     public function createPdfBehaviorWidget()

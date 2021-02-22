@@ -1,31 +1,31 @@
 <?php namespace Waka\Pdfer\Classes;
 
-use App;
 use Waka\Pdfer\Models\WakaPdf;
 use Waka\Utils\Classes\DataSource;
 
-class PdfCreator
+class PdfCreator extends \October\Rain\Extension\Extendable
 {
-
-    private $modelSource;
-    private $dataSourceId;
-    private $additionalParams;
-    private $dataSourceAdditionalParams;
-    private $dataSource;
+    public static $wakapdf;
+    public $ds;
+    public $modelId;
 
     private $isTwigStarted;
 
-    public function __construct($pdf_id)
+    public static function find($pdf_id)
     {
         $wakapdf = WakaPdf::find($pdf_id);
-        $this->wakapdf = $wakapdf;
-        $this->dataSource = new DataSource($this->wakapdf->data_source);
-
+        self::$wakapdf = $wakapdf;
+        return new self;
     }
 
-    public function renderPdf($dataSourceId, $inline = false)
+    public static function getProductor()
     {
-        $data = $this->prepareCreatorVars($dataSourceId);
+        return self::$wakapdf;
+    }
+
+    public function renderPdf($modelId, $inline = false)
+    {
+        $data = $this->prepareCreatorVars($modelId);
         $pdf = $this->createPdf($data);
         if ($inline) {
             return $pdf->inline($data['fileName']);
@@ -35,47 +35,24 @@ class PdfCreator
 
     }
 
-    public function renderTemp($dataSourceId, $inline = false)
+    public function renderTemp($modelId, $inline = false)
     {
-        $data = $this->prepareCreatorVars($dataSourceId);
+        $data = $this->prepareCreatorVars($modelId);
         $pdf = $this->createPdf($data);
         $pdfContent = $pdf->output();
         \Storage::put('temp/' . $data['fileName'], $pdfContent);
         return 'temp/' . $data['fileName'];
     }
 
-    public function renderCloud($dataSourceId, $lot = false)
-    {
-        $data = $this->prepareCreatorVars($dataSourceId);
-        $pdf = $this->createPdf($data);
-        $pdfContent = $pdf->output();
-
-        $cloudSystem = App::make('cloudSystem');
-
-        $lastFolderDir = null;
-        if ($lot) {
-            $lastFolderDir = $cloudSystem->createDirFromArray(['lots']);
-        } else {
-            $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
-            $folders = $folderOrg->getFolder($this->dataSource->model);
-            $lastFolderDir = $cloudSystem->createDirFromArray($folders);
-        }
-
-        //\Storage::cloud()->put('test.txt', 'Hello World');
-
-        \Storage::cloud()->put($lastFolderDir['path'] . '/' . $data['fileName'], $pdfContent);
-
-    }
-
     public function prepareCreatorVars($modelId)
     {
+        $this->ds = new DataSource($this->getProductor()->data_source);
+        $varName = strtolower($this->ds->name);
 
-        $varName = strtolower($this->dataSource->name);
-
-        $doted = $this->dataSource->getValues($modelId);
-        $img = $this->dataSource->wimages->getPicturesUrl($this->wakapdf->images);
+        $doted = $this->ds->getValues($modelId);
+        $img = $this->ds->wimages->getPicturesUrl($this->getProductor()->images);
         //trace_log($img);
-        $fnc = $this->dataSource->getFunctionsCollections($modelId, $this->wakapdf->model_functions);
+        $fnc = $this->ds->getFunctionsCollections($modelId, $this->getProductor()->model_functions);
         $css = null;
 
         $model = [
@@ -86,7 +63,6 @@ class PdfCreator
         ];
 
         $htmlLayout = $this->renderHtml($model, $varName);
-
         $slugName = $this->createTwigStrName($doted);
 
         //trace_log($slugName);
@@ -94,7 +70,7 @@ class PdfCreator
         return [
             "fileName" => $slugName . '.pdf',
             "html" => $htmlLayout,
-            "options" => $this->wakapdf->layout->options,
+            "options" => $this->getProductor()->layout->options,
         ];
     }
 
@@ -107,26 +83,21 @@ class PdfCreator
                 $pdf->setOption($key, $value);
             }
         }
-        //$pdf->setOption('zoom', '1.5');
-        // $pdf->setOption('enable-javascript', true);
-        // $pdf->setOption('javascript-delay', 5000);
-        //$pdf->setOption('enable-smart-shrinking', true);
-        // $pdf->setOption('no-stop-slow-scripts', true);
         return $pdf;
     }
 
     public function renderHtml($model, $varName)
     {
         $this->startTwig();
-        $html = $this->wakapdf->template;
+        $html = $this->getProductor()->template;
         $htmlContent = \Twig::parse($html, $model);
         $data = [
             $varName => $model,
             'content' => $htmlContent,
-            'baseCss' => \File::get(plugins_path() . $this->wakapdf->layout->baseCss),
-            'AddCss' => $this->wakapdf->layout->Addcss,
+            'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
+            'AddCss' => $this->getProductor()->layout->Addcss,
         ];
-        $htmlLayout = \Twig::parse($this->wakapdf->layout->contenu, $data);
+        $htmlLayout = \Twig::parse($this->getProductor()->layout->contenu, $data);
         //trace_log($htmlLayout);
         $this->stopTwig();
         return $htmlLayout;
@@ -135,12 +106,12 @@ class PdfCreator
 
     public function createTwigStrName($data)
     {
-        $modelName = strtolower($this->dataSource->name);
+        $modelName = strtolower($this->ds->name);
         $vars = [
             $modelName => $data,
         ];
-        //trace_log($this->wakapdf->pdf_name);
-        $nameConstruction = \Twig::parse($this->wakapdf->pdf_name, $vars);
+        //trace_log($this->getProductor()->pdf_name);
+        $nameConstruction = \Twig::parse($this->getProductor()->pdf_name, $vars);
         return str_slug($nameConstruction);
     }
 
