@@ -17,7 +17,6 @@ class Layout extends Model
      */
     public $table = 'waka_pdfer_layouts';
 
-
     /**
      * @var array Guarded fields
      */
@@ -103,7 +102,7 @@ class Layout extends Model
      **/
     public function listWconfigLayout()
     {
-        return \Config::get('waka.wconfig::assets.css.pdf');
+        return \Config::get('wcli.wconfig::assets.css.pdf');
     }
 
     /**
@@ -117,7 +116,7 @@ class Layout extends Model
     /**
      * SETTERS
      */
- 
+
     /**
      * FILTER FIELDS
      */
@@ -125,5 +124,5 @@ class Layout extends Model
     /**
      * OTHERS
      */
-    
+
 }
