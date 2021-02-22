@@ -1,0 +1,25 @@
+{
+    "name": "waka/pdfer",
+    "description": "Plugin Pdf",
+    "type": "october-plugin",
+    "require": {
+        "barryvdh/laravel-snappy": "^0.4.7"
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "php artisan key:generate",
+            "php artisan package:discover"
+        ],
+        "post-update-cmd": [
+            "php artisan october:util set build",
+            "php artisan package:discover"
+        ]
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Charles Saint Olive",
+            "email": "contact@notilac.fr"
+        }
+    ]
+}
