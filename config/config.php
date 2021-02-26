@@ -31,4 +31,13 @@
             ],
         ],
     ],
+    'btns' => [
+        'pdf' => [
+            'label' => 'PDF',
+            'class' => 'btn-secondary',
+            'ajaxCaller' => 'onLoadPdfBehaviorPopupForm',
+            'ajaxInlineCaller' => 'onLoadPdfBehaviorContentForm',
+            'icon' => 'oc-icon-file-pdf-o',
+        ],
+    ],
 ];

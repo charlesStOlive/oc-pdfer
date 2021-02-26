@@ -20,14 +20,18 @@ class PdfBehavior extends ControllerBehavior
     }
 
     /**
-     * LOAD DES POPUPS
+     * LOAD DES POPUPS ******************************************
+     */
+
+    /**
+     * Popup seul
      */
     public function onLoadPdfBehaviorPopupForm()
     {
-        $model = post('model');
+        $modelClass = post('modelClass');
         $modelId = post('modelId');
 
-        $ds = new DataSource($model, 'class');
+        $ds = new DataSource($modelClass, 'class');
         $options = $ds->getPartialOptions($modelId, 'Waka\Pdfer\Models\WakaPdf');
 
         $this->vars['options'] = $options;
@@ -35,12 +39,16 @@ class PdfBehavior extends ControllerBehavior
 
         return $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_popup.htm');
     }
+
+    /**
+     * Popup dans barre d'outil
+     */
     public function onLoadPdfBehaviorContentForm()
     {
-        $model = post('model');
+        $modelClass = post('modelClass');
         $modelId = post('modelId');
 
-        $ds = new DataSource($model, 'class');
+        $ds = new DataSource($modelClass, 'class');
         $options = $ds->getPartialOptions($modelId, 'Waka\Pdfer\Models\WakaPdf');
 
         $this->vars['options'] = $options;
@@ -51,18 +59,31 @@ class PdfBehavior extends ControllerBehavior
         ];
     }
 
+    /**
+     * Popup lot
+     */
+
+    /**
+     * Confirmation de popup ******************************
+     */
+
+    /**
+     * popup unique
+     */
+
     public function onPdfBehaviorPopupValidation()
     {
+
         $errors = $this->CheckValidation(\Input::all());
         if ($errors) {
             throw new \ValidationException(['error' => $errors]);
         }
-        $wakaPdfId = post('wakaPdfId');
+        $productorId = post('productorId');
         $modelId = post('modelId');
 
         $inline = post('inline');
 
-        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $wakaPdfId . '&modelId=' . $modelId . '&inline=' . $inline);
+        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?productorId=' . $productorId . '&modelId=' . $modelId . '&inline=' . $inline);
 
     }
 
@@ -73,7 +94,7 @@ class PdfBehavior extends ControllerBehavior
     {
         $rules = [
             'modelId' => 'required',
-            'wakaPdfId' => 'required',
+            'productorId' => 'required',
         ];
 
         $messages = [
@@ -89,22 +110,23 @@ class PdfBehavior extends ControllerBehavior
             return false;
         }
     }
+
     /**
      * Cette fonction est utilisé lors du test depuis le controller wakapdf.
      */
     public function onLoadPdfTest()
     {
         $inline = post('inline');
-        $wakaPdfId = post('wakaPdfId');
-        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $wakaPdfId . '&inline=' . $inline);
+        $productorId = post('productorId');
+        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $productorId . '&inline=' . $inline);
     }
 
     public function makepdf()
     {
-        $wakaPdfId = post('wakaPdfId');
+        $productorId = post('productorId');
         $modelId = post('modelId');
         $inline = post('inline');
-        return PdfCreator::find($wakaPdfId)->renderPdf($modelId, $inline);
+        return PdfCreator::find($productorId)->renderPdf($modelId, $inline);
     }
 
     public function createPdfBehaviorWidget()

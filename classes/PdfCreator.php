@@ -44,6 +44,23 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         return 'temp/' . $data['fileName'];
     }
 
+    public function renderCloud($modelId, $lot = false)
+    {
+        $data = $this->prepareCreatorVars($modelId);
+        $pdf = $this->createPdf($data);
+        $pdfContent = $pdf->output();
+        $cloudSystem = \App::make('cloudSystem');
+        $lastFolderDir = null;
+        if ($lot) {
+            $lastFolderDir = $cloudSystem->createDirFromArray(['lots']);
+        } else {
+            $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
+            $folders = $folderOrg->getFolder($this->ds->model);
+            $lastFolderDir = $cloudSystem->createDirFromArray($folders);
+        }
+        \Storage::cloud()->put($lastFolderDir['path'] . '/' . $data['fileName'], $pdfContent);
+    }
+
     public function prepareCreatorVars($modelId)
     {
         $this->ds = new DataSource($this->getProductor()->data_source);
