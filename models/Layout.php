@@ -124,5 +124,4 @@ class Layout extends Model
     /**
      * OTHERS
      */
-
 }

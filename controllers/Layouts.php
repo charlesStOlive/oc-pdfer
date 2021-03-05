@@ -21,5 +21,4 @@ class Layouts extends Controller
         BackendMenu::setContext('October.System', 'system', 'settings');
         SettingsManager::setContext('Waka.Pdfer', 'WakaPdfs');
     }
-
 }

@@ -33,7 +33,6 @@ class Plugin extends PluginBase
      */
     public function register()
     {
-
     }
 
     /**
@@ -72,7 +71,6 @@ class Plugin extends PluginBase
         //         return \View::make('waka.pdfer::publishPdfContent')->withData($data);;
         //     }
         // });
-
     }
 
     public function bootPackages()

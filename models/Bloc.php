@@ -119,5 +119,4 @@ class Bloc extends Model
     /**
      * OTHERS
      */
-    
 }

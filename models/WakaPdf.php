@@ -129,5 +129,4 @@ class WakaPdf extends Model
     /**
      * OTHERS
      */
-    
 }

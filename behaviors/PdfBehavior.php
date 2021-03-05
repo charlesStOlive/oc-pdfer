@@ -84,7 +84,6 @@ class PdfBehavior extends ControllerBehavior
         $inline = post('inline');
 
         return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?productorId=' . $productorId . '&modelId=' . $modelId . '&inline=' . $inline);
-
     }
 
     /**

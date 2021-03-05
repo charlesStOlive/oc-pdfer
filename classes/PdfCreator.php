@@ -32,7 +32,6 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         } else {
             return $pdf->download($data['fileName']);
         }
-
     }
 
     public function renderTemp($modelId, $inline = false)
@@ -118,7 +117,6 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         //trace_log($htmlLayout);
         $this->stopTwig();
         return $htmlLayout;
-
     }
 
     public function createTwigStrName($data)
@@ -166,5 +164,4 @@ class PdfCreator extends \October\Rain\Extension\Extendable
 
         $this->isTwigStarted = false;
     }
-
 }

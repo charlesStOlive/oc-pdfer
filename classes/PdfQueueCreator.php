@@ -27,7 +27,5 @@ class PdfQueueCreator
             Event::fire('job.end.email', [$job]);
             $job->delete();
         }
-
     }
-
 }
