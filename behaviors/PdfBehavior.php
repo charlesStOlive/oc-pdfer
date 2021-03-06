@@ -123,7 +123,7 @@ class PdfBehavior extends ControllerBehavior
         $productorId = post('productorId');
         $modelId = post('modelId');
         $inline = post('inline');
-        return PdfCreator::find($productorId)->renderPdf($modelId, $inline);
+        return PdfCreator::find($productorId)->setModelId($modelId)->renderPdf($inline);
     }
 
     public function createPdfBehaviorWidget()

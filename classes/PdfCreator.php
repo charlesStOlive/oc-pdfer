@@ -23,9 +23,48 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         return self::$wakapdf;
     }
 
-    public function renderPdf($modelId, $inline = false)
+    public function setModelId($modelId)
     {
-        $data = $this->prepareCreatorVars($modelId);
+        $this->modelId = $modelId;
+        $dataSourceId = $this->getProductor()->data_source;
+        $this->ds = new DataSource($dataSourceId);
+        $this->ds->instanciateModel($modelId);
+        return $this;
+    }
+
+    public function setModelTest()
+    {
+        $this->modelId = $this->getProductor()->test_id;
+        $dataSourceId = $this->getProductor()->data_source;
+        $this->ds = new DataSource($dataSourceId);
+        $this->ds->instanciateModel($modelId);
+        return $this;
+    }
+
+    public function checkScopes()
+    {
+        //trace_log('checkScopes');
+        if (!$this->ds || !$this->modelId) {
+            //trace_log("modelId pas instancie");
+            throw new \SystemException("Le modelId n a pas ete instancié");
+        }
+        //trace_log('nom modèle : '.$this->ds->model);
+        $scope = new \Waka\Utils\Classes\Scopes($this->getProductor(), $this->ds->model);
+        //trace_log('scope calcule');
+        if ($scope->checkScopes()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function renderPdf($inline = false)
+    {
+        if (!$this->ds || !$this->modelId) {
+            //trace_log("modelId pas instancie");
+            throw new \SystemException("Le modelId n a pas ete instancié");
+        }
+        $data = $this->prepareCreatorVars();
         $pdf = $this->createPdf($data);
         if ($inline) {
             return $pdf->inline($data['fileName']);
@@ -34,18 +73,26 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         }
     }
 
-    public function renderTemp($modelId, $inline = false)
+    public function renderTemp($inline = false)
     {
-        $data = $this->prepareCreatorVars($modelId);
+        if (!$this->ds || !$this->modelId) {
+            //trace_log("modelId pas instancie");
+            throw new \SystemException("Le modelId n a pas ete instancié");
+        }
+        $data = $this->prepareCreatorVars();
         $pdf = $this->createPdf($data);
         $pdfContent = $pdf->output();
         \Storage::put('temp/' . $data['fileName'], $pdfContent);
         return 'temp/' . $data['fileName'];
     }
 
-    public function renderCloud($modelId, $lot = false)
+    public function renderCloud($lot = false)
     {
-        $data = $this->prepareCreatorVars($modelId);
+        if (!$this->ds || !$this->modelId) {
+            //trace_log("modelId pas instancie");
+            throw new \SystemException("Le modelId n a pas ete instancié");
+        }
+        $data = $this->prepareCreatorVars();
         $pdf = $this->createPdf($data);
         $pdfContent = $pdf->output();
         $cloudSystem = \App::make('cloudSystem');
@@ -60,15 +107,15 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         \Storage::cloud()->put($lastFolderDir['path'] . '/' . $data['fileName'], $pdfContent);
     }
 
-    public function prepareCreatorVars($modelId)
+    public function prepareCreatorVars()
     {
         $this->ds = new DataSource($this->getProductor()->data_source);
         $varName = strtolower($this->ds->name);
 
-        $doted = $this->ds->getValues($modelId);
+        $doted = $this->ds->getValues($this->modelId);
         $img = $this->ds->wimages->getPicturesUrl($this->getProductor()->images);
         //trace_log($img);
-        $fnc = $this->ds->getFunctionsCollections($modelId, $this->getProductor()->model_functions);
+        $fnc = $this->ds->getFunctionsCollections($this->modelId, $this->getProductor()->model_functions);
         $css = null;
 
         $model = [
