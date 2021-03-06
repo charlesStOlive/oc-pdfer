@@ -32,7 +32,7 @@ class PdfBehavior extends ControllerBehavior
         $modelId = post('modelId');
 
         $ds = new DataSource($modelClass, 'class');
-        $options = $ds->getPartialOptions($modelId, 'Waka\Pdfer\Models\WakaPdf');
+        $options = $ds->getProductorOptions('Waka\Pdfer\Models\WakaPdf', $modelId);
 
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
@@ -49,14 +49,12 @@ class PdfBehavior extends ControllerBehavior
         $modelId = post('modelId');
 
         $ds = new DataSource($modelClass, 'class');
-        $options = $ds->getPartialOptions($modelId, 'Waka\Pdfer\Models\WakaPdf');
+        $options = $ds->getProductorOptions('Waka\Pdfer\Models\WakaPdf', $modelId);
 
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
 
-        return [
-            '#popupActionContent' => $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_content.htm'),
-        ];
+        return ['#popupActionContent' => $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_content.htm')];
     }
 
     /**
