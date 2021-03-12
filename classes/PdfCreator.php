@@ -2,6 +2,7 @@
 
 use Waka\Pdfer\Models\WakaPdf;
 use Waka\Utils\Classes\DataSource;
+use Waka\Utils\Classes\TmpFiles;
 
 class PdfCreator extends \October\Rain\Extension\Extendable
 {
@@ -82,8 +83,7 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         $data = $this->prepareCreatorVars();
         $pdf = $this->createPdf($data);
         $pdfContent = $pdf->output();
-        \Storage::put('temp/' . $data['fileName'], $pdfContent);
-        return 'temp/' . $data['fileName'];
+        return TmpFiles::createDirectory()->putFile($data['fileName'], $pdfContent);
     }
 
     public function renderCloud($lot = false)
