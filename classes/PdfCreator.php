@@ -110,7 +110,7 @@ class PdfCreator extends \October\Rain\Extension\Extendable
     public function prepareCreatorVars()
     {
         $this->ds = new DataSource($this->getProductor()->data_source);
-        $varName = strtolower($this->ds->name);
+        $varName = strtolower($this->ds->code);
 
         $doted = $this->ds->getValues($this->modelId);
         $img = $this->ds->wimages->getPicturesUrl($this->getProductor()->images);
@@ -168,7 +168,7 @@ class PdfCreator extends \October\Rain\Extension\Extendable
 
     public function createTwigStrName($data)
     {
-        $modelName = strtolower($this->ds->name);
+        $modelName = strtolower($this->ds->code);
         $vars = [
             $modelName => $data,
         ];
