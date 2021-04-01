@@ -29,32 +29,51 @@ fields:
         language: css
     options:
         label: waka.pdfer::layout.options
-        span: left
+        span: full
         type: nestedform
         form:
             fields:
                 orientation:
                     label: Orientation
                     type: dropdown
+                    span: auto
                     options:
                         Portrait: Portrait
                         Landscape: Paysage
+                viewport-size:
+                    label: viewPort
+                    span: auto
+                    default: 1280x1024
                 margin-top:
-                    label: Marge haut
-                    default: 10
-                    type: number
-                margin-right:
-                    label: Marge haut
+                    label: Marge Haut
+                    span: auto
                     default: 10
                     type: number
                 margin-bottom:
-                    label: Marge haut
+                    label: Marge Bas
+                    span: auto
+                    default: 10
+                    type: number
+                margin-right:
+                    label: Marge Gauche
+                    span: auto
                     default: 10
                     type: number
                 margin-left:
-                    label: Marge haut
+                    label: Marge droite
+                    span: auto
                     default: 10
                     type: number
-                viewport-size:
-                    label: viewPort
-                    default: 1280x1024
+                header-html:
+                    label: Header
+                    span: full
+                    type: dropdown
+                    placeholder: waka.utils::lang.global.placeholder
+                    options: listBlocs
+                footer-html:
+                    label: Footer
+                    span: full
+                    type: dropdown
+                    placeholder: waka.utils::lang.global.placeholder
+                    options: listBlocs
+                

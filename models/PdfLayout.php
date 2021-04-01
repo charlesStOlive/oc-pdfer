@@ -76,4 +76,6 @@ class PdfLayout extends Model
     {
         return \Config::get('wcli.wconfig::assets.css.pdf');
     }
+
+    
 }

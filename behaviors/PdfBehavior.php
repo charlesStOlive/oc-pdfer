@@ -108,6 +108,14 @@ class PdfBehavior extends ControllerBehavior
         }
     }
 
+    public function makepdf()
+    {
+        $productorId = post('productorId');
+        $modelId = post('modelId');
+        $inline = post('inline');
+        return PdfCreator::find($productorId)->setModelId($modelId)->renderPdf($inline);
+    }
+
     /**
      * Cette fonction est utilisé lors du test depuis le controller wakapdf.
      */
@@ -115,15 +123,14 @@ class PdfBehavior extends ControllerBehavior
     {
         $inline = post('inline');
         $productorId = post('productorId');
-        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?wakaPdfId=' . $productorId . '&inline=' . $inline);
+        $modelId = post('modelId');
+        return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdftest/?productorId=' . $productorId . '&inline=' . $inline);
     }
-
-    public function makepdf()
+    public function makepdftest()
     {
         $productorId = post('productorId');
-        $modelId = post('modelId');
         $inline = post('inline');
-        return PdfCreator::find($productorId)->setModelId($modelId)->renderPdf($inline);
+        return PdfCreator::find($productorId)->setModelTest()->renderPdf($inline);
     }
 
     public function createPdfBehaviorWidget()

@@ -11,6 +11,7 @@ class PdfCreator extends \October\Rain\Extension\Extendable
     public $modelId;
 
     private $isTwigStarted;
+    private $levierData;
 
     public static function find($pdf_id)
     {
@@ -38,7 +39,7 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         $this->modelId = $this->getProductor()->test_id;
         $dataSourceId = $this->getProductor()->data_source;
         $this->ds = new DataSource($dataSourceId);
-        $this->ds->instanciateModel($modelId);
+        $this->ds->instanciateModel($this->modelId);
         return $this;
     }
 
@@ -110,7 +111,7 @@ class PdfCreator extends \October\Rain\Extension\Extendable
     public function prepareCreatorVars()
     {
         $this->ds = new DataSource($this->getProductor()->data_source);
-        $varName = strtolower($this->ds->code);
+        //$varName = strtolower($this->ds->code);
 
         $doted = $this->ds->getValues($this->modelId);
         $img = $this->ds->wimages->getPicturesUrl($this->getProductor()->images);
@@ -119,14 +120,17 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         $css = null;
 
         $model = [
-            $varName => $doted,
+            'ds' => $doted,
             'IMG' => $img,
             'FNC' => $fnc,
             'css' => $css,
         ];
+        $this->levierData = $model;
 
-        $htmlLayout = $this->renderHtml($model, $varName);
+        $htmlLayout = $this->renderHtml($model);
         $slugName = $this->createTwigStrName($doted);
+        //
+        
 
         //trace_log($slugName);
 
@@ -143,19 +147,43 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         $options = $data['options'] ?? null;
         if ($options) {
             foreach ($options as $key => $value) {
-                $pdf->setOption($key, $value);
+                if($key == 'header-html') {
+                    $html = $this->getHeaderFooterHtml($value, $data);
+                    $html = $html ? $pdf->setOption($key, $html) : null;
+                } elseif($key == 'footer-html') {
+                    $html = $this->getHeaderFooterHtml($value, $data);
+                    $html = $html ? $pdf->setOption($key, $html) : null;
+                } else {
+                    $pdf->setOption($key, $value);
+                }
+                
             }
         }
+        $pdf->setOption('encoding', 'utf-8');
         return $pdf;
     }
 
-    public function renderHtml($model, $varName)
+    public function getHeaderFooterHtml($id, $data) {
+        $blocModel = \Waka\Pdfer\Models\Bloc::find($id);
+        if(!$blocModel) {
+            return null;
+        }
+        $content = $blocModel->contenu;
+        if($content) {
+            return  \Twig::parse($content, $this->levierData);
+        } else {
+            return null;
+        }
+            
+    }
+
+    public function renderHtml($model)
     {
         $this->startTwig();
         $html = $this->getProductor()->template;
         $htmlContent = \Twig::parse($html, $model);
         $data = [
-            $varName => $model,
+            'ds' => $model['ds'],
             'content' => $htmlContent,
             'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
             'AddCss' => $this->getProductor()->layout->Addcss,

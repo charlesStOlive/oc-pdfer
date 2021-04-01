@@ -17,7 +17,7 @@ defaultRedirect: waka/pdfer/wakapdfs/index/blocs
 # Create page
 create:
     title: waka.pdfer::bloc.create
-    redirect: waka/pdfer/wakapdfs/update/:id
+    redirect: waka/pdfer/blocs/update/:id
     redirectClose: waka/pdfer/wakapdfs/index/blocs
     form: $/waka/pdfer/models/bloc/fields_create.yaml
 
