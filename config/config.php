@@ -6,7 +6,7 @@
             ],
 
             'aliases' => [
-                'SnappyPDF' => '\Barryvdh\Snappy\Facades\SnappyPdf',
+                'PDF' => '\Barryvdh\Snappy\Facades\SnappyPdf',
                 'SnappyImage' => '\Barryvdh\Snappy\Facades\SnappyImage',
             ],
 
