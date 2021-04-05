@@ -152,11 +152,11 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         }
 
         if($data['header']) {
-            trace_log("---------------HEADER-------------------");
+            //trace_log("---------------HEADER-------------------");
             $pdf->setOption('header-html',$data['header']); 
         }
         if($data['footer']) {
-            trace_log("---------------FOOTER-------------------");
+            //trace_log("---------------FOOTER-------------------");
             $pdf->setOption('footer-html', $data['footer']); 
         }
         
