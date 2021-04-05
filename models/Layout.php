@@ -17,6 +17,7 @@ class Layout extends Model
      */
     public $table = 'waka_pdfer_layouts';
 
+
     /**
      * @var array Guarded fields
      */
@@ -34,6 +35,9 @@ class Layout extends Model
         'name' => 'required',
         'contenu' => 'required',
         'baseCss' => 'required',
+    ];
+
+    public $customMessages = [
     ];
 
     /**
@@ -80,12 +84,14 @@ class Layout extends Model
     public $hasMany = [
     ];
     public $hasOneThrough = [];
-    public $hasManyThrough = [];
+    public $hasManyThrough = [
+    ];
     public $belongsTo = [
     ];
     public $belongsToMany = [];
     public $morphTo = [];
-    public $morphOne = [];
+    public $morphOne = [
+    ];
     public $morphMany = [
     ];
     public $attachOne = [
@@ -119,7 +125,7 @@ class Layout extends Model
     /**
      * SETTERS
      */
-
+ 
     /**
      * FILTER FIELDS
      */
@@ -127,4 +133,5 @@ class Layout extends Model
     /**
      * OTHERS
      */
+    
 }

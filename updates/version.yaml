@@ -6,3 +6,6 @@
 1.0.2:
     - 'Ajout des options dans le layout'
     - create_layouts_table_u102.php
+1.0.3:
+    - 'Ajout des header & footer dans le layout'
+    - create_layouts_table_u103.php

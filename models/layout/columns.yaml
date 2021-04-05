@@ -3,10 +3,12 @@
 # ===================================
 
 columns:
-
     name:
         label: waka.pdfer::layout.name
         searchable: true
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense
+    sort_order:
+        label: waka.utils::lang.global.sort_order
+        invisible: true

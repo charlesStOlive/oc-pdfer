@@ -130,14 +130,14 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         $htmlLayout = $this->renderHtml($model);
         $slugName = $this->createTwigStrName($doted);
         //
-        
-
-        //trace_log($slugName);
+        $header = null;
 
         return [
             "fileName" => $slugName . '.pdf',
             "html" => $htmlLayout,
             "options" => $this->getProductor()->layout->options,
+            "header" => $this->getFooter($doted),
+            "footer" => $this->getFooter($doted),
         ];
     }
 
@@ -145,36 +145,51 @@ class PdfCreator extends \October\Rain\Extension\Extendable
     {
         $pdf = \PDF::loadHtml($data['html']);
         $options = $data['options'] ?? null;
-        if ($options) {
+         if ($options) {
             foreach ($options as $key => $value) {
-                if($key == 'header-html') {
-                    $html = $this->getHeaderFooterHtml($value, $data);
-                    $html = $html ? $pdf->setOption($key, $html) : null;
-                } elseif($key == 'footer-html') {
-                    $html = $this->getHeaderFooterHtml($value, $data);
-                    $html = $html ? $pdf->setOption($key, $html) : null;
-                } else {
-                    $pdf->setOption($key, $value);
-                }
-                
+                $pdf->setOption($key, $value); 
             }
         }
-        $pdf->setOption('encoding', 'utf-8');
+
+        if($data['header']) {
+            trace_log("---------------HEADER-------------------");
+            $pdf->setOption('header-html',$data['header']); 
+        }
+        if($data['footer']) {
+            trace_log("---------------FOOTER-------------------");
+            $pdf->setOption('footer-html', $data['footer']); 
+        }
+        
         return $pdf;
     }
 
-    public function getHeaderFooterHtml($id, $data) {
-        $blocModel = \Waka\Pdfer\Models\Bloc::find($id);
-        if(!$blocModel) {
+    public function getHeader($model) {
+        if(!$this->getProductor()->layout->use_header) {
             return null;
         }
-        $content = $blocModel->contenu;
-        if($content) {
-            return  \Twig::parse($content, $this->levierData);
-        } else {
+        $this->startTwig();
+        $data = [
+            'ds' => $model,
+            'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
+            'AddCss' => $this->getProductor()->layout->Addcss,
+        ];
+        $header = \Twig::parse($this->getProductor()->layout->header_html, $data);
+        $this->stopTwig();
+        return $header;      
+    }
+    public function getFooter($model) {
+        if(!$this->getProductor()->layout->use_footer) {
             return null;
         }
-            
+        $this->startTwig();
+        $data = [
+            'ds' => $model,
+            'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
+            'AddCss' => $this->getProductor()->layout->Addcss,
+        ];
+        $footer = \Twig::parse($this->getProductor()->layout->footer_html, $data);
+        $this->stopTwig();
+        return $footer;      
     }
 
     public function renderHtml($model)

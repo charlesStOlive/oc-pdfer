@@ -12,8 +12,6 @@ fields:
         span: full
         type: codeeditor
         required: true
-        size: giant
-        language: html
     baseCss:
         label: waka.pdfer::layout.baseCss
         span: left
@@ -25,8 +23,6 @@ fields:
         label: waka.pdfer::layout.AddCss
         span: full
         type: codeeditor
-        size: giant
-        language: css
     use_header:
         label: waka.pdfer::layout.use_header
         span: left
@@ -35,7 +31,6 @@ fields:
         label: waka.pdfer::layout.header_html
         span: full
         type: codeeditor
-        language: html
         trigger:
             action: show
             field: use_header
@@ -48,46 +43,11 @@ fields:
         label: waka.pdfer::layout.footer_html
         span: full
         type: codeeditor
-        language: html
         trigger:
             action: show
             field: use_footer
             condition: checked
     options:
         label: waka.pdfer::layout.options
-        span: full
+        span: left
         type: nestedform
-        form:
-            fields:
-                orientation:
-                    label: Orientation
-                    type: dropdown
-                    span: auto
-                    options:
-                        Portrait: Portrait
-                        Landscape: Paysage
-                viewport-size:
-                    label: viewPort
-                    span: auto
-                    default: 1280x1024
-                margin-top:
-                    label: Marge Haut
-                    span: auto
-                    default: 10
-                    type: number
-                margin-bottom:
-                    label: Marge Bas
-                    span: auto
-                    default: 10
-                    type: number
-                margin-right:
-                    label: Marge Gauche
-                    span: auto
-                    default: 10
-                    type: number
-                margin-left:
-                    label: Marge droite
-                    span: auto
-                    default: 10
-                    type: number
-                
