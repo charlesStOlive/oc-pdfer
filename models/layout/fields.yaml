@@ -14,6 +14,34 @@ fields:
         required: true
         size: giant
         language: html
+    use_header:
+        label: waka.pdfer::layout.use_header
+        type: switch
+        default: false
+    header_html:
+        label: waka.pdfer::layout.header_html
+        span: full
+        type: dropdown
+        placeholder: waka.utils::lang.global.placeholder
+        options: listBlocs
+        trigger:
+            action: show
+            use_footer: checked
+            fields: use_header
+    use_footer:
+        label: waka.pdfer::layout.use_footer
+        type: switch
+        default: false
+    footer_html:
+        label: waka.pdfer::layout.footer_html
+        span: full
+        type: dropdown
+        placeholder: waka.utils::lang.global.placeholder
+        options: listBlocs
+        trigger:
+            action: show
+            use_footer: checked
+            fields: use_footer
     baseCss:
         label: waka.pdfer::layout.baseCss
         span: left
@@ -64,16 +92,4 @@ fields:
                     span: auto
                     default: 10
                     type: number
-                header-html:
-                    label: Header
-                    span: full
-                    type: dropdown
-                    placeholder: waka.utils::lang.global.placeholder
-                    options: listBlocs
-                footer-html:
-                    label: Footer
-                    span: full
-                    type: dropdown
-                    placeholder: waka.utils::lang.global.placeholder
-                    options: listBlocs
                 
