@@ -37,6 +37,9 @@ class PdfCreator extends \October\Rain\Extension\Extendable
     public function setModelTest()
     {
         $this->modelId = $this->getProductor()->test_id;
+        if(!$this->modelId) {
+             throw new \ValidationException(['test_id' => \Lang::get('waka.pdfer::wakapdf.e.test_id')]);
+        }
         $dataSourceId = $this->getProductor()->data_source;
         $this->ds = new DataSource($dataSourceId);
         $this->ds->instanciateModel($this->modelId);
