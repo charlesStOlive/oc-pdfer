@@ -3,6 +3,7 @@
 use Waka\Pdfer\Models\WakaPdf;
 use Waka\Utils\Classes\DataSource;
 use Waka\Utils\Classes\TmpFiles;
+use PDF;
 
 class PdfCreator extends \October\Rain\Extension\Extendable
 {
@@ -146,7 +147,7 @@ class PdfCreator extends \October\Rain\Extension\Extendable
 
     public function createPdf($data)
     {
-        $pdf = \PDF::loadHtml($data['html']);
+        $pdf = PDF::loadHtml($data['html']);
         $options = $data['options'] ?? null;
          if ($options) {
             foreach ($options as $key => $value) {
