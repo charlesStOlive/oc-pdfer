@@ -101,15 +101,14 @@ class PdfCreator extends \October\Rain\Extension\Extendable
         $pdf = $this->createPdf($data);
         $pdfContent = $pdf->output();
         $cloudSystem = \App::make('cloudSystem');
-        $lastFolderDir = null;
+        $path = [];
         if ($lot) {
-            $lastFolderDir = $cloudSystem->createDirFromArray(['lots']);
+            $path = 'lots';
         } else {
             $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
-            $folders = $folderOrg->getFolder($this->ds->model);
-            $lastFolderDir = $cloudSystem->createDirFromArray($folders);
+            $path = $folderOrg->getPath($this->ds->model);
         }
-        \Storage::cloud()->put($lastFolderDir['path'] . '/' . $data['fileName'], $pdfContent);
+        $cloudSystem->put($path.'/'.$data['fileName'], $pdfContent);
     }
 
     public function prepareCreatorVars()
