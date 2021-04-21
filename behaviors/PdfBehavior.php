@@ -37,7 +37,11 @@ class PdfBehavior extends ControllerBehavior
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
 
-        return $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_popup.htm');
+        if($options) {
+            return $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_popup.htm');
+        } else {
+            return $this->makePartial('$/waka/utils/views/_popup_no_model.htm');
+        }
     }
 
     /**
@@ -54,7 +58,13 @@ class PdfBehavior extends ControllerBehavior
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
 
-        return ['#popupActionContent' => $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_content.htm')];
+        if($options) {
+            return ['#popupActionContent' => $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_content.htm')];
+        } else {
+            return ['#popupActionContent' => $this->makePartial('$/waka/utils/views/_content_no_model.htm')];
+        }
+
+        
     }
 
     /**
