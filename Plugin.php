@@ -25,6 +25,7 @@ class Plugin extends PluginBase
             'icon' => 'icon-leaf',
         ];
     }
+    
 
     /**
      * Register method, called when the plugin is first registered.
@@ -110,6 +111,7 @@ class Plugin extends PluginBase
         return [
             'functions' => [
                 'pdfPartial' => function ($twig, $data, $dataKey2 = null, $data2 = null) {
+                    //trace_log("pdfPartial");
                     $bloc = \Waka\Pdfer\Models\Bloc::where('slug', $twig)->first();
                     //trace_log($bloc->contenu);
                     if ($dataKey2) {

@@ -34,6 +34,10 @@ class WakaPdfs extends Controller
         parent::__construct();
         BackendMenu::setContext('October.System', 'system', 'settings');
         SettingsManager::setContext('Waka.Pdfer', 'WakaPdfs');
+
+        $blocsWidget = new \Waka\Pdfer\Widgets\SidebarBlocs($this);
+        $blocsWidget->alias = 'blocsWidget';
+        $blocsWidget->bindToController();
     }
 
     public function update($id)

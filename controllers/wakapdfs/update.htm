@@ -72,9 +72,21 @@
 
 <!-- Complimentary sidebar -->
 <?php Block::put('form-sidebar') ?>
-<div class="hide-tabs">
-    <div id="sidebar_attributes">
-        <?= $this->attributesRender() ?>
+<div class="control-tabs secondary-tabs"
+     data-control="tab">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#secondaryTabOne">Attributs</a></li>
+        <li><a href="#secondaryTabTwo">Blocs Pdfs</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div id="sidebar_attributes">
+                <?= $this->attributesRender() ?>
+            </div>
+        </div>
+        <div class="tab-pane">
+            <?= $this->widget->blocsWidget->render() ?>
+        </div>
     </div>
 </div>
 
