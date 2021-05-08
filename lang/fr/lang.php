@@ -52,6 +52,7 @@ return [
         'exemple_download' => "Télecharger un ex.",
         'exemple_inline' => "ex. en ligne",
         'exemple_html' => "Voir HTML",
+        'loading_indicator' => "Création du PDF en cours"
 
     ],
     "errors" => [
