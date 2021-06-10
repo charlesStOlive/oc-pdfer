@@ -5,7 +5,7 @@ use Waka\Utils\Classes\DataSource;
 use Waka\Utils\Classes\TmpFiles;
 use PDF;
 
-class PdfCreator extends \October\Rain\Extension\Extendable
+class PdfCreator extends \Winter\Storm\Extension\Extendable
 {
     public static $wakapdf;
     public $ds;
