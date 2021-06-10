@@ -11,7 +11,7 @@
             "php artisan package:discover"
         ],
         "post-update-cmd": [
-            "php artisan Winter:util set build",
+            "php artisan winter:util set build",
             "php artisan package:discover"
         ]
     },
