@@ -22,12 +22,12 @@ class WakaPdf extends Model
     /**
      * @var array Guarded fields
      */
-    protected $guarded = ['*'];
+    protected $guarded = ['id'];
 
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    //protected $fillable = [];
 
     /**
      * @var array Validation rules for attributes
@@ -37,6 +37,10 @@ class WakaPdf extends Model
         'slug' => 'required|unique:waka_mailer_waka_mails',
         'pdf_name' => 'required',
         'data_source' => 'required',
+    ];
+
+    public $customMessages = [
+        'test_id.required' => 'waka.pdfer::wakapdf.e.test_id',
     ];
 
     /**
@@ -57,6 +61,7 @@ class WakaPdf extends Model
         'model_functions',
         'images',
         'scopes',
+        'asks',
     ];
 
     /**
@@ -85,22 +90,28 @@ class WakaPdf extends Model
     public $hasOne = [];
     public $hasMany = [
     ];
-    public $hasOneThrough = [];
-    public $hasManyThrough = [];
+    public $hasOneThrough = [
+    ];
+    public $hasManyThrough = [
+    ];
     public $belongsTo = [
-        'layout' => [
-            'Waka\Pdfer\Models\Layout',
+       'layout' => [
+            'Waka\Pdfer\Models\Layout'
         ],
     ];
-    public $belongsToMany = [];
+    public $belongsToMany = [
+    ];        
     public $morphTo = [];
-    public $morphOne = [];
+    public $morphOne = [
+    ];
     public $morphMany = [
     ];
     public $attachOne = [
     ];
     public $attachMany = [
     ];
+
+    //startKeep/
 
     /**
      *EVENTS
@@ -129,4 +140,6 @@ class WakaPdf extends Model
     /**
      * OTHERS
      */
+
+//endKeep/
 }

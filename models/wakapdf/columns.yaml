@@ -7,7 +7,6 @@ columns:
         label: ID
         searchable: true
         invisible: true
-
     name:
         label: waka.pdfer::wakapdf.name
         searchable: true
@@ -22,10 +21,12 @@ columns:
         searchable: true
     layout_r:
         label: waka.pdfer::wakapdf.layout
-        searchable: true
         relation: layout
         select: name
         searchable: true
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense
+    sort_order:
+        label: waka.utils::lang.global.sort_order
+        invisible: true

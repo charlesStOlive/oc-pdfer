@@ -1,15 +1,21 @@
 <?php Block::put('breadcrumb') ?>
-<ul>
-    <li><a href="<?= Backend::url('waka/pdfer/wakapdfs') ?>"><?= e(trans('waka.pdfer::wakapdf.preview_name')) ?></a></li>
-    <li><?= e($this->pageTitle) ?></li>
-</ul>
+<?=$this->btnsWidget->renderBreadcrump()?>
 <?php Block::endPut() ?>
 
 <?php if (!$this->fatalError): ?>
 
-<div class="form-preview">
+<?= Form::open(['class' => 'layout']) ?>
+
+<div class="layout-row">
     <?= $this->formRenderPreview() ?>
 </div>
+<div class="form-buttons">
+    <div class="loading-indicator-container">
+        <?= $this->btnsWidget->renderBar('preview') ?>
+    </div>
+</div>
+
+<?= Form::close() ?>
 
 <?php else: ?>
 

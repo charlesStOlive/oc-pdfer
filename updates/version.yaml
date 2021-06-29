@@ -9,3 +9,6 @@
 1.0.3:
     - 'Ajout des header & footer dans le layout'
     - create_layouts_table_u103.php
+1.2.0:
+    - 'Ajout des asks'
+    - create_waka_pdfs_table_u120.php

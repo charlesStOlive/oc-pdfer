@@ -11,6 +11,8 @@ class PdfCreator extends \Winter\Storm\Extension\Extendable
     public $ds;
     public $modelId;
 
+    public $askResponse = [];
+
     private $isTwigStarted;
     private $levierData;
 
@@ -44,6 +46,12 @@ class PdfCreator extends \Winter\Storm\Extension\Extendable
         $dataSourceId = $this->getProductor()->data_source;
         $this->ds = new DataSource($dataSourceId);
         $this->ds->instanciateModel($this->modelId);
+        return $this;
+    }
+
+    public function setAsksResponse($datas = [])
+    {
+        $this->askResponse = $this->ds->getAsksFromData($datas, $this->getProductor()->asks);
         return $this;
     }
 
@@ -129,6 +137,15 @@ class PdfCreator extends \Winter\Storm\Extension\Extendable
             'css' => $css,
         ];
         $this->levierData = $model;
+
+        if(!$this->askResponse) {
+            $this->setAsksResponse();
+        }
+        //trace_log("ASK RESPONSE");
+        //trace_log($this->askResponse);
+        $model = array_merge($model, [ 'asks' => $this->askResponse]);
+
+
 
         $htmlLayout = $this->renderHtml($model);
         $slugName = $this->createTwigStrName($doted);
@@ -254,7 +271,6 @@ class PdfCreator extends \Winter\Storm\Extension\Extendable
 
         $markupManager = \System\Classes\MarkupManager::instance();
         $markupManager->endTransaction();
-
         $this->isTwigStarted = false;
     }
 }

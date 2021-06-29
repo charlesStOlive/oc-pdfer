@@ -9,7 +9,11 @@
             <h4 class="modal-title"><?=e(trans('waka.pdfer::wakapdf.create'))?></h4>
         </div>
         <div class="modal-body">
+            <input id="modelClass" name="modelClass" type="hidden" value="<?=$modelClass?>">
+            <input id="modelId" name="modelId" type="hidden" value="<?=$modelId?>">
             <select class="form-control custom-select"
+                    data-request="onSelectWakaPdf"
+                    data-request-loading="#wakaLoading"
                     name="productorId">
                 <option value=""
                         disabled
@@ -20,11 +24,16 @@
                 </option>
                 <?php } ?>
             </select>
+            <div class="p-t-md">
+                <?= $this->makePartial('~/plugins/waka/utils/views/wakaLoading.htm') ?>
+                <div id="askDataWidget">
+                    <!--Emplacement pour les data-->
+                </div>
+            </div>
         </div>
         <div class="modal-footer m-t">
             <button type="submit"
                     data-request="onPdfBehaviorPopupValidation"
-                    data-request-data="modelId:'<?=$modelId?>'"
                     class="btn btn-primary">
                 <?=e(trans('waka.utils::lang.global.create'))?>
             </button>

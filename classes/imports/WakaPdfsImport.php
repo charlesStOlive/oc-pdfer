@@ -2,15 +2,23 @@
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Waka\Pdfer\Models\WakaPdf;
 
-class WakaPdfsImport implements ToCollection, WithHeadingRow
+class WakaPdfsImport implements ToCollection, WithHeadingRow, WithCalculatedFormulas
 {
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
-            $wakaPdf = new WakaPdf();
+            $wakaPdf = null;
+            $id = $row['id'] ?? null;
+            if($id) {
+                $wakaPdf = WakaPdf::find($id);
+            }
+            if(!$wakaPdf) {
+                $wakaPdf = new WakaPdf();
+            }
             $wakaPdf->id = $row['id'] ?? null;
             $wakaPdf->name = $row['name'] ?? null;
             $wakaPdf->slug = $row['slug'] ?? null;

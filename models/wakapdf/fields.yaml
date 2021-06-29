@@ -21,13 +21,12 @@ tabs:
             span: full
             type: codeeditor
             size: giant
-            tab: waka.pdfer::wakapdf.tab_edit
             language: html
+            tab: waka.pdfer::wakapdf.tab_edit
         name:
             label: waka.pdfer::wakapdf.name
             span: left
             required: true
-            size: giant
             commentAbove: waka.pdfer::wakapdf.name_com
             tab: waka.pdfer::wakapdf.tab_info
         slug:
@@ -52,11 +51,25 @@ tabs:
             placeholder: waka.utils::lang.global.placeholder
             nameFrom: name
             tab: waka.pdfer::wakapdf.tab_info
+        has_asks:
+            label: waka.pdfer::wakapdf.has_asks
+            span: left
+            type: switch
+            tab: waka.pdfer::wakapdf.tab_edit
+        asks:
+            label: waka.pdfer::wakapdf.asks
+            span: full
+            type: repeater
+            groups: $/waka/utils/models/config/ask.yaml
+            trigger:
+                action: show
+                field: has_asks
+                condition: checked
+            tab: waka.pdfer::wakapdf.tab_edit
         model_functions:
             label: waka.pdfer::wakapdf.model_functions
             span: full
             type: functionslist
-            size: giant
             tab: waka.pdfer::wakapdf.tab_fnc
         images:
             label: waka.pdfer::wakapdf.images

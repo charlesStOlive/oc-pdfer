@@ -14,6 +14,8 @@ return [
     'is_scope' => "À des restrictions ?",
     'scopes' => "Restrictions",
     'test_id' => "Model de test",
+    'has_asks' => "A des questions ?",
+    'asks' => "Questions",
     'tab_info' => "Information",
     'tab_edit' => "Édition",
     'tab_scopes' => "Restrictions",

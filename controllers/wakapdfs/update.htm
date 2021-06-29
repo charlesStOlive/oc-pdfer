@@ -1,16 +1,6 @@
 <!-- Primary content -->
 <?php Block::put('breadcrumb') ?>
-<ul>
-    <li><a href="<?= Backend::url('system/settings/') ?>">
-            <?= e(trans('waka.utils::lang.global.settings')) ?>
-        </a></li>
-    <li><a href="<?= Backend::url('waka/pdfer/wakapdfs/index/wakapdfs') ?>">
-            <?= e(trans('waka.pdfer::wakapdf.title')) ?>
-        </a></li>
-    <li>
-        <?= e($this->pageTitle) ?>
-    </li>
-</ul>
+<?=$this->btnsWidget->renderBreadcrump()?>
 <?php Block::endPut() ?>
 <?php Block::put('form-contents') ?>
 <?php if (!$this->fatalError): ?>
@@ -22,50 +12,7 @@
 </div>
 <div class="form-buttons">
     <div class="loading-indicator-container">
-        <button type="submit"
-                data-request="onSave"
-                data-request-data="redirect:0"
-                data-hotkey="ctrl+s, cmd+s"
-                data-load-indicator="<?= e(trans('waka.utils::lang.global.save_indicator')) ?>"
-                class="btn btn-primary">
-            <?= e(trans('waka.utils::lang.global.save')) ?>
-        </button>
-        <button type="button"
-                data-request="onSave"
-                data-request-data="close:1"
-                data-hotkey="ctrl+enter, cmd+enter"
-                data-load-indicator="<?= e(trans('waka.utils::lang.global.save_indicator')) ?>"
-                class="btn btn-default">
-            <?= e(trans('waka.utils::lang.global.save_close')) ?>
-        </button>
-        <button type="button"
-                class="oc-icon-trash-o btn-icon danger pull-right"
-                data-request="onDelete"
-                data-load-indicator="<?= e(trans('waka.utils::lang.global.delete_indicator')) ?>"
-                data-request-confirm="<?= e(trans('waka.utils::lang.global.delete')) ?>">
-        </button>
-        <a class="btn btn-default oc-icon-chrome"
-           <?php
-           $param=$this->params[0] ?>
-           href="
-            <?= Backend::url("waka/pdfer/wakapdfs/makepdftest/?productorId=$param&inline=1" )?>" target="_blank">
-            <?=e(trans('waka.pdfer::lang.button.exemple_inline')) ?>
-        </a>
-        <button type="button"
-                class="btn btn-default oc-icon-cloud-download"
-                data-request-data="redirect:0, wakaPdfId:<?=$this->params[0]?>"
-                data-request=" onLoadPdfTest">
-            <?= e(trans('waka.pdfer::lang.button.exemple_download')) ?>
-        </button>
-        <?= $this->fireViewEvent('backend.top.update') ?>
-        <?= $this->fireViewEvent('backend.down.update') ?>
-        <?= $this->fireViewEvent('backend.update.prod') ?>
-        <span class="btn-text">
-            <?= e(trans('waka.utils::lang.global.or')) ?>
-            <a href="<?= Backend::url('waka/pdfer/wakapdfs/index/wakapdfs') ?>">
-                <?= e(trans('waka.utils::lang.global.cancel')) ?>
-            </a>
-        </span>
+        <?= $this->btnsWidget->renderBar('update') ?>
     </div>
 </div>
 <?php Block::endPut() ?>
@@ -105,13 +52,10 @@
     <?= Block::placeholder('breadcrumb') ?>
 </div>
 <div class="padded-container">
-    <p class="flash-message static error">
-        <?= e(trans($this->fatalError)) ?>
-    </p>
+    <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
     <p>
         <a href="<?= Backend::url('backend/users') ?>"
-           class="btn btn-default">
-            <?= e(trans('backend::lang.user.return')) ?>
+           class="btn btn-default"><?= e(trans('backend::lang.user.return')) ?>
         </a>
     </p>
 </div>

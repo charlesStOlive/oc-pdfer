@@ -6,12 +6,14 @@ use Redirect;
 use Waka\Pdfer\Classes\PdfCreator;
 use Waka\Pdfer\Models\WakaPdf;
 use Waka\Utils\Classes\DataSource;
+use Session;
 
 class PdfBehavior extends ControllerBehavior
 {
     use \Waka\Utils\Classes\Traits\StringRelation;
 
     protected $pdfBehaviorWidget;
+    protected $askDataWidget;
 
     public function __construct($controller)
     {
@@ -36,6 +38,7 @@ class PdfBehavior extends ControllerBehavior
 
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
+        $this->vars['modelClass'] = $modelClass;
 
         if($options) {
             return $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_popup.htm');
@@ -57,14 +60,28 @@ class PdfBehavior extends ControllerBehavior
 
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
+        $this->vars['modelClass'] = $modelClass;
 
         if($options) {
             return ['#popupActionContent' => $this->makePartial('$/waka/pdfer/behaviors/pdfbehavior/_content.htm')];
         } else {
             return ['#popupActionContent' => $this->makePartial('$/waka/utils/views/_content_no_model.htm')];
         }
+    }
 
-        
+    public function onSelectWakaPdf() {
+        $productorId = post('productorId');
+        $modelClass = post('modelClass');
+        $modelId = post('modelId');
+        $wakaPdf = WakaPdf::find($productorId);
+        $ds = new DataSource($modelClass, 'class');
+        $asks = $ds->getProductorAsks('Waka\Pdfer\Models\WakaPdf',$productorId, $modelId);
+        $askDataWidget = $this->createAskDataWidget();
+        $askDataWidget->addFields($asks);
+        $this->vars['askDataWidget'] = $askDataWidget;
+        return [
+            '#askDataWidget' => $this->makePartial('$/waka/utils/models/ask/_widget_ask_data.htm')
+        ];
     }
 
     /**
@@ -81,16 +98,16 @@ class PdfBehavior extends ControllerBehavior
 
     public function onPdfBehaviorPopupValidation()
     {
-
+        $datas = post();
         $errors = $this->CheckValidation(\Input::all());
         if ($errors) {
             throw new \ValidationException(['error' => $errors]);
         }
         $productorId = post('productorId');
         $modelId = post('modelId');
-
         $inline = post('inline');
-
+        Session::put('pdf_asks_'.$modelId, $datas['asks_array'] ?? []);
+        //
         return Redirect::to('/backend/waka/pdfer/wakapdfs/makepdf/?productorId=' . $productorId . '&modelId=' . $modelId . '&inline=' . $inline);
     }
 
@@ -123,7 +140,8 @@ class PdfBehavior extends ControllerBehavior
         $productorId = post('productorId');
         $modelId = post('modelId');
         $inline = post('inline');
-        return PdfCreator::find($productorId)->setModelId($modelId)->renderPdf($inline);
+        $asks = Session::pull('pdf_asks_'.$modelId);
+        return PdfCreator::find($productorId)->setModelId($modelId)->setAsksResponse($asks)->renderPdf($inline);
     }
 
     /**
@@ -150,6 +168,17 @@ class PdfBehavior extends ControllerBehavior
         $config->alias = 'pdfBehaviorformWidget';
         $config->arrayName = 'pdfBehavior_array';
         $config->model = new WakaPdf();
+        $widget = $this->makeWidget('Backend\Widgets\Form', $config);
+        $widget->bindToController();
+        return $widget;
+    }
+
+    public function createAskDataWidget()
+    {
+        $config = $this->makeConfig('$/waka/utils/models/ask/empty_fields.yaml');
+        $config->alias = 'askDataformWidget';
+        $config->arrayName = 'asks_array';
+        $config->model = new \Waka\Utils\Models\Ask();
         $widget = $this->makeWidget('Backend\Widgets\Form', $config);
         $widget->bindToController();
         return $widget;

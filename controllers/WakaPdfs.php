@@ -12,6 +12,7 @@ class WakaPdfs extends Controller
     public $implement = [
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
+        'Waka.Utils.Behaviors.BtnsBehavior',
         'waka.Utils.Behaviors.SideBarAttributesBehavior',
         'Waka.Pdfer.Behaviors.PdfBehavior',
         'Backend.Behaviors.ReorderController',
@@ -25,9 +26,13 @@ class WakaPdfs extends Controller
         'layouts' => 'config_list_layouts.yaml',
         'blocs' => 'config_list_blocs.yaml',
     ];
+    public $btnsConfig = 'config_btns.yaml';
     public $duplicateConfig = 'config_duplicate.yaml';
     public $reorderConfig = 'config_reorder.yaml';
-    public $sidebarAttributesConfig = 'config_attributes.yaml';
+    public $sidebarAttributesConfig = 'config_attributes.yaml';    
+
+    public $requiredPermissions = ['wcli.pdfer.*'];
+    //FIN DE LA CONFIG AUTO
 
     public function __construct()
     {
@@ -39,6 +44,8 @@ class WakaPdfs extends Controller
         $blocsWidget->alias = 'blocsWidget';
         $blocsWidget->bindToController();
     }
+
+    //startKeep/
 
     public function update($id)
     {
@@ -59,4 +66,6 @@ class WakaPdfs extends Controller
         $this->bodyClass = 'compact-container';
         $this->vars['activeTab'] = $tab ?: 'templates';
     }
+
+    //endKeep/
 }

@@ -1,0 +1,59 @@
+# ===================================
+#  Btn  Behavior Config
+# ===================================
+
+
+modelClass: Waka\Pdfer\Models\WakaPdf
+
+workflow: false 
+
+###BREADCRUMP
+breadcrump:
+    inSettings: true 
+    indexUrl: waka/pdfer/wakapdfs
+    indexlabel: waka.pdfer::wakapdf.title
+    title: waka.pdfer::wakapdf.form_name
+
+###TOOL_BAR
+tool_bar:
+    base:
+        create: 
+            show: true
+            permissions: []
+            url: waka/pdfer/wakapdfs/create
+        reorder: 
+            show: true 
+            permissions: []
+            url: waka/pdfer/wakapdfs/reorder
+ 
+        delete: 
+            show: true
+            permissions: []
+    config_btns:
+            format: all
+            btns:
+    config_lot:
+        format: all
+        btns: 
+    # partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
+    #     testbtns:
+    #         url: $/wcli/crm/controllers/projects/_test_index.htm
+
+###ACTION_BAR Producteurs. Les behavior liée aux boutons doivent êtres instanciés implements = [waka.xxx.behaviors.yyy] dans le controller. 
+action_bar:
+    config_btns:
+        format: grouped #unique : un seul bouton, all : tts les boutons
+        groups:
+            waka.utils::lang.prod.produce: oc-icon-file-text-o
+            waka.utils::lang.prod.send: oc-icon-external-link
+            waka.utils::lang.prod.tools: oc-icon-wrench
+        btns:
+            pdf:
+                config: waka.pdfer::btns.pdf
+                group: waka.utils::lang.prod.produce
+            duplicate:
+                config: waka.utils::btns.duplicate
+                group: waka.utils::lang.prod.tools
+    partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
+        name:
+            url: $/waka/pdfer/controllers/wakapdfs/_testbtns.htm

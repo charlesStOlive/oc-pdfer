@@ -2,12 +2,12 @@
 #  Form Field Definitions
 # ===================================
 
-fields:    
+fields:
     name:
         label: waka.pdfer::wakapdf.name
         span: left
         required: true
-        comment: waka.pdfer::wakapdf.name_com
+        commentAbove: waka.pdfer::wakapdf.name_com
     slug:
         label: waka.pdfer::wakapdf.slug
         span: right
@@ -17,7 +17,7 @@ fields:
         label: waka.pdfer::wakapdf.pdf_name
         span: left
         required: true
-        comment: waka.pdfer::wakapdf.pdf_name_com
+        commentAbove: waka.pdfer::wakapdf.pdf_name_com
     data_source:
         label: waka.pdfer::wakapdf.data_source
         span: right

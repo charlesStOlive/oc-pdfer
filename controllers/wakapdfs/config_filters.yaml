@@ -1,7 +1,5 @@
 # ===================================
-#  Form Field Definitions
+#  Config filter
 # ===================================
 
-fields:
-    
-    
+scopes:
