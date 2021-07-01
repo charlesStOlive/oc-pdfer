@@ -136,6 +136,18 @@ class WakaPdf extends Model
     /**
      * FILTER FIELDS
      */
+    public function filterFields($fields, $context = null) {
+        $user = \BackendAuth::getUser();
+        //La limite du  nombre de asks est géré dans le controller.
+        if(!$user->hasAccess(['waka.pdfer.admin.super'])) {
+            if(isset($fields->code)) {
+                    $fields->code->readOnly = true;
+            }
+            if(isset($fields->has_asks)) {
+                    $fields->has_asks->readOnly = true;
+            }
+        }
+    }
 
     /**
      * OTHERS

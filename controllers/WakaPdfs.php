@@ -3,6 +3,7 @@
 use BackendMenu;
 use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
+use Waka\Pdfer\Models\WakaPdf;
 
 /**
  * Waka Pdf Back-end Controller
@@ -31,7 +32,7 @@ class WakaPdfs extends Controller
     public $reorderConfig = 'config_reorder.yaml';
     public $sidebarAttributesConfig = 'config_attributes.yaml';    
 
-    public $requiredPermissions = ['wcli.pdfer.*'];
+    public $requiredPermissions = ['waka.pdfer.admin.*'];
     //FIN DE LA CONFIG AUTO
 
     public function __construct()
@@ -65,6 +66,19 @@ class WakaPdfs extends Controller
         $this->asExtension('ListController')->index();
         $this->bodyClass = 'compact-container';
         $this->vars['activeTab'] = $tab ?: 'templates';
+    }
+
+    public function formExtendFieldsBefore($form) {
+        if(!$this->user->hasAccess(['waka.pdfer.admin.super'])) {
+            //Le blocage du champs code de ask est fait dans le model wakaMail
+            $model =  WakaPdf::find($this->params[0]);
+            $countAsks = 0;
+            if($model->asks) {
+                $countAsks = count($model->asks);
+                $form->tabs['fields']['asks']['maxItems'] = $countAsks;
+                $form->tabs['fields']['asks']['minItems'] = $countAsks;
+            }
+        }
     }
 
     //endKeep/

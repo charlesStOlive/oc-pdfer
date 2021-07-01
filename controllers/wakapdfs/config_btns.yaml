@@ -10,7 +10,7 @@ workflow: false
 ###BREADCRUMP
 breadcrump:
     inSettings: true 
-    indexUrl: waka/pdfer/wakapdfs
+    indexUrl: waka/pdfer/wakapdfs/index/wakapdfs
     indexlabel: waka.pdfer::wakapdf.title
     title: waka.pdfer::wakapdf.form_name
 
@@ -19,7 +19,7 @@ tool_bar:
     base:
         create: 
             show: true
-            permissions: []
+            permissions: ['waka.pdfer.admin.super']
             url: waka/pdfer/wakapdfs/create
         reorder: 
             show: true 
@@ -28,7 +28,7 @@ tool_bar:
  
         delete: 
             show: true
-            permissions: []
+            permissions: ['waka.pdfer.admin.super']
     config_btns:
             format: all
             btns:
@@ -42,11 +42,11 @@ tool_bar:
 ###ACTION_BAR Producteurs. Les behavior liée aux boutons doivent êtres instanciés implements = [waka.xxx.behaviors.yyy] dans le controller. 
 action_bar:
     config_btns:
-        format: grouped #unique : un seul bouton, all : tts les boutons
-        groups:
-            waka.utils::lang.prod.produce: oc-icon-file-text-o
-            waka.utils::lang.prod.send: oc-icon-external-link
-            waka.utils::lang.prod.tools: oc-icon-wrench
+        format: all #unique : un seul bouton, all : tts les boutons  grouped
+        # groups:
+        #     waka.utils::lang.prod.produce: oc-icon-file-text-o
+        #     waka.utils::lang.prod.send: oc-icon-external-link
+        #     waka.utils::lang.prod.tools: oc-icon-wrench
         btns:
             pdf:
                 config: waka.pdfer::btns.pdf
