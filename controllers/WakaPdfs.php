@@ -32,7 +32,7 @@ class WakaPdfs extends Controller
     public $reorderConfig = 'config_reorder.yaml';
     public $sidebarAttributesConfig = 'config_attributes.yaml';    
 
-    public $requiredPermissions = ['waka.pdfer.admin.*'];
+    public $requiredPermissions = ['waka.pdfer.*'];
     //FIN DE LA CONFIG AUTO
 
     public function __construct()
