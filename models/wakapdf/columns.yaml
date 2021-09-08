@@ -24,6 +24,11 @@ columns:
         relation: layout
         select: name
         searchable: true
+    is_lot:
+        label: waka.pdfer::wakapdf.is_lot
+        type: switch
+        searchable: false
+        sortable: true
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense

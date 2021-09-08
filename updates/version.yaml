@@ -12,3 +12,6 @@
 1.2.0:
     - 'Ajout des asks'
     - create_waka_pdfs_table_u120.php
+1.3.0:
+    - "Ajout du champs is_lot"
+    - create_waka_pdfs_table_u130.php

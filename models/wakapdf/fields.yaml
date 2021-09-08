@@ -82,6 +82,12 @@ tabs:
             type: switch
             default: false
             tab: waka.pdfer::wakapdf.tab_scopes
+        is_lot:
+            label: waka.pdfer::wakapdf.is_lot
+            span: left
+            type: switch
+            default: true
+            default: true
         scopes:
             label: waka.pdfer::wakapdf.scopes
             span: left

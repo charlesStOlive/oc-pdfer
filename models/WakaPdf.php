@@ -13,6 +13,7 @@ class WakaPdf extends Model
     use \Winter\Storm\Database\Traits\Sortable;
     use \Waka\Utils\Classes\Traits\DataSourceHelpers;
 
+
     /**
      * @var string The database table used by the model.
      */
@@ -87,7 +88,8 @@ class WakaPdf extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
+    public $hasOne = [
+    ];
     public $hasMany = [
     ];
     public $hasOneThrough = [
@@ -95,9 +97,7 @@ class WakaPdf extends Model
     public $hasManyThrough = [
     ];
     public $belongsTo = [
-       'layout' => [
-            'Waka\Pdfer\Models\Layout'
-        ],
+       'layout' => ['Waka\Pdfer\Models\Layout'],
     ];
     public $belongsToMany = [
     ];        
