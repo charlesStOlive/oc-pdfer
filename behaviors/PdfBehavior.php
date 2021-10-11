@@ -33,7 +33,7 @@ class PdfBehavior extends ControllerBehavior
         $modelClass = post('modelClass');
         $modelId = post('modelId');
 
-        $ds = new DataSource($modelClass, 'class');
+        $ds = \DataSources::findByClass($modelClass);
         $options = $ds->getProductorOptions('Waka\Pdfer\Models\WakaPdf', $modelId);
 
         $this->vars['options'] = $options;
@@ -55,7 +55,7 @@ class PdfBehavior extends ControllerBehavior
         $modelClass = post('modelClass');
         $modelId = post('modelId');
 
-        $ds = new DataSource($modelClass, 'class');
+        $ds = \DataSources::findByClass($modelClass);
         $options = $ds->getProductorOptions('Waka\Pdfer\Models\WakaPdf', $modelId);
 
         $this->vars['options'] = $options;
@@ -74,7 +74,7 @@ class PdfBehavior extends ControllerBehavior
         $modelClass = post('modelClass');
         $modelId = post('modelId');
         $wakaPdf = WakaPdf::find($productorId);
-        $ds = new DataSource($modelClass, 'class');
+        $ds = \DataSources::findByClass($modelClass);
         $asks = $ds->getProductorAsks('Waka\Pdfer\Models\WakaPdf',$productorId, $modelId);
         $askDataWidget = $this->createAskDataWidget();
         $askDataWidget->addFields($asks);

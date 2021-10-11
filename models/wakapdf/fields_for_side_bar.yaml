@@ -1,33 +1,25 @@
 # ===================================
 #  Form Field Definitions
 # ===================================
-
 fields:
     name:
         label: waka.pdfer::wakapdf.name
         span: left
         required: true
         comment: waka.pdfer::wakapdf.name_com
+        infoType: title
     slug:
         label: waka.pdfer::wakapdf.slug
         span: right
         required: true
-        preset: name
-    pdf_name:
-        label: waka.pdfer::wakapdf.pdf_name
-        span: left
-        required: true
-        comment: waka.pdfer::wakapdf.pdf_name_com
+        disabled: true
+        infoType: title
     data_source:
         label: waka.pdfer::wakapdf.data_source
         span: right
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
         required: true
+        disabled: true
         options: listDataSource
-    layout:
-        label: waka.pdfer::wakapdf.layout
-        span: left
-        type: relation
-        placeholder: waka.utils::lang.global.placeholder
-        nameFrom: name
+

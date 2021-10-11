@@ -1,21 +1,21 @@
 # ===================================
 #  Form Field Definitions
 # ===================================
+fields:
+    pdf_name:
+        label: waka.pdfer::wakapdf.pdf_name
+        span: left
+        required: true
+        comment: waka.pdfer::wakapdf.pdf_name_com
 tabs:
     defaultTab: waka.mailer::wakamail.tab_edit
     icons: 
-        waka.mailer::wakamail.tab_info: icon-info-circle
+        waka.mailer::wakamail.tab_options: icon-info-circle
         waka.mailer::wakamail.tab_edit: icon-pencil
         waka.mailer::wakamail.tab_scopes: icon-filter
         waka.mailer::wakamail.tab_fnc: icon-address-card-o
         waka.lp::lang.source_log.tab_lp: icon-file
     fields:    
-        pdf_name:
-            label: waka.pdfer::wakapdf.pdf_name
-            span: left
-            required: true
-            commentAbove: waka.pdfer::wakapdf.pdf_name_com
-            tab: waka.pdfer::wakapdf.tab_edit
         template:
             label: waka.pdfer::wakapdf.template
             span: full
@@ -23,34 +23,18 @@ tabs:
             size: giant
             language: html
             tab: waka.pdfer::wakapdf.tab_edit
-        name:
-            label: waka.pdfer::wakapdf.name
-            span: left
-            required: true
-            commentAbove: waka.pdfer::wakapdf.name_com
-            tab: waka.pdfer::wakapdf.tab_info
-        slug:
-            label: waka.pdfer::wakapdf.slug
-            span: right
-            required: true
-            disabled: true
-            tab: waka.pdfer::wakapdf.tab_info
-        data_source:
-            label: waka.pdfer::wakapdf.data_source
-            span: right
-            type: dropdown
-            placeholder: waka.utils::lang.global.placeholder
-            required: true
-            disabled: true
-            options: listDataSource
-            tab: waka.pdfer::wakapdf.tab_info
-        layout:
-            label: waka.pdfer::wakapdf.layout
-            span: left
-            type: relation
-            placeholder: waka.utils::lang.global.placeholder
-            nameFrom: name
-            tab: waka.pdfer::wakapdf.tab_info
+        rule_asks:
+            span: full
+            type: askbuilder
+            targetClass: wakaPdf
+            full_access: personne
+            tab: waka.pdfer::wakapdf.tab_edit
+        rule_fncs:
+            span: full
+            type: fncbuilder
+            targetClass: wakaPdf
+            full_access: personne
+            tab: waka.pdfer::wakapdf.tab_edit
         has_asks:
             label: waka.pdfer::wakapdf.has_asks
             span: left
@@ -76,18 +60,19 @@ tabs:
             span: full
             type: imageslist
             tab: waka.pdfer::wakapdf.tab_fnc
+        test_id:
+            label: waka.pdfer::wakapdf.test_id
+            span: left
+            type: dropdown
+            placeholder: waka.utils::lang.global.placeholder
+            options: listDataSourceTarget
+            tab: waka.pdfer::wakapdf.tab_options
         is_scope:
             label: waka.pdfer::wakapdf.is_scope
             span: left
             type: switch
             default: false
-            tab: waka.pdfer::wakapdf.tab_scopes
-        is_lot:
-            label: waka.pdfer::wakapdf.is_lot
-            span: left
-            type: switch
-            default: true
-            default: true
+            tab: waka.pdfer::wakapdf.tab_options
         scopes:
             label: waka.pdfer::wakapdf.scopes
             span: left
@@ -96,11 +81,32 @@ tabs:
                 action: show
                 field: is_scope
                 condition: checked
-            tab: waka.pdfer::wakapdf.tab_scopes
-        test_id:
-            label: waka.pdfer::wakapdf.test_id
-            span: auto
-            type: dropdown
-            placeholder: waka.utils::lang.global.placeholder
-            options: listDataSourceTarget
-            tab: waka.pdfer::wakapdf.tab_info
+            tab: waka.pdfer::wakapdf.tab_options
+        is_lot:
+            label: waka.pdfer::wakapdf.is_lot
+            span: left
+            type: switch
+            default: true
+            default: true
+            tab: waka.pdfer::wakapdf.tab_options
+secondaryTabs:
+    fields:
+        # info:
+        #     type: modelinfo
+        #     mode: secondary
+        #     src: /waka/pdfer/models/wakapdf/fields_for_side_bar.yaml
+        infos:
+            span: full
+            type: modelinfo
+            tab: waka.pdfer::wakapdf.tab_infos
+            src: waka/pdfer/models/wakapdf/fields_for_side_bar.yaml
+        attributs:
+            span: full
+            type: attributs
+            tab: waka.pdfer::wakapdf.tab_attributs
+        blocs:
+            span: full
+            type: comonblocs
+            twigName: mailPartial
+            blocClass: Waka\Pdfer\Models\Bloc
+            tab: waka.pdfer::wakapdf.tab_blocs

@@ -14,13 +14,10 @@ class WakaPdfs extends Controller
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
         'Waka.Utils.Behaviors.BtnsBehavior',
-        'waka.Utils.Behaviors.SideBarAttributesBehavior',
         'Waka.Pdfer.Behaviors.PdfBehavior',
         'Backend.Behaviors.ReorderController',
         'Waka.Utils.Behaviors.DuplicateModel',
-
     ];
-
     public $formConfig = 'config_form.yaml';
     public $listConfig = [
         'wakapdfs' => 'config_list.yaml',
@@ -29,8 +26,7 @@ class WakaPdfs extends Controller
     ];
     public $btnsConfig = 'config_btns.yaml';
     public $duplicateConfig = 'config_duplicate.yaml';
-    public $reorderConfig = 'config_reorder.yaml';
-    public $sidebarAttributesConfig = 'config_attributes.yaml';    
+    public $reorderConfig = 'config_reorder.yaml';  
 
     public $requiredPermissions = ['waka.pdfer.*'];
     //FIN DE LA CONFIG AUTO
@@ -40,10 +36,6 @@ class WakaPdfs extends Controller
         parent::__construct();
         BackendMenu::setContext('October.System', 'system', 'settings');
         SettingsManager::setContext('Waka.Pdfer', 'WakaPdfs');
-
-        $blocsWidget = new \Waka\Pdfer\Widgets\SidebarBlocs($this);
-        $blocsWidget->alias = 'blocsWidget';
-        $blocsWidget->bindToController();
     }
 
     //startKeep/
@@ -54,13 +46,6 @@ class WakaPdfs extends Controller
         return $this->asExtension('FormController')->update($id);
     }
 
-    public function update_onSave($recordId = null)
-    {
-        $this->asExtension('FormController')->update_onSave($recordId);
-        return [
-            '#sidebar_attributes' => $this->attributesRender($this->params[0]),
-        ];
-    }
     public function index($tab = null)
     {
         $this->asExtension('ListController')->index();
@@ -68,17 +53,20 @@ class WakaPdfs extends Controller
         $this->vars['activeTab'] = $tab ?: 'templates';
     }
 
-    public function formExtendFieldsBefore($form) {
-        if(!$this->user->hasAccess(['waka.pdfer.admin.super'])) {
-            //Le blocage du champs code de ask est fait dans le model wakaMail
-            $model =  WakaPdf::find($this->params[0]);
-            $countAsks = 0;
-            if($model->asks) {
-                $countAsks = count($model->asks);
-                $form->tabs['fields']['asks']['maxItems'] = $countAsks;
-                $form->tabs['fields']['asks']['minItems'] = $countAsks;
-            }
-        }
+    public function update_onSave($recordId = null)
+    {
+        $this->asExtension('FormController')->update_onSave($recordId);
+        // return [
+        //     '#sidebar_attributes' => $this->attributesRender($this->params[0]),
+        // ];
+        $fieldAttributs = $this->formGetWidget()->renderField('attributs', ['useContainer' => true]);
+        $fieldInfos = $this->formGetWidget()->renderField('infos', ['useContainer' => true]);
+        //trace_log($fieldInfos);
+
+        return [
+            '#Form-field-WakaPdf-attributs-group' => $fieldAttributs,
+            '#Form-field-WakaPdf-infos-group' => $fieldInfos
+        ];
     }
 
     //endKeep/

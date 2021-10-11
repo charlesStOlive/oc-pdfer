@@ -32,7 +32,7 @@ class PdfCreator extends \Winter\Storm\Extension\Extendable
     {
         $this->modelId = $modelId;
         $dataSourceId = $this->getProductor()->data_source;
-        $this->ds = new DataSource($dataSourceId);
+        $this->ds =  \DataSources::find($dataSourceId);
         $this->ds->instanciateModel($modelId);
         return $this;
     }
@@ -44,16 +44,61 @@ class PdfCreator extends \Winter\Storm\Extension\Extendable
              throw new \ValidationException(['test_id' => \Lang::get('waka.pdfer::wakapdf.e.test_id')]);
         }
         $dataSourceId = $this->getProductor()->data_source;
-        $this->ds = new DataSource($dataSourceId);
+        $this->ds =  \DataSources::find($dataSourceId);
         $this->ds->instanciateModel($this->modelId);
         return $this;
     }
 
+    public function setRuleAsksResponse($datas = [])
+    {
+        $askArray = [];
+        $srcmodel = $this->ds->getModel($this->modelId);
+        $asks = $this->getProductor()->rule_asks()->get();
+        foreach($asks as $ask) {
+            $key = $ask->getCode();
+            //trace_log($key);
+            $askResolved = $ask->resolve($srcmodel, 'twig', $datas);
+            $askArray[$key] = $askResolved;
+        }
+        //trace_log($askArray); // les $this->askResponse sont prioritaire
+        return array_replace($askArray,$this->askResponse);
+        
+    }
+
+    //BEBAVIOR AJOUTE LES REPOSES ??
     public function setAsksResponse($datas = [])
     {
         $this->askResponse = $this->ds->getAsksFromData($datas, $this->getProductor()->asks);
         return $this;
     }
+
+    public function setRuleFncsResponse()
+    {
+        $fncArray = [];
+        $srcmodel = $this->ds->getModel($this->modelId);
+        $fncs = $this->getProductor()->rule_fncs()->get();
+        foreach($fncs as $fnc) {
+            $key = $fnc->getCode();
+            //trace_log('key of the function');
+            $fncResolved = $fnc->resolve($srcmodel,$this->ds->code);
+            $fncArray[$key] = $fncResolved;
+        }
+        //trace_log($fncArray);
+        return $fncArray;
+        
+    }
+
+    public function setdefaultAsks($datas = [])
+    {
+        if($this->ds) {
+             $this->askResponse = $this->ds->getAsksFromData($datas, $this->getProductor()->asks);
+        } else {
+            $this->askResponse = [];
+        }
+        return $this;
+    }
+
+    
 
     public function checkScopes()
     {
@@ -121,29 +166,42 @@ class PdfCreator extends \Winter\Storm\Extension\Extendable
 
     public function prepareCreatorVars()
     {
-        $this->ds = new DataSource($this->getProductor()->data_source);
+        $this->ds =  \DataSources::find($this->getProductor()->data_source);
         //$varName = strtolower($this->ds->code);
 
         $doted = $this->ds->getValues($this->modelId);
-        $img = $this->ds->wimages->getPicturesUrl($this->getProductor()->images);
+        //$img = $this->ds->wimages->getPicturesUrl($this->getProductor()->images);
         //trace_log($img);
-        $fnc = $this->ds->getFunctionsCollections($this->modelId, $this->getProductor()->model_functions);
+        //$fnc = $this->ds->getFunctionsCollections($this->modelId, $this->getProductor()->model_functions);
         $css = null;
 
         $model = [
             'ds' => $doted,
-            'IMG' => $img,
-            'FNC' => $fnc,
+            // 'IMG' => $img,
+            // 'FNC' => $fnc,
             'css' => $css,
         ];
-        $this->levierData = $model;
+        
+        //Nouveau bloc pour nouveaux asks
+        if($this->getProductor()->rule_asks()->count()) {
+            $this->askResponse = $this->setRuleAsksResponse($model);
+        } else {
+            //Injection des asks s'ils existent dans le model;
+            if(!$this->askResponse) {
+                $this->setAsksResponse($model);
+            }
+        }
 
-        if(!$this->askResponse) {
-            $this->setAsksResponse();
+        //Nouveau bloc pour les new Fncs
+        if($this->getProductor()->rule_fncs()->count()) {
+            $fncs = $this->setRuleFncsResponse($model);
+            $model = array_merge($model, [ 'fncs' => $fncs]);
         }
         //trace_log("ASK RESPONSE");
         //trace_log($this->askResponse);
         $model = array_merge($model, [ 'asks' => $this->askResponse]);
+
+        $this->levierData = $model;
 
 
 
@@ -231,12 +289,12 @@ class PdfCreator extends \Winter\Storm\Extension\Extendable
 
     public function createTwigStrName($data)
     {
-        $modelName = strtolower($this->ds->code);
-        $vars = [
-            $modelName => $data,
-        ];
+        // $modelName = strtolower($this->ds->code);
+        // $vars = [
+        //     $modelName => $data,
+        // ];
         //trace_log($this->getProductor()->pdf_name);
-        $nameConstruction = \Twig::parse($this->getProductor()->pdf_name, $vars);
+        $nameConstruction = \Twig::parse($this->getProductor()->pdf_name, ['ds' => $data]);
         return str_slug($nameConstruction);
     }
 

@@ -1,0 +1,13 @@
+# ===================================
+#  Config des data source
+# ===================================
+datasource: 
+    wakaPdf:
+        hidden: true
+        label: WakaPdf
+        class: Waka\Pdfer\Models\WakaPdf
+        controller: wcli/pdfer/wakamails
+        attributes: waka/pdfer/models/wakapdf/attributes.yaml
+        relations:
+            layout:
+                label: Layout

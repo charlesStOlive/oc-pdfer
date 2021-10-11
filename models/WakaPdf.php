@@ -34,10 +34,10 @@ class WakaPdf extends Model
      * @var array Validation rules for attributes
      */
     public $rules = [
-        'name' => 'required',
-        'slug' => 'required|unique:waka_mailer_waka_mails',
         'pdf_name' => 'required',
         'data_source' => 'required',
+        'name' => 'required',
+        'slug' => 'required|unique:waka_mailer_waka_mails',
     ];
 
     public $customMessages = [
@@ -59,10 +59,10 @@ class WakaPdf extends Model
      * @var array Attributes to be cast to JSON
      */
     protected $jsonable = [
+        'asks',
         'model_functions',
         'images',
         'scopes',
-        'asks',
     ];
 
     /**
@@ -105,6 +105,16 @@ class WakaPdf extends Model
     public $morphOne = [
     ];
     public $morphMany = [
+        'rule_asks' => [
+            'Waka\Utils\Models\RuleAsk',
+            'name' => 'askeable',
+            'delete' => true
+        ],
+        'rule_fncs' => [
+            'Waka\Utils\Models\RuleFnc',
+            'name' => 'fnceable',
+            'delete' => true
+        ],
     ];
     public $attachOne = [
     ];

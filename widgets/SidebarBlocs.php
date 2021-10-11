@@ -22,7 +22,7 @@ class SideBarBlocs extends WidgetBase
     {
         $controllerModel = $this->controller->formGetModel();
         if(!$controllerModel->no_ds) {
-            $this->dataSource = new DataSource($controllerModel->data_source);
+            $this->dataSource =  \DataSources::find($controllerModel->data_source);
         }
         $blocs = $this->getBlocs();
         $this->vars['blocs'] = $blocs;

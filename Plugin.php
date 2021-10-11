@@ -12,6 +12,13 @@ use System\Classes\PluginBase;
 class Plugin extends PluginBase
 {
     /**
+     * @var array Plugin dependencies
+     */
+    public $require = [
+        'Waka.Utils',
+        'Waka.Informer',
+    ];
+    /**
      * Returns information about this plugin.
      *
      * @return array
@@ -43,7 +50,9 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        
         $this->bootPackages();
+        \DataSources::registerDataSources(plugins_path().'/waka/pdfer/config/datasources.yaml');
 
         // \Event::listen('backend.update.prod', function ($controller) {
         //     if (get_class($controller) == 'Waka\Pdfer\Controllers\WakaPdf') {
