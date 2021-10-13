@@ -7,6 +7,7 @@ fields:
         span: left
         required: true
         comment: waka.pdfer::wakapdf.pdf_name_com
+        permissions: [waka.pdfer.admin.*]
 tabs:
     defaultTab: waka.mailer::wakamail.tab_edit
     icons: 
@@ -22,23 +23,27 @@ tabs:
             type: codeeditor
             size: giant
             language: html
+            permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_edit
         rule_asks:
             span: full
             type: askbuilder
-            targetClass: wakaPdf
-            full_access: personne
+            targetProductor: wakaPdf
+            full_access: waka.rules.asks.admin
+            permissions: [waka.rules.asks.*]
             tab: waka.pdfer::wakapdf.tab_edit
         rule_fncs:
             span: full
             type: fncbuilder
-            targetClass: wakaPdf
-            full_access: personne
+            targetProductor: wakaPdf
+            full_access: waka.rules.fncs.admin
+            permissions: [waka.rules.fncs.*]
             tab: waka.pdfer::wakapdf.tab_edit
         has_asks:
             label: waka.pdfer::wakapdf.has_asks
             span: left
             type: switch
+            permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_edit
         asks:
             label: waka.pdfer::wakapdf.asks
@@ -49,16 +54,19 @@ tabs:
                 action: show
                 field: has_asks
                 condition: checked
+            permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_edit
         model_functions:
             label: waka.pdfer::wakapdf.model_functions
             span: full
             type: functionslist
+            permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_fnc
         images:
             label: waka.pdfer::wakapdf.images
             span: full
             type: imageslist
+            permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_fnc
         test_id:
             label: waka.pdfer::wakapdf.test_id
@@ -66,12 +74,14 @@ tabs:
             type: dropdown
             placeholder: waka.utils::lang.global.placeholder
             options: listDataSourceTarget
+            permissions: [waka.pdfer.admin.*]
             tab: waka.pdfer::wakapdf.tab_options
         is_scope:
             label: waka.pdfer::wakapdf.is_scope
             span: left
             type: switch
             default: false
+            permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_options
         scopes:
             label: waka.pdfer::wakapdf.scopes
@@ -81,6 +91,7 @@ tabs:
                 action: show
                 field: is_scope
                 condition: checked
+            permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_options
         is_lot:
             label: waka.pdfer::wakapdf.is_lot
@@ -88,6 +99,7 @@ tabs:
             type: switch
             default: true
             default: true
+            permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_options
 secondaryTabs:
     fields:
@@ -98,15 +110,18 @@ secondaryTabs:
         infos:
             span: full
             type: modelinfo
+            permissions: [waka.pdfer.admin.*]
             tab: waka.pdfer::wakapdf.tab_infos
             src: waka/pdfer/models/wakapdf/fields_for_side_bar.yaml
         attributs:
             span: full
             type: attributs
+            permissions: [waka.pdfer.admin.*]
             tab: waka.pdfer::wakapdf.tab_attributs
         blocs:
             span: full
             type: comonblocs
             twigName: mailPartial
             blocClass: Waka\Pdfer\Models\Bloc
+            permissions: [waka.pdfer.admin.*]
             tab: waka.pdfer::wakapdf.tab_blocs

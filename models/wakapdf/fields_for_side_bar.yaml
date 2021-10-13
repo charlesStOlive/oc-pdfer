@@ -7,12 +7,14 @@ fields:
         span: left
         required: true
         comment: waka.pdfer::wakapdf.name_com
+        permissions: [waka.pdfer.admin.*]
         infoType: title
     slug:
         label: waka.pdfer::wakapdf.slug
         span: right
         required: true
         disabled: true
+        permissions: [waka.pdfer.admin.*]
         infoType: title
     data_source:
         label: waka.pdfer::wakapdf.data_source
@@ -22,4 +24,13 @@ fields:
         required: true
         disabled: true
         options: listDataSource
+        permissions: [waka.pdfer.admin.super]
+    layout:
+        label: waka.pdfer::wakapdf.layout
+        span: left
+        type: relation
+        placeholder: waka.utils::lang.global.placeholder
+        nameFrom: name
+        permissions: [waka.pdfer.admin.super]
+        value: layout.name
 
