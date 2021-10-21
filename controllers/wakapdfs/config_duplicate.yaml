@@ -12,21 +12,24 @@ redirect: backend/waka/pdfer/wakapdfs/update/
 
 duplication:
     #Les champs dans le tableau relation seront cloné et attaché au nouveau model 
-    # relations:
-    #     - quotesdetails
+    relationsMany:
+        - rule_asks
+        - rule_fncs
+    # relationsBelongsToMany:
+    #   - rule_asks
+    #   - rule_fncs
+  
 
     #Les champs dans le tableau transformation auront les valeurs listé ci dessous 
     # transformation:
-    #     quotestatus_id: 1
-    #     code: null
-    #     unblock: false
+    #     state: Brouillon
 
     #Les champs qui seront modifié dans le formulaire du popup 
     fields:
         name:
-          label: waka.pdfer::wakapdf.name 
+          label: waka.mailer::wakamail.name 
         slug:
-          label: waka.pdfer::wakapdf.slug 
+          label: waka.mailer::wakamail.slug 
 
         # _keep:
         #   label: Dupliquer dans ce projet

@@ -5,6 +5,7 @@ use Backend;
 use Config;
 use Illuminate\Foundation\AliasLoader;
 use System\Classes\PluginBase;
+use System\Classes\PluginManager;
 
 /**
  * Pdfer Plugin Information File
@@ -41,6 +42,21 @@ class Plugin extends PluginBase
      */
     public function register()
     {
+    }
+
+
+    /**
+     * Register model to clean.
+     *
+     * @return void
+     */
+    public function registerModelToClean()
+    {
+        return [
+            'cleanSoftDelete' => [
+                \Waka\Pdfer\Models\WakaPdf::class => 0,
+            ],
+        ];
     }
 
     /**
