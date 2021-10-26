@@ -100,21 +100,10 @@ class PdfCreator extends \Winter\Storm\Extension\Extendable
 
     
 
-    public function checkScopes()
+    public function checkConditions()//Ancienement checkScopes
     {
-        //trace_log('checkScopes');
-        if (!$this->ds || !$this->modelId) {
-            //trace_log("modelId pas instancie");
-            throw new \SystemException("Le modelId n a pas ete instancié");
-        }
-        //trace_log('nom modèle : '.$this->ds->model);
-        $scope = new \Waka\Utils\Classes\Scopes($this->getProductor(), $this->ds->model);
-        //trace_log('scope calcule');
-        if ($scope->checkScopes()) {
-            return true;
-        } else {
-            return false;
-        }
+        $conditions = new \Waka\Utils\Classes\Conditions($this->getProductor(), $this->ds->model);
+        return $conditions->checkConditions();
     }
 
     public function renderPdf($inline = false)
