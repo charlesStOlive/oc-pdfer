@@ -115,6 +115,11 @@ class WakaPdf extends Model
             'name' => 'fnceable',
             'delete' => true
         ],
+        'rule_conditions' => [
+            'Waka\Utils\Models\RuleCondition',
+            'name' => 'conditioneable',
+            'delete' => true
+        ],
     ];
     public $attachOne = [
     ];

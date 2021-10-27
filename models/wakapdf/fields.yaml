@@ -93,6 +93,14 @@ tabs:
                 condition: checked
             permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_options
+        rule_conditions:
+            label: waka.pdfer::wakapdf.rule_conditions
+            span: full
+            ruleMode: condition
+            targetProductor: wakaPdf
+            options: rulebuilder
+            permissions: [waka.mailer.admin.super]
+            tab: waka.pdfer::wakapdf.tab_options
         is_lot:
             label: waka.pdfer::wakapdf.is_lot
             span: left

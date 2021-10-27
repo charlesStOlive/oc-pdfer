@@ -12,6 +12,7 @@ return [
     'name_com' => 'interne uniquement',
     'pdf_name' => 'Nom du document pdf',
     'pdf_name_com' => 'Nom du document en sortie',
+    'rule_conditions' => 'Conditions',
     'scopes' => 'Restrictions',
     'slug' => 'Code/Slug',
     'tab_attributs' => 'Attributs',
