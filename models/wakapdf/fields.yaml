@@ -96,9 +96,9 @@ tabs:
         rule_conditions:
             label: waka.pdfer::wakapdf.rule_conditions
             span: full
+            type: rulebuilder
             ruleMode: condition
             targetProductor: wakaPdf
-            options: rulebuilder
             permissions: [waka.mailer.admin.super]
             tab: waka.pdfer::wakapdf.tab_options
         is_lot:
