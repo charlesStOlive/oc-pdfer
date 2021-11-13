@@ -26,6 +26,7 @@ tabs:
             permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_edit
         rule_asks:
+            label: waka.pdfer::wakapdf.rule_asks
             span: full
             type: askbuilder
             targetProductor: wakaPdf
@@ -33,6 +34,7 @@ tabs:
             permissions: [waka.rules.asks.*]
             tab: waka.pdfer::wakapdf.tab_edit
         rule_fncs:
+            label: waka.pdfer::wakapdf.rule_fncs
             span: full
             type: fncbuilder
             targetProductor: wakaPdf

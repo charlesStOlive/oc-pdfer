@@ -14,6 +14,7 @@ class WakaPdfs extends Controller
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
         'Waka.Utils.Behaviors.BtnsBehavior',
+        'Waka.Utils.Behaviors.SideBarUpdate',
         'Waka.Pdfer.Behaviors.PdfBehavior',
         'Backend.Behaviors.ReorderController',
         'Waka.Utils.Behaviors.DuplicateModel',
@@ -26,7 +27,8 @@ class WakaPdfs extends Controller
     ];
     public $btnsConfig = 'config_btns.yaml';
     public $duplicateConfig = 'config_duplicate.yaml';
-    public $reorderConfig = 'config_reorder.yaml';  
+    public $reorderConfig = 'config_reorder.yaml';
+    public $sideBarUpdateConfig = 'config_side_bar_update.yaml';
 
     public $requiredPermissions = ['waka.pdfer.*'];
     //FIN DE LA CONFIG AUTO
@@ -71,3 +73,4 @@ class WakaPdfs extends Controller
 
     //endKeep/
 }
+

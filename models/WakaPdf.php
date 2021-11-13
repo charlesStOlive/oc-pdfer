@@ -50,6 +50,7 @@ class WakaPdf extends Model
     public $attributesToDs = [
     ];
 
+
     /**
      * @var array Attributes to be cast to native types
      */

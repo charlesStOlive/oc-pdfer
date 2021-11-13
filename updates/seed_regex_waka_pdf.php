@@ -9,10 +9,10 @@ class SeedRegexWakaPdf extends Seeder
     {
         $pdfs = \Waka\Pdfer\Models\WakaPdf::get();
         foreach($pdfs as $pdf) {
-            $html = $pdf->html;
+            $html = $pdf->template;
             $html = $this->transformFnc($html);
             $html = $this->addDatas($html);
-            $pdf->html = $html;
+            $pdf->template = $html;
             $pdf->save();
         }
         

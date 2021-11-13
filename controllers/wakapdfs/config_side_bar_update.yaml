@@ -1,0 +1,12 @@
+# ===================================
+#  Side Bar Behavior Config
+# ===================================
+
+# Record name
+title: waka.utils::lang.side_bar_info.update
+
+# Model Form Field configuration
+form: $/waka/pdfer/models/wakapdf/fields_for_side_bar.yaml
+
+# Model Class name
+modelClass: Waka\Pdfer\Models\WakaPdf
