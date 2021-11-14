@@ -1,6 +1,7 @@
 <?php
 return [
     'asks' => 'Questions',
+    'create' => 'Créer un PDF',
     'data_source' => 'Source des données',
     'has_asks' => 'A des questions ?',
     'images' => 'Images',
