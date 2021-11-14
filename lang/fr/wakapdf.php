@@ -3,6 +3,7 @@ return [
     'asks' => 'Questions',
     'create' => 'Créer un PDF',
     'data_source' => 'Source des données',
+    'form_name' => 'Éditer un pdf',
     'has_asks' => 'A des questions ?',
     'images' => 'Images',
     'is_lot' => 'Autoriser dans les lots ?',
