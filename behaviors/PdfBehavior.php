@@ -14,11 +14,16 @@ class PdfBehavior extends ControllerBehavior
 
     protected $pdfBehaviorWidget;
     protected $askDataWidget;
+    public $errors;
 
     public function __construct($controller)
     {
         parent::__construct($controller);
         $this->pdfBehaviorWidget = $this->createPdfBehaviorWidget();
+        $this->errors = [];
+        \Event::listen('waka.utils::conditions.error', function ($error) {
+            array_push($this->errors, $error);
+        });
     }
 
     /**
@@ -38,6 +43,7 @@ class PdfBehavior extends ControllerBehavior
 
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
+        $this->vars['errors'] = $this->errors;
         $this->vars['modelClass'] = $modelClass;
 
         if($options) {
@@ -60,6 +66,7 @@ class PdfBehavior extends ControllerBehavior
 
         $this->vars['options'] = $options;
         $this->vars['modelId'] = $modelId;
+        $this->vars['errors'] = $this->errors;
         $this->vars['modelClass'] = $modelClass;
 
         if($options) {

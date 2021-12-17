@@ -13,8 +13,8 @@ columns:
     slug:
         label: waka.pdfer::wakapdf.slug
         searchable: true
-    pdf_name:
-        label: waka.pdfer::wakapdf.pdf_name
+    state:
+        label: waka.pdfer::wakapdf.state
         searchable: true
     data_source:
         label: waka.pdfer::wakapdf.data_source

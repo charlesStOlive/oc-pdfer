@@ -11,6 +11,8 @@ class CreateWakaPdfsTable extends Migration
         Schema::create('waka_pdfer_waka_pdfs', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->string('name');
+            $table->string('slug');
             $table->string('pdf_name');
             $table->text('template')->nullable();
             $table->string('data_source');
@@ -20,8 +22,6 @@ class CreateWakaPdfsTable extends Migration
             $table->boolean('is_scope')->nullable()->default(false);
             $table->text('scopes')->nullable();
             $table->string('test_id')->nullable();
-            $table->string('name');
-            $table->string('slug');
             //reorder
             $table->integer('sort_order')->default(0);
             //softDelete

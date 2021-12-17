@@ -9,6 +9,7 @@
             <h4 class="modal-title"><?=e(trans('waka.pdfer::wakapdf.create'))?></h4>
         </div>
         <div class="modal-body">
+            <?= $this->makePartial('~/plugins/waka/utils/views/condition_errors_tt.htm') ?>
             <input id="modelClass" name="modelClass" type="hidden" value="<?=$modelClass?>">
             <input id="modelId" name="modelId" type="hidden" value="<?=$modelId?>">
             <select class="form-control custom-select"

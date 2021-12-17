@@ -2,6 +2,15 @@
 #  Form Field Definitions
 # ===================================
 fields:
+    state:
+        label: waka.pdfer::wakapdf.state
+        span: right
+        type: balloon-selector
+        required: true
+        default: Brouillon
+        options: listStates
+        default: Actif
+        permissions: [waka.worder.admin.*]
     pdf_name:
         label: waka.pdfer::wakapdf.pdf_name
         span: left
@@ -41,35 +50,6 @@ tabs:
             full_access: waka.rules.fncs.admin
             permissions: [waka.rules.fncs.*]
             tab: waka.pdfer::wakapdf.tab_edit
-        has_asks:
-            label: waka.pdfer::wakapdf.has_asks
-            span: left
-            type: switch
-            permissions: [waka.pdfer.admin.super]
-            tab: waka.pdfer::wakapdf.tab_edit
-        asks:
-            label: waka.pdfer::wakapdf.asks
-            span: full
-            type: repeater
-            groups: $/waka/utils/models/config/ask.yaml
-            trigger:
-                action: show
-                field: has_asks
-                condition: checked
-            permissions: [waka.pdfer.admin.super]
-            tab: waka.pdfer::wakapdf.tab_edit
-        model_functions:
-            label: waka.pdfer::wakapdf.model_functions
-            span: full
-            type: functionslist
-            permissions: [waka.pdfer.admin.super]
-            tab: waka.pdfer::wakapdf.tab_fnc
-        images:
-            label: waka.pdfer::wakapdf.images
-            span: full
-            type: imageslist
-            permissions: [waka.pdfer.admin.super]
-            tab: waka.pdfer::wakapdf.tab_fnc
         test_id:
             label: waka.pdfer::wakapdf.test_id
             span: left
@@ -77,23 +57,6 @@ tabs:
             placeholder: waka.utils::lang.global.placeholder
             options: listDataSourceTarget
             permissions: [waka.pdfer.admin.*]
-            tab: waka.pdfer::wakapdf.tab_options
-        is_scope:
-            label: waka.pdfer::wakapdf.is_scope
-            span: left
-            type: switch
-            default: false
-            permissions: [waka.pdfer.admin.super]
-            tab: waka.pdfer::wakapdf.tab_options
-        scopes:
-            label: waka.pdfer::wakapdf.scopes
-            span: left
-            type: scopeslist
-            trigger:
-                action: show
-                field: is_scope
-                condition: checked
-            permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_options
         rule_conditions:
             label: waka.pdfer::wakapdf.rule_conditions

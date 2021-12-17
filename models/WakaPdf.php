@@ -136,6 +136,9 @@ class WakaPdf extends Model
     /**
      * LISTS
      **/
+    public function listStates() {
+        return \Config::get('waka.utils::basic_state');
+    }
 
     /**
      * GETTERS
@@ -144,6 +147,10 @@ class WakaPdf extends Model
     /**
      * SCOPES
      */
+    public function scopeActive($query) {
+        return $query->where('state', 'Actif');
+
+    }
 
     /**
      * SETTERS

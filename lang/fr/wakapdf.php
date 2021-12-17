@@ -19,6 +19,7 @@ return [
     'rule_fncs' => 'Fonctions éditables',
     'scopes' => 'Restrictions',
     'slug' => 'Code/Slug',
+    'state' => 'État',
     'tab_attributs' => 'Attributs',
     'tab_blocs' => 'Blocs',
     'tab_edit' => 'Édition',

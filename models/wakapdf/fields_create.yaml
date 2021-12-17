@@ -36,3 +36,12 @@ fields:
         placeholder: waka.utils::lang.global.placeholder
         nameFrom: name
         permissions: [waka.pdfer.admin.super]
+    state:
+        label: waka.pdfer::wakapdf.state
+        span: right
+        type: balloon-selector
+        required: true
+        default: Brouillon
+        options: listStates
+        default: Actif
+        permissions: [waka.worder.admin.*]
