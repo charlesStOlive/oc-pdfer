@@ -185,7 +185,7 @@ class PdfBehavior extends ControllerBehavior
         $config = $this->makeConfig('$/waka/utils/models/ask/empty_fields.yaml');
         $config->alias = 'askDataformWidget';
         $config->arrayName = 'asks_array';
-        $config->model = new \Waka\Utils\Models\Ask();
+        $config->model = new \Waka\Utils\Models\RuleAsk();
         $widget = $this->makeWidget('Backend\Widgets\Form', $config);
         $widget->bindToController();
         return $widget;
