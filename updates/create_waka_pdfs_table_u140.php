@@ -8,15 +8,17 @@ class CreateWakaPdfsTableU140 extends Migration
 {
     public function up()
     {
-        Schema::table('waka_pdfer_waka_pdfs', function (Blueprint $table) {
-            $table->string('state')->default('Actif');
-            $table->dropColumn('has_asks');
-            $table->dropColumn('asks');
-            $table->dropColumn('model_functions');
-            $table->dropColumn('images');
-            $table->dropColumn('is_scope');
-            $table->dropColumn('scopes');
-        });
+        if (!Schema::hasColumn('waka_pdfer_waka_pdfs', 'state')){
+            Schema::table('waka_pdfer_waka_pdfs', function (Blueprint $table) {
+                $table->string('state')->default('Actif');
+                $table->dropColumn('has_asks');
+                $table->dropColumn('asks');
+                $table->dropColumn('model_functions');
+                $table->dropColumn('images');
+                $table->dropColumn('is_scope');
+                $table->dropColumn('scopes');
+            });
+        }
     }
 
     public function down()
