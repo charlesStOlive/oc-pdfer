@@ -1,0 +1,6 @@
+files:
+    pdfer_install:
+        title: Installation PDFER 
+        group: "01 Installation"
+        comment: "Niveau developpeur laravel & october/winter"
+        relativePath: waka/utils/docs
