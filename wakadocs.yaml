@@ -2,5 +2,11 @@ files:
     pdfer_install:
         title: Installation PDFER 
         group: "01 Installation"
-        comment: "Niveau developpeur laravel & october/winter"
+        comment: "Comment installer wkhtml et autres dépendances"
+        level: dev
         relativePath: waka/utils/docs
+        order: 10
+parts:
+    env:
+        relativePath: waka/pdfer/docs/parts
+        from: pdfer
