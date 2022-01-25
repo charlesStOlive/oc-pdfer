@@ -126,7 +126,7 @@ class PdfCreator extends ProductorCreator
             'AddCss' => $this->getProductor()->layout->Addcss,
         ];
         $data = array_merge($data, $model);
-        trace_log( $data);
+        //trace_log( $data);
         $footer = \Twig::parse($this->getProductor()->layout->footer_html, $data);
         $this->stopTwig();
         return $footer;      
