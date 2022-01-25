@@ -15,11 +15,11 @@ fields:
         required: true
         preset: name
         permissions: [waka.pdfer.admin.*]
-    pdf_name:
-        label: waka.pdfer::wakapdf.pdf_name
+    output_name:
+        label: waka.pdfer::wakapdf.output_name
         span: left
         required: true
-        comment: waka.pdfer::wakapdf.pdf_name_com
+        comment: waka.pdfer::wakapdf.output_name_com
         permissions: [waka.pdfer.admin.*]
     data_source:
         label: waka.pdfer::wakapdf.data_source

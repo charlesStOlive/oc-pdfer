@@ -11,11 +11,11 @@ fields:
         options: listStates
         default: Actif
         permissions: [waka.worder.admin.*]
-    pdf_name:
-        label: waka.pdfer::wakapdf.pdf_name
+    output_name:
+        label: waka.pdfer::wakapdf.output_name
         span: left
         required: true
-        comment: waka.pdfer::wakapdf.pdf_name_com
+        comment: waka.pdfer::wakapdf.output_name_com
         permissions: [waka.pdfer.admin.*]
 tabs:
     defaultTab: waka.mailer::wakamail.tab_edit

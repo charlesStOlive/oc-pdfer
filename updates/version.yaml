@@ -21,3 +21,6 @@
 1.4.0:
     - "Nettoyage et ajout du champs état"
     - create_waka_pdfs_table_u140.php
+1.5.0:
+    - "Changement de nom output_name"
+    - create_waka_pdfs_table_u150.php

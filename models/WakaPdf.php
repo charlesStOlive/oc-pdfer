@@ -34,10 +34,11 @@ class WakaPdf extends Model
      * @var array Validation rules for attributes
      */
     public $rules = [
-        'pdf_name' => 'required',
-        'data_source' => 'required',
         'name' => 'required',
         'slug' => 'required|unique:waka_mailer_waka_mails',
+        'output_name' => 'required',
+        'state' => 'required',
+        'data_source' => 'required',
     ];
 
     public $customMessages = [
