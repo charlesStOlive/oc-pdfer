@@ -1,7 +1,7 @@
 files:
     pdfer_install:
         title: Installation PDFER 
-        group: "01 Installation"
+        group: "10 Installation"
         comment: "Comment installer wkhtml et autres dépendances"
         level: dev
         relativePath: waka/utils/docs
