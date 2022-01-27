@@ -5,6 +5,7 @@ use Waka\Utils\Classes\DataSource;
 use Waka\Utils\Classes\TmpFiles;
 use PDF;
 use Waka\Utils\Classes\ProductorCreator;
+use Spatie\Browsershot\Browsershot;
 class PdfCreator extends ProductorCreator
 {
 
@@ -23,10 +24,16 @@ class PdfCreator extends ProductorCreator
         }
         $data = $this->prepareCreatorVars();
         $pdf = $this->createPdf($data);
-        if ($inline) {
-            return $pdf->inline($data['fileName']);
-        } else {
-            return $pdf->download($data['fileName']);
+        
+        if ($inline =="inline_download") {
+            return response()->stream(function () use ($data, $pdf) {
+                echo $pdf->pdf();
+            }, 200, ['Content-Type' => 'application/pdf']);
+        } else if($inline =="inline_show") {
+            return $pdf->bodyHtml();
+        } else  {
+            $pdf->save('coin.pdf');
+            return response()->download('coin.pdf')->deleteFileAfterSend();
         }
     }
 
@@ -74,31 +81,32 @@ class PdfCreator extends ProductorCreator
             "fileName" => $slugName . '.pdf',
             "html" => $htmlLayout,
             "options" => $this->getProductor()->layout->options,
-            "header" => $this->getFooter($model),
+            "header" => $this->getHeader($model),
             "footer" => $this->getFooter($model),
         ];
     }
 
     public function createPdf($data)
     {
-        $pdf = PDF::loadHtml($data['html']);
-        $options = $data['options'] ?? null;
-         if ($options) {
-            foreach ($options as $key => $value) {
-                $pdf->setOption($key, $value); 
-            }
-        }
+        $options = $data['options'] ?? [];
+        $pdf = Browsershot::html($data['html'])
+            ->showBackground()
+            ->emulateMedia('screen')
+            ->margins($options['margin-top'] ?? 10, $options['margin-right'] ?? 10, $options['margin-bottom'] ?? 10, $options['margin-left'] ?? 10)
+            ->format('A4');
 
-        if($data['header']) {
-            trace_log("---------------HEADER-------------------");
-            trace_log($data['header']);
-            $pdf->setOption('header-html',$data['header']); 
+        $header = $data['header'] ?? '';
+        $footer = $data['footer'] ?? '';
+        if(!empty($header) or !empty($footer)) {
+            $pdf->showBrowserHeaderAndFooter()
+                ->headerHtml($header)
+                ->footerHtml($footer);
         }
-        if($data['footer']) {
-            trace_log("---------------FOOTER-------------------");
-            $pdf->setOption('footer-html', $data['footer']); 
+        $orientation = $options['orientation'] ?? null;
+        trace_log($orientation);
+        if($orientation == 'Landscape') {
+            $pdf->landscape();
         }
-        
         return $pdf;
     }
 

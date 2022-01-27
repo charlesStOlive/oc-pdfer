@@ -49,8 +49,9 @@ return [
         'show' => "Voir",
     ],
     "button" => [
-        'exemple_download' => "Télecharger un ex.",
-        'exemple_inline' => "ex. en ligne",
+        'exemple_download' => "Télecharger Pdf",
+        'exemple_inline' => "Pdf en ligne",
+        'exemple_inline_show' => "Html en ligne",
         'exemple_html' => "Voir HTML",
         'loading_indicator' => "Création du PDF en cours"
 

@@ -3,7 +3,7 @@
     "description": "Plugin Pdf",
     "type": "october-plugin",
     "require": {
-        "barryvdh/laravel-snappy": "^0.4.7"
+        "spatie/browsershot": "^3.52"
     },
     "scripts": {
         "post-create-project-cmd": [

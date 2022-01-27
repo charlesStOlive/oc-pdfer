@@ -1,11 +1,16 @@
 <a class="btn btn-default oc-icon-chrome"
    href="
-            <?= Backend::url("waka/pdfer/wakapdfs/makepdftest/?productorId=$modelId&inline=1" )?>" target="_blank">
+            <?= Backend::url("waka/pdfer/wakapdfs/makepdftest/?productorId=$modelId&inline=inline_show" )?>" target="_blank">
+    <?=e(trans('waka.pdfer::lang.button.exemple_inline_show')) ?>
+</a>
+<a class="btn btn-default oc-icon-chrome"
+   href="
+            <?= Backend::url("waka/pdfer/wakapdfs/makepdftest/?productorId=$modelId&inline=inline_download" )?>" target="_blank">
     <?=e(trans('waka.pdfer::lang.button.exemple_inline')) ?>
 </a>
-<button type="button"
-        class="btn btn-default oc-icon-cloud-download"
-        data-request-data="redirect:0, wakaPdfId:<?=$modelId?>"
-        data-request=" onLoadPdfTest">
-    <?= e(trans('waka.pdfer::lang.button.exemple_download')) ?>
-</button>
+<a class="btn btn-default oc-icon-cloud-download"
+   href="
+            <?= Backend::url("waka/pdfer/wakapdfs/makepdftest/?productorId=$modelId&inline=download" )?>" target="_blank">
+    <?=e(trans('waka.pdfer::lang.button.exemple_download')) ?>
+</a>
+
