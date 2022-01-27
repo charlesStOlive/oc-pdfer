@@ -90,11 +90,12 @@ class PdfCreator extends ProductorCreator
         }
 
         if($data['header']) {
-            //trace_log("---------------HEADER-------------------");
+            trace_log("---------------HEADER-------------------");
+            trace_log($data['header']);
             $pdf->setOption('header-html',$data['header']); 
         }
         if($data['footer']) {
-            //trace_log("---------------FOOTER-------------------");
+            trace_log("---------------FOOTER-------------------");
             $pdf->setOption('footer-html', $data['footer']); 
         }
         
