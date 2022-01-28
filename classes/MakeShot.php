@@ -23,9 +23,9 @@ class MakeShot
     }
 
     public static function makeAndReturn($browsershot, $width, $height,$retain, $name, $returnPath = false, $showBackground = true, $emulateMedia = 'screen') {
-        trace_log('makeAndReturn');
+        //trace_log('makeAndReturn');
         $tmpfile =  TmpFiles::createDirectory($retain)->emptyFile($name);
-        trace_log($tmpfile->getFilePath());
+        //trace_log($tmpfile->getFilePath());
         if($showBackground)
         {
             $browsershot->showBackground();
