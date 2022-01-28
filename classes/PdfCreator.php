@@ -24,6 +24,8 @@ class PdfCreator extends ProductorCreator
         }
         $data = $this->prepareCreatorVars();
         $pdf = $this->createPdf($data);
+
+        //trace_log($data);
         
         if ($inline =="inline_download") {
             return response()->stream(function () use ($data, $pdf) {
@@ -32,8 +34,8 @@ class PdfCreator extends ProductorCreator
         } else if($inline =="inline_show") {
             return $pdf->bodyHtml();
         } else  {
-            $pdf->save('coin.pdf');
-            return response()->download('coin.pdf')->deleteFileAfterSend();
+            $pdf->save(temp_path($data['fileName']));
+            return response()->download(temp_path($data['fileName']))->deleteFileAfterSend();
         }
     }
 
@@ -103,7 +105,7 @@ class PdfCreator extends ProductorCreator
                 ->footerHtml($footer);
         }
         $orientation = $options['orientation'] ?? null;
-        trace_log($orientation);
+        //trace_log($orientation);
         if($orientation == 'Landscape') {
             $pdf->landscape();
         }
@@ -116,11 +118,11 @@ class PdfCreator extends ProductorCreator
         }
         $this->startTwig();
         
-        $data = [
-            'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
-            'AddCss' => $this->getProductor()->layout->Addcss,
-        ];
-        $data = array_merge($data, $model);
+        // $data = [
+        //     'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
+        //     'AddCss' => $this->getProductor()->layout->Addcss,
+        // ];
+        $data = array_merge([], $model);
         $header = \Twig::parse($this->getProductor()->layout->header_html, $data);
         $this->stopTwig();
         return $header;      
@@ -130,11 +132,11 @@ class PdfCreator extends ProductorCreator
             return null;
         }
         $this->startTwig();
-        $data = [
-            'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
-            'AddCss' => $this->getProductor()->layout->Addcss,
-        ];
-        $data = array_merge($data, $model);
+        // $data = [
+        //     'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
+        //     'AddCss' => $this->getProductor()->layout->Addcss,
+        // ];
+        $data = array_merge([], $model);
         //trace_log( $data);
         $footer = \Twig::parse($this->getProductor()->layout->footer_html, $data);
         $this->stopTwig();
