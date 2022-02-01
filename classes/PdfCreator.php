@@ -97,12 +97,23 @@ class PdfCreator extends ProductorCreator
             ->margins($options['margin-top'] ?? 10, $options['margin-right'] ?? 10, $options['margin-bottom'] ?? 10, $options['margin-left'] ?? 10)
             ->format('A4');
 
-        $header = $data['header'] ?? '';
-        $footer = $data['footer'] ?? '';
+        $header = $data['header'] ?? null;
+        $footer = $data['footer'] ?? null;
+        trace_log($header);
+        trace_log($footer);
+
         if(!empty($header) or !empty($footer)) {
-            $pdf->showBrowserHeaderAndFooter()
-                ->headerHtml($header)
-                ->footerHtml($footer);
+            $pdf->showBrowserHeaderAndFooter();
+            if($header) {
+                $pdf->headerHtml($header);
+            } else {
+                $pdf->headerHtml('<span></span>');
+            }
+            if($footer) {
+                $pdf->footerHtml($footer);
+            } else {
+                $pdf->footerHtml('<span></span>');
+            }
         }
         $orientation = $options['orientation'] ?? null;
         //trace_log($orientation);
