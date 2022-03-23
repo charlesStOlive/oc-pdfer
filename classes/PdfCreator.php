@@ -99,8 +99,8 @@ class PdfCreator extends ProductorCreator
 
         $header = $data['header'] ?? null;
         $footer = $data['footer'] ?? null;
-        trace_log($header);
-        trace_log($footer);
+        //trace_log($header);
+        //trace_log($footer);
 
         if(!empty($header) or !empty($footer)) {
             $pdf->showBrowserHeaderAndFooter();
