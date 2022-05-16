@@ -9,7 +9,6 @@ fields:
         required: true
         default: Brouillon
         options: listStates
-        default: Actif
         permissions: [waka.worder.admin.*]
     output_name:
         label: waka.pdfer::wakapdf.output_name
@@ -73,7 +72,6 @@ tabs:
             span: left
             type: switch
             default: true
-            default: true
             permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_options
 secondaryTabs:
@@ -93,10 +91,3 @@ secondaryTabs:
             type: attributs
             permissions: [waka.pdfer.admin.*]
             tab: waka.pdfer::wakapdf.tab_attributs
-        blocs:
-            span: full
-            type: comonblocs
-            twigName: mailPartial
-            blocClass: Waka\Pdfer\Models\Bloc
-            permissions: [waka.pdfer.admin.*]
-            tab: waka.pdfer::wakapdf.tab_blocs

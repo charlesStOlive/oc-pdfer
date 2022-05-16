@@ -103,7 +103,8 @@ class WakaPdf extends Model
     ];
     public $belongsToMany = [
     ];        
-    public $morphTo = [];
+    public $morphTo = [
+    ];
     public $morphOne = [
     ];
     public $morphMany = [

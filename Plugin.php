@@ -131,30 +131,6 @@ class Plugin extends PluginBase
         }
     }
 
-    public function registerMarkupTags()
-    {
-        return [
-            'functions' => [
-                'pdfPartial' => function ($twig, $data, $dataKey2 = null, $data2 = null) {
-                    //trace_log("pdfPartial");
-                    $bloc = \Waka\Pdfer\Models\Bloc::where('slug', $twig)->first();
-                    //trace_log($bloc->contenu);
-                    if ($dataKey2) {
-                        $data[$dataKey2] = $data2;
-                        $test = compact('data');
-                    }
-                    if ($bloc) {
-                        $bloc_html = \Twig::parse($bloc->contenu, compact('data'));
-                        return $bloc_html;
-                    } else {
-                        return null;
-                    }
-                    return null;
-                },
-            ],
-        ];
-    }
-
     /**
      * Registers any front-end components implemented in this plugin.
      *

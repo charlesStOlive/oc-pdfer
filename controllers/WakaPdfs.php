@@ -23,7 +23,6 @@ class WakaPdfs extends Controller
     public $listConfig = [
         'wakapdfs' => 'config_list.yaml',
         'layouts' => 'config_list_layouts.yaml',
-        'blocs' => 'config_list_blocs.yaml',
     ];
     public $btnsConfig = 'config_btns.yaml';
     public $duplicateConfig = 'config_duplicate.yaml';
@@ -32,6 +31,7 @@ class WakaPdfs extends Controller
 
     public $requiredPermissions = ['waka.pdfer.*'];
     //FIN DE LA CONFIG AUTO
+    //startKeep/
 
     public function __construct()
     {
@@ -39,8 +39,6 @@ class WakaPdfs extends Controller
         BackendMenu::setContext('October.System', 'system', 'settings');
         SettingsManager::setContext('Waka.Pdfer', 'WakaPdfs');
     }
-
-    //startKeep/
 
     public function update($id)
     {
