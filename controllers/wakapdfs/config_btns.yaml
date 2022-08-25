@@ -2,8 +2,7 @@
 #  Btn  Behavior Config
 # ===================================
 
-Description: >
-    //startKeep/
+
 modelClass: Waka\Pdfer\Models\WakaPdf
 
 workflow: false 
@@ -58,8 +57,7 @@ action_bar:
     partials: #Attention seul les variables modelId et modelClass (class du controller) sont disponible sans les partials.  
         name:
             url: $/waka/pdfer/controllers/wakapdfs/_testbtns.htm
-Description: >
-    //endKeep/
+
 
 
 #     ##### SAUVEGARDE PURE ########
