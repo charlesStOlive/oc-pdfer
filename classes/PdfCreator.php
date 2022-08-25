@@ -127,7 +127,7 @@ class PdfCreator extends ProductorCreator
         if(!$this->getProductor()->layout->use_header) {
             return null;
         }
-        $this->startTwig();
+        
         
         // $data = [
         //     'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
@@ -135,14 +135,14 @@ class PdfCreator extends ProductorCreator
         // ];
         $data = array_merge([], $model);
         $header = \Twig::parse($this->getProductor()->layout->header_html, $data);
-        $this->stopTwig();
+        
         return $header;      
     }
     public function getFooter($model) {
         if(!$this->getProductor()->layout->use_footer) {
             return null;
         }
-        $this->startTwig();
+        
         // $data = [
         //     'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
         //     'AddCss' => $this->getProductor()->layout->Addcss,
@@ -150,13 +150,13 @@ class PdfCreator extends ProductorCreator
         $data = array_merge([], $model);
         //trace_log( $data);
         $footer = \Twig::parse($this->getProductor()->layout->footer_html, $data);
-        $this->stopTwig();
+        
         return $footer;      
     }
 
     public function renderHtml($model)
     {
-        $this->startTwig();
+        
         $html = $this->getProductor()->template;
         $htmlContent = \Twig::parse($html, $model);
         $data = [
@@ -167,7 +167,7 @@ class PdfCreator extends ProductorCreator
         ];
         $htmlLayout = \Twig::parse($this->getProductor()->layout->contenu, $data);
         //trace_log($htmlLayout);
-        $this->stopTwig();
+        
         return $htmlLayout;
     }
 }
