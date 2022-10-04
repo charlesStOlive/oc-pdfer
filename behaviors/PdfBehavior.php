@@ -10,8 +10,6 @@ use Session;
 
 class PdfBehavior extends ControllerBehavior
 {
-    use \Waka\Utils\Classes\Traits\StringRelation;
-
     protected $pdfBehaviorWidget;
     protected $askDataWidget;
     public $errors;
