@@ -27,10 +27,12 @@ return [
     'tab_infos' => 'Infos',
     'tab_options' => 'Options',
     'tab_scopes' => 'Restrictions',
+    'tab_session' => 'Session',
     'template' => 'Éditeur',
     'test_id' => 'Model de test',
     'title' => 'Gestion des pdfs',
     'update' => 'Éditer un pdf',
+    'waka_session' => 'Clef pour LP',
     'e' => [
         'test_id' => 'Vous devez choisir un modèle de test (dans infomration )'
     ]

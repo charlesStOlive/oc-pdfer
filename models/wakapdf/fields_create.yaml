@@ -41,7 +41,6 @@ fields:
         span: right
         type: balloon-selector
         required: true
-        default: Brouillon
         options: listStates
         default: Actif
         permissions: [waka.worder.admin.*]

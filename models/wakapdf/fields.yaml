@@ -7,8 +7,8 @@ fields:
         span: right
         type: balloon-selector
         required: true
-        default: Brouillon
         options: listStates
+        default: Actif
         permissions: [waka.worder.admin.*]
     output_name:
         label: waka.pdfer::wakapdf.output_name
@@ -91,3 +91,10 @@ secondaryTabs:
             type: attributs
             permissions: [waka.pdfer.admin.*]
             tab: waka.pdfer::wakapdf.tab_attributs
+        waka_session:
+            label: waka.pdfer::wakapdf.waka_session
+            span: full
+            type: partial
+            path: field_waka_session
+            permissions: [waka.mailer.admin.super]
+            tab: waka.pdfer::wakapdf.tab_session

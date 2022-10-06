@@ -24,3 +24,7 @@
 1.5.0:
     - "Changement de nom output_name"
     - create_waka_pdfs_table_u150.php
+2.0.0:
+    - 'Transformation de data_source en session'
+    - change_waka_pdfs_table_u200.php
+    - create_waka_pdfs_table_u200.php

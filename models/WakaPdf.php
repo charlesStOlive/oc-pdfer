@@ -12,6 +12,7 @@ class WakaPdf extends Model
     use \Winter\Storm\Database\Traits\SoftDelete;
     use \Winter\Storm\Database\Traits\Sortable;
     use \Waka\Utils\Classes\Traits\DataSourceHelpers;
+    use \Waka\Session\Classes\Traits\WakaSessionTrait;
 
 
     /**
@@ -87,6 +88,12 @@ class WakaPdf extends Model
         'deleted_at',
     ];
 
+/**
+    * @var array Spécifié le type d'export à utiliser pour chaque champs
+    */
+    public $importExportConfig = [
+    ]; 
+
     /**
      * @var array Relations
      */
@@ -106,6 +113,11 @@ class WakaPdf extends Model
     public $morphTo = [
     ];
     public $morphOne = [
+        'waka_session' => [
+            'Waka\Session\Models\WakaSession',
+            'name' => 'sessioneable',
+            'delete' => true
+        ],
     ];
     public $morphMany = [
         'rule_asks' => [

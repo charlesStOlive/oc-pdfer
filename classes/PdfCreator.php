@@ -18,10 +18,10 @@ class PdfCreator extends ProductorCreator
 
     public function renderPdf($inline = false)
     {
-        if (!self::$ds || !$this->modelId) {
-            //trace_log("modelId pas instancie");
-            throw new \SystemException("Le modelId n a pas ete instancié");
-        }
+        // if (!self::$ds || !$this->modelId) {
+        //     //trace_log("modelId pas instancie");
+        //     throw new \SystemException("Le modelId n a pas ete instancié");
+        // }
         $data = $this->prepareCreatorVars();
         $pdf = $this->createPdf($data);
 
