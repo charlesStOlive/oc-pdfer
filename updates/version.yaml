@@ -28,3 +28,7 @@
     - 'Transformation de data_source en session'
     - change_waka_pdfs_table_u200.php
     - create_waka_pdfs_table_u200.php
+2.1.0:
+    - 'Modification des layout. changement nom de field ajout de 2 champs'
+    - create_layouts_table_u210.php
+    - change_layouts_table_u210.php

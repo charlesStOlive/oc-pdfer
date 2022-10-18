@@ -21,14 +21,6 @@ fields:
         required: true
         comment: waka.pdfer::wakapdf.output_name_com
         permissions: [waka.pdfer.admin.*]
-    data_source:
-        label: waka.pdfer::wakapdf.data_source
-        span: right
-        type: dropdown
-        placeholder: waka.utils::lang.global.placeholder
-        required: true
-        options: listDataSource
-        permissions: [waka.pdfer.admin.super]
     layout:
         label: waka.pdfer::wakapdf.layout
         span: left

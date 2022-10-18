@@ -39,7 +39,6 @@ class WakaPdf extends Model
         'slug' => 'required|unique:waka_mailer_waka_mails',
         'output_name' => 'required',
         'state' => 'required',
-        'data_source' => 'required',
     ];
 
     public $customMessages = [

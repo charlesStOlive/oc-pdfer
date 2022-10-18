@@ -16,15 +16,6 @@ fields:
         disabled: true
         permissions: [waka.pdfer.admin.*]
         infoType: title
-    data_source:
-        label: waka.pdfer::wakapdf.data_source
-        span: right
-        type: dropdown
-        placeholder: waka.utils::lang.global.placeholder
-        required: true
-        disabled: true
-        options: listDataSource
-        permissions: [waka.pdfer.admin.super]
     layout:
         label: waka.pdfer::wakapdf.layout
         span: left

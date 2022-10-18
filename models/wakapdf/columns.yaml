@@ -16,9 +16,6 @@ columns:
     state:
         label: waka.pdfer::wakapdf.state
         searchable: true
-    data_source:
-        label: waka.pdfer::wakapdf.data_source
-        searchable: true
     layout_r:
         label: waka.pdfer::wakapdf.layout
         relation: layout

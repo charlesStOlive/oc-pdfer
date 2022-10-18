@@ -13,8 +13,8 @@ class CreateLayoutsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->text('contenu')->nullable();
-            $table->string('baseCss')->nullable();
-            $table->text('AddCss');
+            $table->string('base_css')->nullable();
+            $table->text('add_css');
             //reorder
             $table->integer('sort_order')->default(0);
             $table->timestamps();

@@ -2,31 +2,53 @@
 #  Form Field Definitions
 # ===================================
 
-fields:    
+fields:
     name:
         label: waka.pdfer::layout.name
         span: left
         required: true
+    in_theme:
+        label: waka.pdfer::layout.in_theme
+        span: full
+        type: switch
+        default: false
+    theme_page_path:
+        label: waka.pdfer::layout.theme_page_path
+        span: full
+        trigger:
+            action: show
+            field: in_theme
+            condition: checked
     contenu:
         label: waka.pdfer::layout.contenu
         span: full
         type: codeeditor
-        required: true
         size: giant
         language: html
-    baseCss:
-        label: waka.pdfer::layout.baseCss
+        trigger:
+            action: hide
+            field: in_theme
+            condition: checked
+    base_css:
+        label: waka.pdfer::layout.base_css
         span: left
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
-        required: true
         options: listWconfigLayout
-    AddCss:
-        label: waka.pdfer::layout.AddCss
+        trigger:
+            action: hide
+            field: in_theme
+            condition: checked
+    add_css:
+        label: waka.pdfer::layout.add_css
         span: full
         type: codeeditor
         size: giant
         language: css
+        trigger:
+            action: hide
+            field: in_theme
+            condition: checked
     use_header:
         label: waka.pdfer::layout.use_header
         span: left
@@ -90,4 +112,3 @@ fields:
                     span: auto
                     default: 10
                     type: number
-                

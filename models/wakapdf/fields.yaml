@@ -51,14 +51,6 @@ tabs:
             ruleMode: fnc
             permissions: [waka.rules.fncs.*]
             tab: waka.pdfer::wakapdf.tab_edit
-        test_id:
-            label: waka.pdfer::wakapdf.test_id
-            span: left
-            type: dropdown
-            placeholder: waka.utils::lang.global.placeholder
-            options: listDataSourceTarget
-            permissions: [waka.pdfer.admin.*]
-            tab: waka.pdfer::wakapdf.tab_options
         rule_conditions:
             label: waka.pdfer::wakapdf.rule_conditions
             span: full
@@ -74,6 +66,13 @@ tabs:
             default: true
             permissions: [waka.pdfer.admin.super]
             tab: waka.pdfer::wakapdf.tab_options
+        waka_session:
+            label: waka.pdfer::wakapdf.waka_session
+            span: full
+            type: partial
+            path: field_waka_session
+            permissions: [waka.mailer.admin.super]
+            tab: waka.pdfer::wakapdf.tab_session
 secondaryTabs:
     fields:
         # info:
@@ -91,10 +90,3 @@ secondaryTabs:
             type: attributs
             permissions: [waka.pdfer.admin.*]
             tab: waka.pdfer::wakapdf.tab_attributs
-        waka_session:
-            label: waka.pdfer::wakapdf.waka_session
-            span: full
-            type: partial
-            path: field_waka_session
-            permissions: [waka.mailer.admin.super]
-            tab: waka.pdfer::wakapdf.tab_session

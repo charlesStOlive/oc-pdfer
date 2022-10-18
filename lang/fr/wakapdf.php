@@ -2,7 +2,6 @@
 return [
     'asks' => 'Questions',
     'create' => 'Créer un PDF',
-    'data_source' => 'Source des données',
     'form_name' => 'Éditer un pdf',
     'has_asks' => 'A des questions ?',
     'images' => 'Images',
@@ -29,7 +28,6 @@ return [
     'tab_scopes' => 'Restrictions',
     'tab_session' => 'Session',
     'template' => 'Éditeur',
-    'test_id' => 'Model de test',
     'title' => 'Gestion des pdfs',
     'update' => 'Éditer un pdf',
     'waka_session' => 'Clef pour LP',

@@ -12,6 +12,7 @@ class Layout extends Model
     use \Winter\Storm\Database\Traits\Sortable;
     use \Waka\Utils\Classes\Traits\DataSourceHelpers;
 
+
     /**
      * @var string The database table used by the model.
      */
@@ -21,20 +22,18 @@ class Layout extends Model
     /**
      * @var array Guarded fields
      */
-    protected $guarded = ['*'];
+    protected $guarded = ['id'];
 
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    //protected $fillable = [];
 
     /**
      * @var array Validation rules for attributes
      */
     public $rules = [
         'name' => 'required',
-        'contenu' => 'required',
-        'baseCss' => 'required',
     ];
 
     public $customMessages = [
@@ -45,6 +44,7 @@ class Layout extends Model
      */
     public $attributesToDs = [
     ];
+
 
     /**
      * @var array Attributes to be cast to native types
@@ -77,19 +77,29 @@ class Layout extends Model
         'updated_at',
     ];
 
+/**
+    * @var array Spécifié le type d'export à utiliser pour chaque champs
+    */
+    public $importExportConfig = [
+    ]; 
+
     /**
      * @var array Relations
      */
-    public $hasOne = [];
+    public $hasOne = [
+    ];
     public $hasMany = [
     ];
-    public $hasOneThrough = [];
+    public $hasOneThrough = [
+    ];
     public $hasManyThrough = [
     ];
     public $belongsTo = [
     ];
-    public $belongsToMany = [];
-    public $morphTo = [];
+    public $belongsToMany = [
+    ];        
+    public $morphTo = [
+    ];
     public $morphOne = [
     ];
     public $morphMany = [
@@ -98,6 +108,8 @@ class Layout extends Model
     ];
     public $attachMany = [
     ];
+
+    //startKeep/
 
     /**
      *EVENTS
@@ -133,5 +145,6 @@ class Layout extends Model
     /**
      * OTHERS
      */
-    
+
+//endKeep/
 }

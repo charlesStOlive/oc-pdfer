@@ -2,7 +2,19 @@
 #  Form Field Definitions
 # ===================================
 
-fields:    
+fields:
+    in_theme:
+        label: waka.pdfer::layout.in_theme
+        span: full
+        type: switch
+        default: false
+    theme_page_path:
+        label: waka.pdfer::layout.theme_page_path
+        span: full
+        trigger:
+            action: show
+            field: in_theme
+            condition: checked
     name:
         label: waka.pdfer::layout.name
         span: left
@@ -11,18 +23,28 @@ fields:
         label: waka.pdfer::layout.contenu
         span: full
         type: codeeditor
-        required: true
-    baseCss:
-        label: waka.pdfer::layout.baseCss
+        trigger:
+            action: hide
+            field: in_theme
+            condition: checked
+    base_css:
+        label: waka.pdfer::layout.base_css
         span: left
         type: dropdown
         placeholder: waka.utils::lang.global.placeholder
-        required: true
         options: listWconfigLayout
-    AddCss:
-        label: waka.pdfer::layout.AddCss
+        trigger:
+            action: hide
+            field: in_theme
+            condition: checked
+    add_css:
+        label: waka.pdfer::layout.add_css
         span: full
         type: codeeditor
+        trigger:
+            action: hide
+            field: in_theme
+            condition: checked
     use_header:
         label: waka.pdfer::layout.use_header
         span: left
@@ -49,5 +71,38 @@ fields:
             condition: checked
     options:
         label: waka.pdfer::layout.options
-        span: left
+        span: full
         type: nestedform
+        form:
+            fields:
+                orientation:
+                    label: Orientation
+                    type: dropdown
+                    span: auto
+                    options:
+                        Portrait: Portrait
+                        Landscape: Paysage
+                viewport-size:
+                    label: viewPort
+                    span: auto
+                    default: 1280x1024
+                margin-top:
+                    label: Marge Haut
+                    span: auto
+                    default: 10
+                    type: number
+                margin-bottom:
+                    label: Marge Bas
+                    span: auto
+                    default: 10
+                    type: number
+                margin-right:
+                    label: Marge Gauche
+                    span: auto
+                    default: 10
+                    type: number
+                margin-left:
+                    label: Marge droite
+                    span: auto
+                    default: 10
+                    type: number

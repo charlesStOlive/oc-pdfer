@@ -18,10 +18,6 @@ class PdfCreator extends ProductorCreator
 
     public function renderPdf($inline = false)
     {
-        // if (!self::$ds || !$this->modelId) {
-        //     //trace_log("modelId pas instancie");
-        //     throw new \SystemException("Le modelId n a pas ete instancié");
-        // }
         $data = $this->prepareCreatorVars();
         $pdf = $this->createPdf($data);
 
@@ -74,7 +70,11 @@ class PdfCreator extends ProductorCreator
     public function prepareCreatorVars()
     {
         $model = $this->getProductorVars();
-        $htmlLayout = $this->renderHtml($model);
+        $htmlLayout = null;
+        if($this->getProductor()->layout->in_theme == false) {
+            trace_log('---pas dans theme');
+            $htmlLayout = $this->renderHtml($model);
+        }
         $slugName = $this->createTwigStrName();
         //
         $header = null;
@@ -91,11 +91,25 @@ class PdfCreator extends ProductorCreator
     public function createPdf($data)
     {
         $options = $data['options'] ?? [];
-        $pdf = Browsershot::html($data['html'])
+        $pdf = null;
+
+        
+        if($fromPage = $this->getProductor()->layout->in_theme) {
+            $url = url($this->getProductor()->layout->theme_page_path.'/'.$this->userKey->name);
+            trace_log($url);
+            $pdf = Browsershot::url($url)
             ->showBackground()
             ->emulateMedia('screen')
             ->margins($options['margin-top'] ?? 10, $options['margin-right'] ?? 10, $options['margin-bottom'] ?? 10, $options['margin-left'] ?? 10)
             ->format('A4');
+        } else {
+            $pdf = Browsershot::url($data['html'])
+            ->showBackground()
+            ->emulateMedia('screen')
+            ->margins($options['margin-top'] ?? 10, $options['margin-right'] ?? 10, $options['margin-bottom'] ?? 10, $options['margin-left'] ?? 10)
+            ->format('A4');
+        }
+        
 
         $header = $data['header'] ?? null;
         $footer = $data['footer'] ?? null;
