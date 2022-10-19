@@ -84,7 +84,6 @@ class PdfCreator extends ProductorCreator
         if($this->layout->layout_require_code) {
             $url .= '/'.$this->userKey->name;
         }
-        trace_log($url);
         $pdf = Browsershot::url($url)
         ->showBackground()
         ->emulateMedia('screen')
