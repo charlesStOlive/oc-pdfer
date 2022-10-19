@@ -12,16 +12,13 @@ class CreateWakaPdfsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
+            $table->string('state')->default('Actif');
             $table->string('slug');
-            $table->string('pdf_name');
-            $table->text('template')->nullable();
-            $table->string('data_source');
+            $table->string('output_name');
+            $table->boolean('is_update_content')->nullable()->default(false);
+            $table->text('update_content')->nullable();
             $table->integer('layout_id')->unsigned()->nullable();
-            $table->text('model_functions')->nullable();
-            $table->text('images')->nullable();
-            $table->boolean('is_scope')->nullable()->default(false);
-            $table->text('scopes')->nullable();
-            $table->string('test_id')->nullable();
+            $table->boolean('is_lot')->nullable()->default(true);
             //reorder
             $table->integer('sort_order')->default(0);
             //softDelete

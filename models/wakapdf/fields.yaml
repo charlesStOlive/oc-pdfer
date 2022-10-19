@@ -4,7 +4,7 @@
 fields:
     state:
         label: waka.pdfer::wakapdf.state
-        span: right
+        span: left
         type: balloon-selector
         required: true
         options: listStates
@@ -25,13 +25,24 @@ tabs:
         waka.mailer::wakamail.tab_fnc: icon-address-card-o
         waka.lp::lang.source_log.tab_lp: icon-file
     fields:    
-        template:
-            label: waka.pdfer::wakapdf.template
+        is_update_content:
+            label: waka.pdfer::wakapdf.is_update_content
+            span: full
+            type: switch
+            default: false
+            comment: waka.pdfer::wakapdf.is_update_content_com
+            permissions: [waka.pdfer.admin.*]
+            tab: waka.pdfer::wakapdf.tab_edit
+        update_content:
+            label: waka.pdfer::wakapdf.update_content
             span: full
             type: codeeditor
-            size: giant
-            language: html
-            permissions: [waka.pdfer.admin.super]
+            trigger:
+                action: show
+                field: is_update_content
+                condition: checked
+            comment: waka.pdfer::wakapdf.update_content_com
+            permissions: [waka.pdfer.admin.*]
             tab: waka.pdfer::wakapdf.tab_edit
         rule_asks:
             label: waka.pdfer::wakapdf.rule_asks

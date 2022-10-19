@@ -15,12 +15,6 @@ fields:
         required: true
         preset: name
         permissions: [waka.pdfer.admin.*]
-    output_name:
-        label: waka.pdfer::wakapdf.output_name
-        span: left
-        required: true
-        comment: waka.pdfer::wakapdf.output_name_com
-        permissions: [waka.pdfer.admin.*]
     layout:
         label: waka.pdfer::wakapdf.layout
         span: left
@@ -30,9 +24,23 @@ fields:
         permissions: [waka.pdfer.admin.super]
     state:
         label: waka.pdfer::wakapdf.state
-        span: right
+        span: left
         type: balloon-selector
         required: true
         options: listStates
         default: Actif
         permissions: [waka.worder.admin.*]
+    output_name:
+        label: waka.pdfer::wakapdf.output_name
+        span: left
+        required: true
+        comment: waka.pdfer::wakapdf.output_name_com
+        permissions: [waka.pdfer.admin.*]
+    is_update_content:
+        label: waka.pdfer::wakapdf.is_update_content
+        span: full
+        type: switch
+        default: false
+        comment: waka.pdfer::wakapdf.is_update_content_com
+        permissions: [waka.pdfer.admin.*]
+        tab: waka.pdfer::wakapdf.tab_edit

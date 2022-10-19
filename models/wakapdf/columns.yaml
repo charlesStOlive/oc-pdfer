@@ -7,14 +7,20 @@ columns:
         label: ID
         searchable: true
         invisible: true
+    state:
+        label: waka.pdfer::wakapdf.state
+        searchable: true
     name:
         label: waka.pdfer::wakapdf.name
         searchable: true
     slug:
         label: waka.pdfer::wakapdf.slug
         searchable: true
-    state:
-        label: waka.pdfer::wakapdf.state
+    output_name:
+        label: waka.pdfer::wakapdf.output_name
+        searchable: true
+    is_update_content:
+        label: waka.pdfer::wakapdf.is_update_content
         searchable: true
     layout_r:
         label: waka.pdfer::wakapdf.layout

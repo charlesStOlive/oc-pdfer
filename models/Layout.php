@@ -118,13 +118,6 @@ class Layout extends Model
     /**
      * LISTS
      **/
-    public function listWconfigLayout()
-    {
-        return \Config::get('wcli.wconfig::assets.css.pdf');
-    }
-    public function listBlocs() {
-        return Bloc::lists('name', 'id');
-    }
 
     /**
      * GETTERS

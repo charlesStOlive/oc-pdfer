@@ -9,6 +9,12 @@ use Spatie\Browsershot\Browsershot;
 class PdfCreator extends ProductorCreator
 {
 
+    private $layout;
+    private $pdfData;
+    private $header;
+    private $footer;
+    private $fileName;
+
     public static function find($pdf_id)
     {
         $productor = WakaPdf::find($pdf_id);
@@ -16,45 +22,37 @@ class PdfCreator extends ProductorCreator
         return new self;
     }
 
+    
+
     public function renderPdf($inline = false)
     {
-        $data = $this->prepareCreatorVars();
-        $pdf = $this->createPdf($data);
-
-        //trace_log($data);
+        $this->prepareCreatorVars();
+        $pdf = $this->createPdf();
         
         if ($inline =="inline_download") {
-            return response()->stream(function () use ($data, $pdf) {
+            return response()->stream(function () use ($pdf) {
                 echo $pdf->pdf();
             }, 200, ['Content-Type' => 'application/pdf']);
         } else if($inline =="inline_show") {
             return $pdf->bodyHtml();
         } else  {
-            $pdf->save(temp_path($data['fileName']));
-            return response()->download(temp_path($data['fileName']))->deleteFileAfterSend();
+            $pdf->save(temp_path($this->fileName));
+            return response()->download(temp_path($this->fileName))->deleteFileAfterSend();
         }
     }
 
     public function renderTemp($inline = false)
     {
-        if (!self::$ds || !$this->modelId) {
-            //trace_log("modelId pas instancie");
-            throw new \SystemException("Le modelId n a pas ete instancié");
-        }
-        $data = $this->prepareCreatorVars();
-        $pdf = $this->createPdf($data);
+        $this->prepareCreatorVars();
+        $pdf = $this->createPdf();
         $pdfContent = $pdf->output();
-        return TmpFiles::createDirectory()->putFile($data['fileName'], $pdfContent);
+        return TmpFiles::createDirectory()->putFile($this->fileName, $pdfContent);
     }
 
     public function renderCloud($lot = false)
     {
-        if (!self::$ds || !$this->modelId) {
-            //trace_log("modelId pas instancie");
-            throw new \SystemException("Le modelId n a pas ete instancié");
-        }
-        $data = $this->prepareCreatorVars();
-        $pdf = $this->createPdf($data);
+        $this->prepareCreatorVars();
+        $pdf = $this->createPdf();
         $pdfContent = $pdf->output();
         $cloudSystem = \App::make('cloudSystem');
         $path = [];
@@ -62,59 +60,39 @@ class PdfCreator extends ProductorCreator
             $path = 'lots';
         } else {
             $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
-            $path = $folderOrg->getPath(self::$ds->model);
+            $path = $folderOrg->getPath($this->getDs()->model);
         }
-        $cloudSystem->put($path.'/'.$data['fileName'], $pdfContent);
+        $cloudSystem->put($path.'/'.$this->fileName, $pdfContent);
     }
+
 
     public function prepareCreatorVars()
     {
-        $model = $this->getProductorVars();
-        $htmlLayout = null;
-        if($this->getProductor()->layout->in_theme == false) {
-            trace_log('---pas dans theme');
-            $htmlLayout = $this->renderHtml($model);
-        }
-        $slugName = $this->createTwigStrName();
-        //
-        $header = null;
-
-        return [
-            "fileName" => $slugName . '.pdf',
-            "html" => $htmlLayout,
-            "options" => $this->getProductor()->layout->options,
-            "header" => $this->getHeader($model),
-            "footer" => $this->getFooter($model),
-        ];
+        $this->pdfData =  $this->getProductorVars();
+        $this->layout = $this->getProductor()->layout;
+        $this->fileName = $this->createTwigStrName(). '.pdf';
+        $this->header = $this->getHeader();
+        $this->footer = $this->getFooter();
     }
 
-    public function createPdf($data)
+    public function createPdf()
     {
-        $options = $data['options'] ?? [];
-        $pdf = null;
 
-        
-        if($fromPage = $this->getProductor()->layout->in_theme) {
-            $url = url($this->getProductor()->layout->theme_page_path.'/'.$this->userKey->name);
-            trace_log($url);
-            $pdf = Browsershot::url($url)
-            ->showBackground()
-            ->emulateMedia('screen')
-            ->margins($options['margin-top'] ?? 10, $options['margin-right'] ?? 10, $options['margin-bottom'] ?? 10, $options['margin-left'] ?? 10)
-            ->format('A4');
-        } else {
-            $pdf = Browsershot::url($data['html'])
-            ->showBackground()
-            ->emulateMedia('screen')
-            ->margins($options['margin-top'] ?? 10, $options['margin-right'] ?? 10, $options['margin-bottom'] ?? 10, $options['margin-left'] ?? 10)
-            ->format('A4');
+        $options = $this->layout->options;
+
+        $url = url($this->layout->layout_path);
+        if($this->layout->layout_require_code) {
+            $url .= '/'.$this->userKey->name;
         }
+        trace_log($url);
+        $pdf = Browsershot::url($url)
+        ->showBackground()
+        ->emulateMedia('screen')
+        ->margins($options['margin-top'] ?? 10, $options['margin-right'] ?? 10, $options['margin-bottom'] ?? 10, $options['margin-left'] ?? 10)
+        ->format('A4');
         
-
-        $header = $data['header'] ?? null;
-        $footer = $data['footer'] ?? null;
-        //trace_log($header);
-        //trace_log($footer);
+        $header = $this->header ?? null;
+        $footer = $this->footer ?? null;
 
         if(!empty($header) or !empty($footer)) {
             $pdf->showBrowserHeaderAndFooter();
@@ -137,51 +115,22 @@ class PdfCreator extends ProductorCreator
         return $pdf;
     }
 
-    public function getHeader($model) {
-        if(!$this->getProductor()->layout->use_header) {
+    public function getHeader() {
+        if(!$this->layout->use_header) {
             return null;
         }
-        
-        
-        // $data = [
-        //     'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
-        //     'AddCss' => $this->getProductor()->layout->Addcss,
-        // ];
-        $data = array_merge([], $model);
-        $header = \Twig::parse($this->getProductor()->layout->header_html, $data);
+        $data = array_merge([], $this->pdfData);
+        $header = \Twig::parse($this->layout->header_html, $data);
         
         return $header;      
     }
-    public function getFooter($model) {
-        if(!$this->getProductor()->layout->use_footer) {
+    public function getFooter() {
+        if(!$this->layout->use_footer) {
             return null;
         }
-        
-        // $data = [
-        //     'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
-        //     'AddCss' => $this->getProductor()->layout->Addcss,
-        // ];
-        $data = array_merge([], $model);
-        //trace_log( $data);
-        $footer = \Twig::parse($this->getProductor()->layout->footer_html, $data);
+        $data = array_merge([], $this->pdfData);
+        $footer = \Twig::parse($this->layout->footer_html, $data);
         
         return $footer;      
-    }
-
-    public function renderHtml($model)
-    {
-        
-        $html = $this->getProductor()->template;
-        $htmlContent = \Twig::parse($html, $model);
-        $data = [
-            'ds' => $model['ds'],
-            'content' => $htmlContent,
-            'baseCss' => \File::get(plugins_path() . $this->getProductor()->layout->baseCss),
-            'AddCss' => $this->getProductor()->layout->Addcss,
-        ];
-        $htmlLayout = \Twig::parse($this->getProductor()->layout->contenu, $data);
-        //trace_log($htmlLayout);
-        
-        return $htmlLayout;
     }
 }

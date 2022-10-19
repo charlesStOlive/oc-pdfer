@@ -36,9 +36,9 @@ class WakaPdf extends Model
      */
     public $rules = [
         'name' => 'required',
+        'state' => 'required',
         'slug' => 'required|unique:waka_mailer_waka_mails',
         'output_name' => 'required',
-        'state' => 'required',
     ];
 
     public $customMessages = [
@@ -61,10 +61,6 @@ class WakaPdf extends Model
      * @var array Attributes to be cast to JSON
      */
     protected $jsonable = [
-        'asks',
-        'model_functions',
-        'images',
-        'scopes',
     ];
 
     /**
