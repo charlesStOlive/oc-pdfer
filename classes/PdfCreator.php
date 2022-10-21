@@ -53,22 +53,27 @@ class PdfCreator extends ProductorCreator
     {
         $this->prepareCreatorVars();
         $pdf = $this->createPdf();
-        $pdfContent = $pdf->output();
+        $pdfContent = $pdf->base64pdf();
         $cloudSystem = \App::make('cloudSystem');
         $path = [];
         if ($lot) {
-            $path = 'lots';
+            $path = str_slug($lot);
         } else {
             $folderOrg = new \Waka\Cloud\Classes\FolderOrganisation();
-            $path = $folderOrg->getPath($this->getDs()->model);
+            $path = $folderOrg->getPath($this->productorDsQuery);
         }
-        $cloudSystem->put($path.'/'.$this->fileName, $pdfContent);
+        $cloudSystem->put($path.'/'.$this->fileName, base64_decode($pdfContent));
     }
 
 
     public function prepareCreatorVars()
     {
         $this->pdfData =  $this->getProductorVars();
+        $dataForKey = $this->pdfData;
+        unset($dataForKey['ds']);
+        unset($dataForKey['userKey']);
+        $this->userKey->data = $dataForKey;
+        $this->userKey->save();
         $this->layout = $this->getProductor()->layout;
         $this->fileName = $this->createTwigStrName(). '.pdf';
         $this->header = $this->getHeader();
