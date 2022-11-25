@@ -7,48 +7,20 @@ fields:
         label: waka.pdfer::layout.name
         span: left
         required: true
-    in_theme:
-        label: waka.pdfer::layout.in_theme
-        span: full
-        type: switch
-        default: false
-    theme_page_path:
-        label: waka.pdfer::layout.theme_page_path
-        span: full
-        trigger:
-            action: show
-            field: in_theme
-            condition: checked
-    contenu:
-        label: waka.pdfer::layout.contenu
-        span: full
-        type: codeeditor
-        size: giant
-        language: html
-        trigger:
-            action: hide
-            field: in_theme
-            condition: checked
-    base_css:
-        label: waka.pdfer::layout.base_css
+    layout_path:
+        label: waka.pdfer::layout.layout_path
         span: left
-        type: dropdown
-        placeholder: waka.utils::lang.global.placeholder
-        options: listWconfigLayout
-        trigger:
-            action: hide
-            field: in_theme
-            condition: checked
+    layout_require_code:
+        label: waka.pdfer::layout.layout_require_code
+        span: right
+        type: switch
+        default: true
     add_css:
         label: waka.pdfer::layout.add_css
         span: full
         type: codeeditor
         size: giant
         language: css
-        trigger:
-            action: hide
-            field: in_theme
-            condition: checked
     use_header:
         label: waka.pdfer::layout.use_header
         span: left

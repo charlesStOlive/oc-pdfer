@@ -10,9 +10,6 @@ columns:
     name:
         label: waka.pdfer::layout.name
         searchable: true
-    in_theme:
-        label: waka.pdfer::layout.in_theme
-        searchable: true
     updated_at:
         label: waka.utils::lang.global.updated_at
         type: timetense

@@ -76,12 +76,10 @@ class PdfBehavior extends ControllerBehavior
 
     public function onSelectWakaPdf() {
         $productorId = post('productorId');
-        $modelClass = post('modelClass');
         $modelId = post('modelId');
-        $wakaPdf = WakaPdf::find($productorId);
-        $ds = \DataSources::findByClass($modelClass);
-        $asks = $ds->getProductorAsks('Waka\Pdfer\Models\WakaPdf',$productorId, $modelId);
+        $productor = PdfCreator::find($productorId)->setModelId($modelId);
         $askDataWidget = $this->createAskDataWidget();
+        $asks = $productor->getProductorAsks();
         $askDataWidget->addFields($asks);
         $this->vars['askDataWidget'] = $askDataWidget;
         return [
@@ -92,6 +90,17 @@ class PdfBehavior extends ControllerBehavior
     /**
      * Popup lot
      */
+
+    
+
+
+
+
+
+
+
+
+
 
     /**
      * Confirmation de popup ******************************
