@@ -15,7 +15,7 @@ class CreateWakaPdfsTable extends Migration
             $table->string('state')->default('Actif');
             $table->string('slug');
             $table->string('output_name');
-            $table->boolean('is_update_content')->nullable()->default(false);
+            $table->boolean('is_update_content')->default(false);
             $table->text('update_content')->nullable();
             $table->integer('layout_id')->unsigned()->nullable();
             $table->boolean('is_lot')->nullable()->default(true);
