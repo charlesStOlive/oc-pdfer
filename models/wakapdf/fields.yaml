@@ -23,7 +23,6 @@ tabs:
         waka.mailer::wakamail.tab_edit: icon-pencil
         waka.mailer::wakamail.tab_scopes: icon-filter
         waka.mailer::wakamail.tab_fnc: icon-address-card-o
-        waka.lp::lang.source_log.tab_lp: icon-file
     fields:    
         is_update_content:
             label: waka.pdfer::wakapdf.is_update_content
