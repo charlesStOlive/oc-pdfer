@@ -9,5 +9,8 @@ return [
     "menu" => [
         "wakapdfs" => "Pdfs",
         "wakapdfs_description" => "Gestion des modèles pdfs"
+    ],
+    "errors" => [
+        "wakaPdfId" => "Il manque l'ID du PDF"
     ]
 ];

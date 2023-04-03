@@ -136,8 +136,8 @@ class PdfBehavior extends ControllerBehavior
         ];
 
         $messages = [
-            'modelId.required' => Lang::get("waka.pdfer::lang.errors.modelId"),
-            'wakaPdfId.wakaPdfId' => Lang::get("waka.pdfer::lang.errors.wakaPdfId"),
+            'modelId.required' => Lang::get('waka.pdfer::lang.errors.modelId'),
+            'wakaPdfId.wakaPdfId' => Lang::get('waka.pdfer::lang.errors.wakaPdfId'),
         ];
 
         $validator = \Validator::make($inputs, $rules);
