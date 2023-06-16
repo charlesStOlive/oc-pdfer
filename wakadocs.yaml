@@ -3,7 +3,7 @@ files:
         title: Installation PDFER 
         group: "10 Installation"
         comment: "Comment installer wkhtml et autres dépendances"
-        permission: waka.pdfer.admin.super
+        permissions: waka.docser.technics
         relativePath: waka/utils/docs
         order: 10
 parts:
